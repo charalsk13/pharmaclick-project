@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane style="-fx-background-color: #A7CCD7;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.pharmaclick.RegisterController">
+    <children>
+        <VBox layoutX="50" layoutY="88.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="420.0" prefWidth="276.0" spacing="10" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <children>
+                <ImageView fitHeight="50" fitWidth="50" pickOnBounds="true" preserveRatio="true" />
+                <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Εγγραφή" />
+                <TextField fx:id="emailField" promptText="email@address.com" />
+                <PasswordField fx:id="passwordField" promptText="Κωδικός" />
+                <TextField fx:id="addressField" promptText="Διεύθυνση" />
+                <TextField fx:id="amkaField" promptText="AMKA" />
+                <HBox spacing="20">
+                    <children>
+                        <CheckBox fx:id="customerCheckBox" text="Πελάτης" />
+                        <CheckBox fx:id="pharmacistCheckBox" text="Φαρμακοποιός" />
+                    </children>
+                </HBox>
+                <Button fx:id="registerButton" alignment="CENTER" contentDisplay="CENTER" onAction="#handleRegister" text="Δημιουργία Λογαριασμού" />
+                <Hyperlink fx:id="loginLink" text="Έχεις ήδη λογαριασμό; Συνδέσου εδώ" />
+            </children>
+            <padding>
+                <Insets bottom="20" left="20" right="20" top="20" />
+            </padding>
+        </VBox>
+      <ImageView fitHeight="81.0" fitWidth="91.0" layoutX="93.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../OneDrive/Υπολογιστής/Στιγμιότυπο%20οθόνης%202025-04-07%20151302.png" />
+         </image>
+      </ImageView>
+    </children>
+</AnchorPane>
