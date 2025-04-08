@@ -70,6 +70,12 @@
             <version>2.22.2</version>
         </plugin>
     </plugins>
+      <resources>
+        <resource>
+            <directory>src/main/resources</directory>
+        </resource>
+    </resources>
   </build>
+
 
 </project>

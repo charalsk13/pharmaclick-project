@@ -14,13 +14,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        // Φορτώνουμε το FXML από τον φάκελο views
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/RegisterView.fxml"));
-        Parent root = loader.load();
-
-        Scene scene = new Scene(root, 340, 600); // μέγεθος παραθύρου
-        stage.setScene(scene);
-        stage.setTitle("Εγγραφή Χρήστη");
+        Parent root = FXMLLoader.load(getClass().getResource("/views/login.fxml"));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Σύνδεση Χρήστη");
         stage.show();
     }
+    
 }

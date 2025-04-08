@@ -1,10 +1,15 @@
 package com.pharmaclick;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -82,19 +87,21 @@ public class RegisterController {
     @FXML
     private void goToLogin() {
         try {
-            // Φόρτωση του login.fxml
-            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/com/pharmaclick/login.fxml"));
-            javafx.scene.Parent root = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
+            Parent root = loader.load();
+
     
-            javafx.stage.Stage stage = (javafx.stage.Stage) loginLink1.getScene().getWindow(); // Παίρνει το υπάρχον stage
-            stage.setScene(new javafx.scene.Scene(root));
+            Stage stage = (Stage) loginLink1.getScene().getWindow();
+            stage.setScene(new Scene(root));
             stage.setTitle("Σύνδεση Χρήστη");
             stage.show();
     
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    
+
     
     // Μέθοδος για τη σύνδεση με τη βάση δεδομένων
     private Connection getConnection() throws SQLException {
