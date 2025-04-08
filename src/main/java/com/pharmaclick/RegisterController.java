@@ -105,7 +105,7 @@ public class RegisterController {
     
     // Μέθοδος για τη σύνδεση με τη βάση δεδομένων
     private Connection getConnection() throws SQLException {
-        String url = "jdbc:mariadb://localhost:3306/pharmaclick";
+        String url = "jdbc:mariadb://192.168.1.4:3306/pharmaclick";
         String user = "pharmaclick";
         String password = "1111";
         return DriverManager.getConnection(url, user, password);
