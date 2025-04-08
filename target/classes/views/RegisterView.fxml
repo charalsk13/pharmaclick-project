@@ -9,32 +9,40 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="491.0" prefWidth="277.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.RegisterController">
-    <children>
-      <ImageView fitHeight="99.0" fitWidth="114.0" layoutX="78.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/logo.png" />
-         </image>
-      </ImageView>
-      <TextField fx:id="emailField1" layoutX="52.0" layoutY="142.0" promptText="email@address.com" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5;" />
-      <TextField fx:id="addressField1" layoutX="52.0" layoutY="248.0" promptText="Διεύθυνση" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5;" />
-      <TextField fx:id="amkaField1" layoutX="52.0" layoutY="196.0" promptText="AMKA" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5;" />
-      <CheckBox fx:id="customerCheckBox1" layoutX="14.0" layoutY="349.0" style="-fx-font-size: 14px;" text="Πελάτης" />
-      <CheckBox fx:id="pharmacistCheckBox1" layoutX="135.0" layoutY="349.0" style="-fx-font-size: 14px;" text="Φαρμακοποιός" />
-      <Button fx:id="registerButton1" alignment="CENTER" contentDisplay="CENTER" layoutX="38.0" layoutY="391.0" onAction="#handleRegister" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10; -fx-border-radius: 10;" text="Δημιουργία Λογαριασμού" />
-      <Hyperlink fx:id="loginLink1" layoutX="51.0" layoutY="443.0" style="-fx-font-size: 10px;" text="Έχεις ήδη λογαριασμό; Συνδέσου εδώ" textFill="#00000051">
-         <font>
-            <Font size="8.0" />
-         </font>
-      </Hyperlink>
-      <PasswordField fx:id="passwordField1" layoutX="52.0" layoutY="298.0" promptText="Κωδικός" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5;" />
-      <Label contentDisplay="BOTTOM" layoutX="91.0" layoutY="92.0" prefHeight="23.0" prefWidth="88.0" text="Εγγραφή">
-         <font>
-            <Font name="Times New Roman Bold" size="22.0" />
-         </font>
-      </Label>
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.pharmaclick.RegisterController"
+            prefHeight="600.0" prefWidth="335.0">
 
-    </children>
-</AnchorPane>
+    <center>
+        <AnchorPane prefHeight="491.0" prefWidth="277.0" style="-fx-background-color: #A7CCD7;" BorderPane.alignment="CENTER">
+            <children>
+                <ImageView fitHeight="113.0" fitWidth="152.0" layoutX="91.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/logo.png" />
+                    </image>
+                </ImageView>
+                <TextField fx:id="emailField1" layoutX="82.0" layoutY="225.0" promptText="email@address.com" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5;" />
+                <TextField fx:id="addressField1" layoutX="82.0" layoutY="334.0" promptText="Διεύθυνση" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5;" />
+                <TextField fx:id="amkaField1" layoutX="82.0" layoutY="280.0" promptText="AMKA" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5;" />
+                <CheckBox fx:id="customerCheckBox1" layoutX="47.0" layoutY="442.0" style="-fx-font-size: 14px;" text="Πελάτης" />
+                <CheckBox fx:id="pharmacistCheckBox1" layoutX="168.0" layoutY="442.0" style="-fx-font-size: 14px;" text="Φαρμακοποιός" />
+                <Button fx:id="registerButton1" alignment="CENTER" contentDisplay="CENTER" layoutX="65.0" layoutY="485.0" onAction="#handleRegister" style="-fx-background-color: black; -fx-text-fill: white; -fx-font-size: 16px; -fx-padding: 10; -fx-border-radius: 10;" text="Δημιουργία Λογαριασμού" />
+                <Hyperlink fx:id="loginLink1" onAction="#goToLogin" layoutX="79.0" layoutY="537.0" style="-fx-font-size: 10px;" text="Έχεις ήδη λογαριασμό; Συνδέσου εδώ" textFill="#00000051">
+                    <font>
+                        <Font size="8.0" />
+                    </font>
+                </Hyperlink>
+                <PasswordField fx:id="passwordField1" layoutX="82.0" layoutY="384.0" promptText="Κωδικός" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5;" />
+                <Label contentDisplay="BOTTOM" layoutX="123.0" layoutY="169.0" prefHeight="23.0" prefWidth="88.0" text="Εγγραφή">
+                    <font>
+                        <Font name="Times New Roman Bold" size="22.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

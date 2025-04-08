@@ -31,6 +31,10 @@ public class RegisterController {
     @FXML
     private CheckBox pharmacistCheckBox1;
 
+    @FXML
+    private javafx.scene.control.Hyperlink loginLink1;
+
+
     // Η μέθοδος που καλείται όταν ο χρήστης πατήσει "Δημιουργία Λογαριασμού"
     public void handleRegister() {
         // Πάρε τα δεδομένα από τα πεδία της φόρμας
@@ -75,7 +79,23 @@ public class RegisterController {
             System.out.println("Σφάλμα κατά την εγγραφή: " + e.getMessage());
         }
     }
-
+    @FXML
+    private void goToLogin() {
+        try {
+            // Φόρτωση του login.fxml
+            javafx.fxml.FXMLLoader loader = new javafx.fxml.FXMLLoader(getClass().getResource("/com/pharmaclick/login.fxml"));
+            javafx.scene.Parent root = loader.load();
+    
+            javafx.stage.Stage stage = (javafx.stage.Stage) loginLink1.getScene().getWindow(); // Παίρνει το υπάρχον stage
+            stage.setScene(new javafx.scene.Scene(root));
+            stage.setTitle("Σύνδεση Χρήστη");
+            stage.show();
+    
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     // Μέθοδος για τη σύνδεση με τη βάση δεδομένων
     private Connection getConnection() throws SQLException {
         String url = "jdbc:mariadb://localhost:3306/pharmaclick";

@@ -18,7 +18,7 @@ public class App extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/RegisterView.fxml"));
         Parent root = loader.load();
 
-        Scene scene = new Scene(root, 400, 500); // μέγεθος παραθύρου
+        Scene scene = new Scene(root, 340, 600); // μέγεθος παραθύρου
         stage.setScene(scene);
         stage.setTitle("Εγγραφή Χρήστη");
         stage.show();

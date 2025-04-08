@@ -55,6 +55,7 @@
                 <mainClass>com.pharmaclick.App</mainClass>
             </configuration>
         </plugin>
+        
     <plugin>
       <groupId>org.codehaus.mojo</groupId>
       <artifactId>exec-maven-plugin</artifactId>
