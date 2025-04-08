@@ -1,33 +1,86 @@
 package com.pharmaclick;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class RegisterController {
 
-    @FXML private TextField emailField;
-    @FXML private PasswordField passwordField;
-    @FXML private TextField addressField;
-    @FXML private TextField amkaField;
-    @FXML private CheckBox customerCheckBox;
-    @FXML private CheckBox pharmacistCheckBox;
-    @FXML private Button registerButton;
-    @FXML private Hyperlink loginLink;
+    // Σύνδεση με τα πεδία της φόρμας (με βάση τα fx:id του FXML)
+    @FXML
+    private TextField emailField1;
 
     @FXML
-    private void handleRegister() {
-        String email = emailField.getText();
-        String password = passwordField.getText();
-        String address = addressField.getText();
-        String amka = amkaField.getText();
-        boolean isCustomer = customerCheckBox.isSelected();
-        boolean isPharmacist = pharmacistCheckBox.isSelected();
+    private PasswordField passwordField1;
 
-        System.out.println("Εγγραφή:");
-        System.out.println("Email: " + email);
-        System.out.println("Κωδικός: " + password);
-        System.out.println("Διεύθυνση: " + address);
-        System.out.println("AMKA: " + amka);
-        System.out.println("Ρόλος - Πελάτης: " + isCustomer + ", Φαρμακοποιός: " + isPharmacist);
+    @FXML
+    private TextField addressField1;
+
+    @FXML
+    private TextField amkaField1;
+
+    @FXML
+    private CheckBox customerCheckBox1;
+
+    @FXML
+    private CheckBox pharmacistCheckBox1;
+
+    // Η μέθοδος που καλείται όταν ο χρήστης πατήσει "Δημιουργία Λογαριασμού"
+    public void handleRegister() {
+        // Πάρε τα δεδομένα από τα πεδία της φόρμας
+        String email = emailField1.getText(); 
+        String password = passwordField1.getText();
+        String address = addressField1.getText();
+        String amka = amkaField1.getText();
+
+        String userType;
+        if (customerCheckBox1.isSelected()) {
+            userType = "customer";
+        } else if (pharmacistCheckBox1.isSelected()) {
+            userType = "pharmacist";
+        } else {
+            userType = "unknown";
+        }
+
+        // Κάλεσε τη μέθοδο για να προσθέσεις το χρήστη στη βάση δεδομένων
+        registerUser(email, password, address, amka, userType);
+    }
+
+    // Μέθοδος για την εισαγωγή του χρήστη στη βάση δεδομένων
+    private void registerUser(String email, String password, String address, String amka, String userType) {
+        String query = "INSERT INTO users (email, password, address, amka, user_type) VALUES (?, ?, ?, ?, ?)";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, email);
+            statement.setString(2, password);
+            statement.setString(3, address);
+            statement.setString(4, amka);
+            statement.setString(5, userType);
+
+            int rowsAffected = statement.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Ο χρήστης εγγράφηκε με επιτυχία!");
+            } else {
+                System.out.println("Η εγγραφή απέτυχε.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Σφάλμα κατά την εγγραφή: " + e.getMessage());
+        }
+    }
+
+    // Μέθοδος για τη σύνδεση με τη βάση δεδομένων
+    private Connection getConnection() throws SQLException {
+        String url = "jdbc:mariadb://localhost:3306/pharmaclick";
+        String user = "pharmaclick";
+        String password = "1111";
+        return DriverManager.getConnection(url, user, password);
     }
 }

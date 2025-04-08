@@ -37,6 +37,12 @@
         <version>5.7.2</version>
         <scope>test</scope>
     </dependency>
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>3.5.3</version> <!-- Αυτή είναι η έκδοση -->
+</dependency>
+
   </dependencies>
 
   <build>
@@ -49,7 +55,14 @@
                 <mainClass>com.pharmaclick.App</mainClass>
             </configuration>
         </plugin>
-
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>3.5.0</version>
+      <configuration>
+        <mainClass>com.pharmaclick.DatabaseConnection</mainClass> <!-- Ονομάστε την κύρια κλάση σας -->
+      </configuration>
+    </plugin>
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
