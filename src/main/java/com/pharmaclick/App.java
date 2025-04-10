@@ -13,11 +13,20 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/views/login.fxml"));
-        stage.setScene(new Scene(root));
-        stage.setTitle("Σύνδεση Χρήστη");
-        stage.show();
-    }
+public void start(Stage stage) throws Exception {
+    Parent root = FXMLLoader.load(getClass().getResource("/views/login.fxml"));
+    Scene scene = new Scene(root, 350, 600);
     
+    stage.setScene(scene);
+    stage.setTitle("Σύνδεση Χρήστη");
+
+    stage.setMinWidth(350);
+    stage.setMaxWidth(350);
+    stage.setMinHeight(600);
+    stage.setMaxHeight(600);
+
+    stage.setResizable(false); // Απενεργοποιεί το resize τελείως
+    stage.show();
+}
+
 }

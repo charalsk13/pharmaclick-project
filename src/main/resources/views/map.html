@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Χάρτης Φαρμακείων Πάτρας</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 300px;"></div>
+
+<script>
+  // Δημιουργία χάρτη
+  var map = L.map('map').setView([38.2466, 21.7346], 13);
+
+  // Φόρτωση πλακιδίων από OpenStreetMap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Πίνακας με φαρμακεία
+  const pharmacies = [
+    { name: "Φαρμακείο Παπανικολάου", coords: [38.2466, 21.7346], info: "Ώρες: 08:00 - 20:00, Τηλ: 2610 123456" },
+    { name: "Φαρμακείο Αθανασίου", coords: [38.2485, 21.7355], info: "Ώρες: 09:00 - 21:00, Τηλ: 2610 654321" },
+    { name: "Φαρμακείο Λεοντίδη", coords: [38.2432, 21.7320], info: "24ωρο, Τηλ: 2610 111111" },
+    { name: "Φαρμακείο Σαμαρά", coords: [38.2500, 21.7400], info: "Ώρες: 07:00 - 15:00, Τηλ: 2610 222222" },
+    { name: "Φαρμακείο Νεοφύτου", coords: [38.2470, 21.7290], info: "Ώρες: 10:00 - 18:00, Τηλ: 2610 333333" }
+  ];
+
+  // Προσθήκη markers
+  pharmacies.forEach(pharmacy => {
+    L.marker(pharmacy.coords)
+     .addTo(map)
+     .bindPopup(`<b>${pharmacy.name}</b><br>${pharmacy.info}`);
+  });
+
+  // Τοποθεσία χρήστη (αν επιτρέψει)
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const userCoords = [position.coords.latitude, position.coords.longitude];
+      L.marker(userCoords, {
+        icon: L.icon({
+          iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+          iconSize: [30, 41],
+          iconAnchor: [15, 41]
+        })
+      }).addTo(map).bindPopup("Η τοποθεσία μου").openPopup();
+      map.setView(userCoords, 14);
+    });
+  }
+</script>
+</body>
+
+  
+</html>

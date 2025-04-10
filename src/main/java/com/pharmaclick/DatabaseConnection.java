@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
     public static void main(String[] args) {
-        String url = "jdbc:mariadb://192.168.1.4:3306/pharmaclick";
+        String url = "jdbc:mariadb://localhost:3306/pharmaclick";
         String user = "pharmaclick";
         String pass = "1111";
 
