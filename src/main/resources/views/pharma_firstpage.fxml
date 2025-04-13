@@ -33,14 +33,11 @@
                         </ImageView>
                         <VBox>
                             <Label text="DEPON" style="-fx-font-weight: bold;" />
-                            <Label text="ΠΕΤΡΟΠΟΥΛΟΥ ΜΑΡΙΤΙΝΑ AMKA: 12345678909  No. 8078887635" wrapText="true" />
+                            <Label text="ΠΕΤΡΟΠΟΥΛΟΥ ΜΑΡΙΤΙΝΑ
+AMKA: 12345678909  No. 8078887635" wrapText="true" />
                         </VBox>
                         <Region HBox.hgrow="ALWAYS" />
-                        <ImageView fitWidth="18" fitHeight="18">
-                            <image>
-                                <Image url="@/images/check.png" />
-                            </image>
-                        </ImageView>
+                        <CheckBox />
                     </HBox>
                 </VBox>
 
@@ -53,14 +50,11 @@
                         </ImageView>
                         <VBox>
                             <Label text="DEPON" style="-fx-font-weight: bold;" />
-                            <Label text="laskarithara@gmail.com AMKA: 12345678909  No. 8078887635" wrapText="true" />
+                            <Label text="laskarithara@gmail.com
+AMKA: 12345678909  No. 8078887635" wrapText="true" />
                         </VBox>
                         <Region HBox.hgrow="ALWAYS" />
-                        <ImageView fitWidth="18" fitHeight="18">
-                            <image>
-                                <Image url="@/images/check.png" />
-                            </image>
-                        </ImageView>
+                        <CheckBox />
                     </HBox>
                 </VBox>
             </VBox>
@@ -78,19 +72,12 @@
                         </ImageView>
                         <VBox>
                             <Label text="DEPON" style="-fx-font-weight: bold;" />
-                            <Label text="ΠΕΤΡΟΠΟΥΛΟΥ ΜΑΡΙΤΙΝΑ\nAMKA: 12345678909" wrapText="true" />
+                            <Label text="ΠΕΤΡΟΠΟΥΛΟΥ ΜΑΡΙΤΙΝΑ
+AMKA: 12345678909" wrapText="true" />
                         </VBox>
                         <Region HBox.hgrow="ALWAYS" />
-                        <ImageView fitWidth="18" fitHeight="18">
-                            <image>
-                                <Image url="@/images/check.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fitWidth="18" fitHeight="18">
-                            <image>
-                                <Image url="@/images/delete.png" />
-                            </image>
-                        </ImageView>
+                        <CheckBox />
+                        <CheckBox />
                     </HBox>
                 </VBox>
 
@@ -103,19 +90,12 @@
                         </ImageView>
                         <VBox>
                             <Label text="DEPON" style="-fx-font-weight: bold;" />
-                            <Label text="laskarithara@gmail.com\nAMKA: 12345678909" wrapText="true" />
+                            <Label text="laskarithara@gmail.com
+AMKA: 12345678909" wrapText="true" />
                         </VBox>
                         <Region HBox.hgrow="ALWAYS" />
-                        <ImageView fitWidth="18" fitHeight="18">
-                            <image>
-                                <Image url="@/images/check.png" />
-                            </image>
-                        </ImageView>
-                        <ImageView fitWidth="18" fitHeight="18">
-                            <image>
-                                <Image url="@/images/delete.png" />
-                            </image>
-                        </ImageView>
+                        <CheckBox />
+                        <CheckBox />
                     </HBox>
                 </VBox>
             </VBox>
@@ -125,26 +105,75 @@
                 <Label text="➕ Πρόσθεσε φάρμακα" style="-fx-font-weight: bold; -fx-font-size: 14px;" />
                 <TilePane hgap="10" vgap="10" prefColumns="2">
 
-                    <!-- Each Category -->
+                    <!-- Κατηγορία 1 -->
                     <VBox spacing="5" alignment="CENTER" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);">
                         <ImageView fitWidth="48" fitHeight="48">
-                            <image>
-                                <Image url="@/images/category1.png" />
-                            </image>
+                            <image><Image url="@/images/category1.png" /></image>
                         </ImageView>
                         <Label text="Αναλγητικά και Αντιφλεγμονώδη" wrapText="true" textAlignment="CENTER" />
                         <ImageView fitWidth="20" fitHeight="20">
-                            <image>
-                                <Image url="@/images/plus.png" />
-                            </image>
+                            <image><Image url="@/images/plus.png" /></image>
                         </ImageView>
                     </VBox>
 
-                    <!-- Επαναλαμβάνεις για κάθε κατηγορία -->
+                    <!-- Κατηγορία 2 -->
+                    <VBox spacing="5" alignment="CENTER" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);">
+                        <ImageView fitWidth="48" fitHeight="48">
+                            <image><Image url="@/images/category2.png" /></image>
+                        </ImageView>
+                        <Label text="Βιταμίνες και Συμπληρώματα" wrapText="true" textAlignment="CENTER" />
+                        <ImageView fitWidth="20" fitHeight="20">
+                            <image><Image url="@/images/plus.png" /></image>
+                        </ImageView>
+                    </VBox>
+
+                    <!-- Κατηγορία 3 -->
+                    <VBox spacing="5" alignment="CENTER" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);">
+                        <ImageView fitWidth="48" fitHeight="48">
+                            <image><Image url="@/images/category3.png" /></image>
+                        </ImageView>
+                        <Label text="Κρυολογήματα και Γρίπη" wrapText="true" textAlignment="CENTER" />
+                        <ImageView fitWidth="20" fitHeight="20">
+                            <image><Image url="@/images/plus.png" /></image>
+                        </ImageView>
+                    </VBox>
+
+                    <!-- Κατηγορία 4 -->
+                    <VBox spacing="5" alignment="CENTER" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);">
+                        <ImageView fitWidth="48" fitHeight="48">
+                            <image><Image url="@/images/category4.png" /></image>
+                        </ImageView>
+                        <Label text="Βρεφικά Προϊόντα" wrapText="true" textAlignment="CENTER" />
+                        <ImageView fitWidth="20" fitHeight="20">
+                            <image><Image url="@/images/plus.png" /></image>
+                        </ImageView>
+                    </VBox>
+
+                    <!-- Κατηγορία 5 -->
+                    <VBox spacing="5" alignment="CENTER" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);">
+                        <ImageView fitWidth="48" fitHeight="48">
+                            <image><Image url="@/images/category5.png" /></image>
+                        </ImageView>
+                        <Label text="Δερματολογικά" wrapText="true" textAlignment="CENTER" />
+                        <ImageView fitWidth="20" fitHeight="20">
+                            <image><Image url="@/images/plus.png" /></image>
+                        </ImageView>
+                    </VBox>
+
+                    <!-- Κατηγορία 6 -->
+                    <VBox spacing="5" alignment="CENTER" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);">
+                        <ImageView fitWidth="48" fitHeight="48">
+                            <image><Image url="@/images/category6.png" /></image>
+                        </ImageView>
+                        <Label text="Ερωτική Υγεία και Προφυλάξεις" wrapText="true" textAlignment="CENTER" />
+                        <ImageView fitWidth="20" fitHeight="20">
+                            <image><Image url="@/images/plus.png" /></image>
+                        </ImageView>
+                    </VBox>
+
                 </TilePane>
                 <Hyperlink text="➕ Προσθήκη κατηγορίας" onAction="#goToCategoryC" />
             </VBox>
         </VBox>
     </content>
 </ScrollPane>
-
