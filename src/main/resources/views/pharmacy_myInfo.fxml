@@ -60,7 +60,7 @@
                </image>
             </ImageView>
             <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
-            <TextField prefHeight="27.0" prefWidth="128.0" promptText="Όνομα Φαρμακείου" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Όνομα Φαρμακείου">
+            <TextField prefHeight="27.0" prefWidth="136.0" promptText="Όνομα Φαρμακείου" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Όνομα Φαρμακείου">
                <font>
                   <Font size="13.0" />
                </font>
