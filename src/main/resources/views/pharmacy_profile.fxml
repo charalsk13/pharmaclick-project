@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Point3D?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,6 +16,9 @@
          <image>
             <Image url="@../images/logo.png" />
          </image>
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="30.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -51,7 +55,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER_LEFT" layoutX="46.0" layoutY="232.0" onMouseClicked="#handleBookingsClick" prefHeight="34.0" prefWidth="281.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
+      <HBox alignment="CENTER_LEFT" layoutX="48.0" layoutY="232.0" onMouseClicked="#handleBookingsClick" prefHeight="34.0" prefWidth="281.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
          <children>
             <Label style="-fx-text-fill: black;" text="Κρατήσεις">
                <font>
@@ -71,7 +75,7 @@
             <Image url="@../images/fast-delivery.png" />
          </image>
       </ImageView>
-      <HBox alignment="CENTER_LEFT" layoutX="52.0" layoutY="265.0" onMouseClicked="#handleBookingsClick" prefHeight="31.0" prefWidth="274.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
+      <HBox alignment="CENTER_LEFT" layoutX="52.0" layoutY="265.0" onMouseClicked="#handleHelpClick" prefHeight="31.0" prefWidth="274.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
          <children>
             <Label style="-fx-text-fill: black;" text="Χρειάζεσαι βοήθεια;">
                <font>
@@ -86,7 +90,7 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="52.0" layoutY="300.0" onMouseClicked="#handleBookingsClick" prefHeight="31.0" prefWidth="274.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
+      <HBox alignment="CENTER_LEFT" layoutX="52.0" layoutY="300.0" onMouseClicked="#handleInfoClick" prefHeight="31.0" prefWidth="274.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
          <children>
             <Label style="-fx-text-fill: black;" text="Οι πληροφορίες μου">
                <font>
@@ -101,7 +105,7 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="52.0" layoutY="331.0" onMouseClicked="#handleBookingsClick" prefHeight="33.0" prefWidth="274.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
+      <HBox alignment="CENTER_LEFT" layoutX="52.0" layoutY="331.0" onMouseClicked="#handleNotificationsClick" prefHeight="33.0" prefWidth="274.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
          <children>
             <Label style="-fx-text-fill: black;" text="Ειδοποιήσεις">
                <font>
@@ -116,7 +120,7 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="52.0" layoutY="364.0" onMouseClicked="#handleBookingsClick" prefHeight="33.0" prefWidth="274.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
+      <HBox alignment="CENTER_LEFT" layoutX="52.0" layoutY="364.0" onMouseClicked="#handlePrivacyOptClick" prefHeight="33.0" prefWidth="274.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
          <children>
             <Label style="-fx-text-fill: black;" text="Privacy options">
                <font>
@@ -131,7 +135,7 @@
             </ImageView>
          </children>
       </HBox>
-      <HBox alignment="CENTER_LEFT" layoutX="52.0" layoutY="397.0" onMouseClicked="#handleBookingsClick" prefHeight="33.0" prefWidth="274.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
+      <HBox alignment="CENTER_LEFT" layoutX="52.0" layoutY="397.0" onMouseClicked="#handleLogoutClick" prefHeight="33.0" prefWidth="274.0" spacing="10.0" style="-fx-background-color: transparent; -fx-border-color: #dcdcdc; -fx-border-width: 0 0 1 0; -fx-padding: 5 10 5 10;">
          <children>
             <Label style="-fx-text-fill: black;" text="Αποσύνδεση">
                <font>
