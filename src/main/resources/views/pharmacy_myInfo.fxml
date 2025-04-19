@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="60.0" layoutX="138.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo.png" />
+         </image>
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="30.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/circle-user.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="46.0" layoutY="21.0" style="-fx-text-fill: white;" text="pharmacy name" textFill="#f0f0f0">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="200.0" fitWidth="25.0" layoutX="240.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: #A7CCD7;">
+         <image>
+            <Image url="@../images/ellipsis.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="200.0" fitWidth="25.0" layoutX="290.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/clock.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="138.0" layoutY="77.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/circle%20(1).png" />
+         </image>
+      </ImageView>
+      <Label layoutX="100.0" layoutY="144.0" onMouseClicked="#handleChangePhotoClick" style="-fx-underline: true; -fx-font-size: 10px; -fx-cursor: hand;" text="Αλλαγή φωτογραφίας προφίλ" textAlignment="CENTER" textFill="#0d0000" underline="true">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER_LEFT" layoutX="68.0" layoutY="270.0" onMouseClicked="#handlePharmacyNameClick" prefHeight="30.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 5 10;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/driving-license.png" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
+            <TextField prefHeight="27.0" prefWidth="128.0" promptText="Όνομα Φαρμακείου" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Όνομα Φαρμακείου">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="68.0" layoutY="450.0" onMouseClicked="#handleIdClick" prefHeight="30.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 5 10;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/fingerprint.png" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
+            <TextField prefHeight="27.0" prefWidth="135.0" promptText="Κωδικος Φαρμακείου" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Κωδικός Φαρμακείου" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="68.0" layoutY="405.0" onMouseClicked="#handleLocationClick" prefHeight="30.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 5 10;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/pin.png" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
+            <TextField prefHeight="20.0" prefWidth="117.0" promptText="Διεύθυνση" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Διεύθυνση">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="68.0" layoutY="360.0" onMouseClicked="#handlePasswordClick" prefHeight="30.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 5 10;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/padlock.png" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
+            <TextField prefHeight="20.0" prefWidth="117.0" promptText="Κωδικός" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Κωδικός">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="68.0" layoutY="315.0" onMouseClicked="#handleNameClick" prefHeight="30.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 5 10;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/driving-license.png" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
+            <TextField prefHeight="20.0" prefWidth="117.0" promptText="Ονοματεπώνυμο" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Ονοματεπώνυμο">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="68.0" layoutY="180.0" onMouseClicked="#handleEmailClick" prefHeight="30.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 5 10;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/letter.png" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
+            <TextField prefHeight="20.0" prefWidth="117.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Email">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" layoutX="68.0" layoutY="225.0" onMouseClicked="#handleTelephoneClick" prefHeight="30.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 5 10;">
+         <children>
+            <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/phone.png" />
+               </image>
+            </ImageView>
+            <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
+            <TextField prefHeight="20.0" prefWidth="117.0" promptText="Τηλέφωνο" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Τηλέφωνο">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <Button layoutX="99.0" layoutY="515.0" maxWidth="180.0" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 20; -fx-font-size: 14px;" text="Υποβολή Αλλαγών" />
+      <Label layoutX="112.0" layoutY="562.0" onMouseClicked="#handleDeleteAccountClick" style="-fx-text-fill: #0a4b5b; -fx-underline: true; -fx-cursor: hand;" text="Διαγραφή Λογαριασμού">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
