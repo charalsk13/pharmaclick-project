@@ -1,15 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.TilePane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="600" prefWidth="350" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.pharmaclick.PharmaFirstPage">
     <content>
@@ -17,24 +11,23 @@
 
             <!-- Top Bar -->
             <HBox alignment="CENTER_LEFT" spacing="10">
-            <ImageView fitHeight="27.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/circle-user.png" />
-               </image>
-            </ImageView>
+                <ImageView fitHeight="27.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/circle-user.png" />
+                    </image>
+                </ImageView>
                 <Label text="pharmacy name" />
-            <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/logo.png" />
-               </image>
-            </ImageView>
+                <ImageView fitHeight="37.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/logo.png" />
+                    </image>
+                </ImageView>
                 <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
             </HBox>
 
             <!-- Κρατήσεις για παραλαβή -->
             <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;">
                 <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Κρατήσεις για παραλαβή" />
-
                 <VBox spacing="5" style="-fx-background-color: #e7f0f5; -fx-padding: 10; -fx-background-radius: 10;">
                     <HBox alignment="CENTER_LEFT" spacing="10">
                         <ImageView fitHeight="20" fitWidth="20">
@@ -47,10 +40,9 @@
                             <Label text="ΠΕΤΡΟΠΟΥΛΟΥ ΜΑΡΙΤΙΝΑ AMKA: 12345678909  No. 8078887635" wrapText="true" />
                         </VBox>
                         <Region HBox.hgrow="ALWAYS" />
-                        <CheckBox />
+                        <CheckBox fx:id="confirmReservation1" onAction="#handleConfirmReservation1" />
                     </HBox>
                 </VBox>
-
                 <VBox spacing="5" style="-fx-background-color: #e7f0f5; -fx-padding: 10; -fx-background-radius: 10;">
                     <HBox alignment="CENTER_LEFT" spacing="10">
                         <ImageView fitHeight="20" fitWidth="20">
@@ -63,7 +55,7 @@
                             <Label text="laskarithara@gmail.com AMKA: 12345678909  No. 8078887635" wrapText="true" />
                         </VBox>
                         <Region HBox.hgrow="ALWAYS" />
-                        <CheckBox />
+                        <CheckBox fx:id="confirmReservation2" onAction="#handleConfirmReservation2" />
                     </HBox>
                 </VBox>
             </VBox>
@@ -71,7 +63,6 @@
             <!-- Αιτήματα -->
             <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;">
                 <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Αιτήματα" />
-
                 <VBox spacing="5" style="-fx-background-color: #e7f0f5; -fx-padding: 10; -fx-background-radius: 10;">
                     <HBox alignment="CENTER_LEFT" spacing="10">
                         <ImageView fitHeight="20" fitWidth="20">
@@ -84,11 +75,10 @@
                             <Label text="ΠΕΤΡΟΠΟΥΛΟΥ ΜΑΡΙΤΙΝΑ AMKA: 12345678909" wrapText="true" />
                         </VBox>
                         <Region HBox.hgrow="ALWAYS" />
-                        <CheckBox />
-                        <CheckBox />
+                        <CheckBox fx:id="approveRequest1" onAction="#handleApproveRequest1" />
+                        <CheckBox fx:id="rejectRequest1" onAction="#handleRejectRequest1" />
                     </HBox>
                 </VBox>
-
                 <VBox spacing="5" style="-fx-background-color: #e7f0f5; -fx-padding: 10; -fx-background-radius: 10;">
                     <HBox alignment="CENTER_LEFT" spacing="10">
                         <ImageView fitHeight="20" fitWidth="20">
@@ -101,8 +91,8 @@
                             <Label text="laskarithara@gmail.com AMKA: 12345678909" wrapText="true" />
                         </VBox>
                         <Region HBox.hgrow="ALWAYS" />
-                        <CheckBox />
-                        <CheckBox />
+                        <CheckBox fx:id="approveRequest2" onAction="#handleApproveRequest2" />
+                        <CheckBox fx:id="rejectRequest2" onAction="#handleRejectRequest2" />
                     </HBox>
                 </VBox>
             </VBox>
@@ -115,10 +105,10 @@
                     <!-- Κατηγορία 1 -->
                     <VBox alignment="CENTER" prefHeight="118.0" prefWidth="273.0" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);" TilePane.alignment="CENTER">
                         <Label text="Αναλγητικά και Αντιφλεγμονώδη" textAlignment="CENTER" wrapText="true" />
-                        <ImageView fitHeight="48.0" fitWidth="48.0">
+                        <ImageView fx:id="category1Image" fitHeight="48.0" fitWidth="48.0" onMouseClicked="#goToCategoryA1">
                             <image><Image url="@../images/category1.png" /></image>
                         </ImageView>
-                        <ImageView fitHeight="20" fitWidth="20">
+                        <ImageView fx:id="addCategory1" fitHeight="20" fitWidth="20" onMouseClicked="#goToAddForm">
                             <image><Image url="@../images/add-button.png" /></image>
                         </ImageView>
                     </VBox>
@@ -126,10 +116,10 @@
                     <!-- Κατηγορία 2 -->
                     <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);">
                         <Label text="Βιταμίνες και Συμπληρώματα" textAlignment="CENTER" wrapText="true" />
-                        <ImageView fitHeight="48" fitWidth="48">
+                        <ImageView fx:id="category2Image" fitHeight="48" fitWidth="48" onMouseClicked="#goToCategoryA2">
                             <image><Image url="@../images/category2.png" /></image>
                         </ImageView>
-                        <ImageView fitHeight="20" fitWidth="20">
+                        <ImageView fx:id="addCategory2" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB2">
                             <image><Image url="@../images/add-button.png" /></image>
                         </ImageView>
                     </VBox>
@@ -137,10 +127,10 @@
                     <!-- Κατηγορία 3 -->
                     <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);">
                         <Label text="Κρυολογήματα και Γρίπη" textAlignment="CENTER" wrapText="true" />
-                        <ImageView fitHeight="48" fitWidth="48">
+                        <ImageView fx:id="category3Image" fitHeight="48" fitWidth="48" onMouseClicked="#goToCategoryA3">
                             <image><Image url="@../images/category3.png" /></image>
                         </ImageView>
-                        <ImageView fitHeight="20" fitWidth="20">
+                        <ImageView fx:id="addCategory3" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB3">
                             <image><Image url="@../images/add-button.png" /></image>
                         </ImageView>
                     </VBox>
@@ -148,10 +138,10 @@
                     <!-- Κατηγορία 4 -->
                     <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);">
                         <Label text="Βρεφικά Προϊόντα" textAlignment="CENTER" wrapText="true" />
-                        <ImageView fitHeight="48" fitWidth="48">
+                        <ImageView fx:id="category4Image" fitHeight="48" fitWidth="48" onMouseClicked="#goToCategoryA4">
                             <image><Image url="@../images/category4.png" /></image>
                         </ImageView>
-                        <ImageView fitHeight="20" fitWidth="20">
+                        <ImageView fx:id="addCategory4" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB4">
                             <image><Image url="@../images/add-button.png" /></image>
                         </ImageView>
                     </VBox>
@@ -159,10 +149,10 @@
                     <!-- Κατηγορία 5 -->
                     <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);">
                         <Label text="Δερματολογικά" textAlignment="CENTER" wrapText="true" />
-                        <ImageView fitHeight="48" fitWidth="48">
+                        <ImageView fx:id="category5Image" fitHeight="48" fitWidth="48" onMouseClicked="#goToCategoryA5">
                             <image><Image url="@../images/category5.png" /></image>
                         </ImageView>
-                        <ImageView fitHeight="20" fitWidth="20">
+                        <ImageView fx:id="addCategory5" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB5">
                             <image><Image url="@../images/add-button.png" /></image>
                         </ImageView>
                     </VBox>
@@ -170,17 +160,19 @@
                     <!-- Κατηγορία 6 -->
                     <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, lightgrey, 3, 0, 1, 1);">
                         <Label text="Ερωτική Υγεία και Προφυλάξεις" textAlignment="CENTER" wrapText="true" />
-                        <ImageView fitHeight="48" fitWidth="48">
+                        <ImageView fx:id="category6Image" fitHeight="48" fitWidth="48" onMouseClicked="#goToCategoryA6">
                             <image><Image url="@../images/category6.png" /></image>
                         </ImageView>
-                        <ImageView fitHeight="20" fitWidth="20">
+                        <ImageView fx:id="addCategory6" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB6">
                             <image><Image url="@../images/add-button.png" /></image>
                         </ImageView>
                     </VBox>
-
                 </TilePane>
-                <Hyperlink onAction="#goToCategoryC" text="➕ Προσθήκη κατηγορίας" />
+
+                <!-- Προσθήκη κατηγορίας -->
+                <Hyperlink fx:id="addCategoryLink" onAction="#goToCategoryC" text="➕ Προσθήκη κατηγορίας" />
             </VBox>
         </VBox>
     </content>
 </ScrollPane>
+

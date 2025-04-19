@@ -1,8 +1,13 @@
-
 package com.pharmaclick;
+import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+import javafx.scene.Node;
 
 public class PharmaFirstPage {
 
@@ -28,12 +33,28 @@ public class PharmaFirstPage {
 
     @FXML
     public void goToCategoryA(MouseEvent event) {
-        System.out.println("Σελίδα Α");
+        goToAddFormWithCategory("Αναλγητικά και Αντιφλεγμονώδη", "/images/category1.png", event);
     }
 
     @FXML
-    public void goToCategoryB() {
-        System.out.println("Σελίδα Β");
+    public void goToCategoryB(MouseEvent event) {
+        goToAddFormWithCategory("Βιταμίνες και Συμπληρώματα", "/images/category2.png", event);
+    }
+
+    public void goToAddFormWithCategory(String categoryName, String iconPath, MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddMedicine.fxml"));
+            Parent root = loader.load();
+
+            AddMedicineController controller = loader.getController();
+            controller.setCategory(categoryName, iconPath);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 350, 600);
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
