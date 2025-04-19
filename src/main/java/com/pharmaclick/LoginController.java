@@ -61,7 +61,7 @@ public class LoginController {
                 if (role.equalsIgnoreCase("customer")) {
                     fxmlToLoad = "/views/frontpage_user.fxml";
                 } else if (role.equalsIgnoreCase("pharmacist")) {
-                    fxmlToLoad = "/views/frontpage_pharmacist.fxml";
+                    fxmlToLoad = "/views/pharma_firstpage.fxml";
                 } else {
                     errorText.setText("Άγνωστος ρόλος χρήστη.");
                     return;
