@@ -1,59 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600" prefWidth="350" style="-fx-background-color: #B7D3DD;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.AddMedicineController">
+<ScrollPane prefHeight="600.0" prefWidth="335.0" style="-fx-background: #B7D3DD;" fitToWidth="true" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.AddMedicineController">
+    <content>
+        <VBox spacing="15" style="-fx-background-color: #B7D3DD; -fx-padding: 10;">
 
-    <!-- Top Bar -->
-    <HBox layoutX="20" layoutY="20" spacing="10">
-        <ImageView fx:id="categoryIcon" fitHeight="27.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/category1.png" />
-         </image></ImageView>
-        <Label fx:id="categoryLabel" style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Κατηγορία" />
-    </HBox>
+            <!-- Top bar: pharmacy name and icons -->
+            <HBox spacing="10">
+                <ImageView fitHeight="20" fitWidth="20">
+                    <image>
+                        <Image url="@../images/circle%20(1).png" />
+                    </image>
+                </ImageView>
+                <Label style="-fx-text-fill: white; -fx-font-weight: bold;" text="pharmacy name" />
+                <Region HBox.hgrow="ALWAYS" />
+                <ImageView fitHeight="20" fitWidth="20">
+                    <image>
+                        <Image url="@../images/logo.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="20" fitWidth="20">
+                    <image>
+                        <Image url="@../images/ellipsis.png" />
+                    </image>
+                </ImageView>
+            </HBox>
 
-    <VBox layoutX="20" layoutY="70" prefWidth="310" spacing="15" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 10;" AnchorPane.bottomAnchor="50.0" AnchorPane.topAnchor="50.0">
+            <!-- Κατηγορία -->
+            <HBox spacing="10">
+                <ImageView fitHeight="27.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/category1.png" />
+                    </image>
+                </ImageView>
+                <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Αναλγητικά και Αντιφλεγμονώδη" />
+            </HBox>
 
-        <Label style="-fx-font-weight: bold; -fx-font-size: 16px;" text="Πρόσθεσε φάρμακο" />
-        <Separator />
+            <!-- Search bar -->
+            <HBox spacing="10">
+                <ImageView fitHeight="20.0" fitWidth="20.0">
+                    <image>
+                        <Image url="@../images/search.png" />
+                    </image>
+                </ImageView>
+                <TextField fx:id="searchField" prefWidth="250.0" promptText="Search" />
+            </HBox>
 
-        <Label text="Όνομα Φαρμάκου" />
-        <TextField fx:id="drugNameField" prefHeight="26.0" prefWidth="228.0">
-         <font>
-            <Font size="1.0" />
-         </font></TextField>
+            <!-- Medicine list -->
+            <VBox fx:id="medicineListVBox" spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;">
+                <!-- Example item -->
+                <HBox spacing="10">
+                    <ImageView fitHeight="20.0" fitWidth="20.0">
+                        <image>
+                            <Image url="@../images/category1.png" />
+                        </image>
+                    </ImageView>
+                    <VBox spacing="2">
+                        <Label style="-fx-font-weight: bold;" text="ALGON" />
+                        <Label prefHeight="16.0" prefWidth="198.0" style="-fx-font-size: 11px;" text="Ακετυλοσαλικυλικό οξύ - Παρακεταμόλη - Καφεΐνη" />
+                    </VBox>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <VBox alignment="CENTER_RIGHT" spacing="2">
+                        <Label text="0,95 €" />
+                        <Spinner fx:id="algonQuantitySpinner" prefWidth="60" />
+                    </VBox>
+                </HBox>
+            </VBox>
 
-        <Label text="Περιγραφή" />
-        <TextField fx:id="descriptionField" />
+            <!-- Add medicine form -->
+            <VBox prefWidth="310.0" spacing="10" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 10;">
+                <Label style="-fx-font-weight: bold; -fx-font-size: 16px;" text="Πρόσθεσε φάρμακο" />
+                <Separator />
+                <Label text="Όνομα Φαρμάκου" />
+                <TextField fx:id="drugNameField" />
+                <Label text="Περιγραφή" />
+                <TextField fx:id="descriptionField" />
+                <Label text="Μορφή Φαρμάκου" />
+                <TextField fx:id="formField" />
+                <Label text="Ποσότητα σε Απόθεμα" />
+                <Spinner fx:id="quantitySpinner" editable="true" />
+                <Label text="Τιμή (€)" />
+                <TextField fx:id="priceField" />
+                <Label text="Διαθεσιμότητα" />
+                <ComboBox fx:id="availabilityCombo" />
+                <Label text="Κωδικός Φαρμάκου" />
+                <TextField fx:id="drugCodeField" />
+                <Button onAction="#handleAddMedicine" style="-fx-background-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;" text="Προσθήκη" />
+            </VBox>
 
-        <Label text="Μορφή Φαρμάκου" />
-        <TextField fx:id="formField" />
-
-        <Label text="Ποσότητα σε Απόθεμα" />
-        <Spinner fx:id="quantitySpinner" editable="true" />
-
-        <Label text="Τιμή (€)" />
-        <TextField fx:id="priceField" />
-
-        <Label text="Διαθεσιμότητα" />
-        <ComboBox fx:id="availabilityCombo" />
-
-        <Label text="Κωδικός Φαρμάκου" />
-        <TextField fx:id="drugCodeField" />
-
-        <Button onAction="#handleAddMedicine" style="-fx-background-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;" text="Προσθήκη" />
-    </VBox>
-
-</AnchorPane>
+        </VBox>
+    </content>
+</ScrollPane>
