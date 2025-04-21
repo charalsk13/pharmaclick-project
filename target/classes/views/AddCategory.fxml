@@ -67,7 +67,9 @@
             <Button onAction="#handleChooseImage" text="Επιλογή Φωτογραφίας" />
         </VBox>
 
-        <Button onAction="#handleAddCategory" style="-fx-background-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;" text="Προσθήκη" />
+       
+         <Button onAction="#handleAddCategory" style="-fx-background-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;" text="Προσθήκη" />
+         <Button onAction="#goBackToHome" text="Επιστροφή" style="-fx-background-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;" />
     </VBox>
 
 </AnchorPane>

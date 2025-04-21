@@ -88,6 +88,7 @@
                 <Label text="Κωδικός Φαρμάκου" />
                 <TextField fx:id="CodeField" />
                 <Button onAction="#handleAddMedicine" style="-fx-background-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;" text="Προσθήκη" />
+                <Button onAction="#goBackToHome" text="Επιστροφή" style="-fx-background-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;" />
             </VBox>
 
         </VBox>

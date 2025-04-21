@@ -1,9 +1,17 @@
 package com.pharmaclick;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -68,5 +76,18 @@ public class AddMedicineController {
             System.out.println("❌ Σφάλμα κατά την προσθήκη: " + e.getMessage());
         }
     }
+
+     @FXML
+    public void goBackToHome(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharma_firstpage.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root, 350, 600));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
 }
 

@@ -5,6 +5,7 @@ com\pharmaclick\OrderDetailsApp.class
 com\pharmaclick\DatabaseConnection.class
 com\pharmaclick\RegisterController.class
 com\pharmaclick\FrontpageUserController.class
+com\pharmaclick\AddCategoryController.class
 com\pharmaclick\App.class
 com\pharmaclick\CustomerOrdersController.class
 com\pharmaclick\CustomerOrdersApp.class
