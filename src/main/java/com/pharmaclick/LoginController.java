@@ -11,7 +11,11 @@ import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+
+
 public class LoginController {
+
+    public static String loggedInEmail;
 
     @FXML private TextField emailField1;
     @FXML private PasswordField passwordField1;
@@ -34,56 +38,69 @@ public class LoginController {
         errorText.setText(""); // καθαρίζει αρχικά
     }
 
+
     @FXML
     private void handleLogin() {
+    
         String email = emailField1.getText().trim();
         String password = passwordField1.getText().trim();
-
+    
+        LoginController.loggedInEmail = email;
+    
         if (email.isEmpty() || password.isEmpty()) {
             errorText.setText("Συμπλήρωσε όλα τα πεδία.");
             return;
         }
-
+    
         try (Connection conn = connect()) {
             String sql = "SELECT user_type FROM users WHERE email = ? AND password = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
             stmt.setString(2, password);
-
+    
             ResultSet rs = stmt.executeQuery();
-
+    
             if (rs.next()) {
                 String role = rs.getString("user_type");
-
-
-                // Redirect ανάλογα με τον ρόλο
-                String fxmlToLoad;
-                if (role.equalsIgnoreCase("customer")) {
-                    fxmlToLoad = "/views/frontpage_user.fxml";
-                } else if (role.equalsIgnoreCase("pharmacist")) {
-                    fxmlToLoad = "/views/pharma_firstpage.fxml";
+    
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                Scene scene;
+                Parent root;
+    
+                if (role.equalsIgnoreCase("pharmacist")) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharma_firstpage.fxml"));
+                    root = loader.load();
+                    
+                    PharmaFirstPage controller = loader.getController();
+                    controller.setPharmacyEmail(email); // ✅ περνάμε το email
+    
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.setTitle("Αρχική Φαρμακοποιού");
+                    stage.show();
+    
+                } else if (role.equalsIgnoreCase("customer")) {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/frontpage_user.fxml"));
+                    root = loader.load();
+    
+                    scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.setTitle("Αρχική Χρήστη");
+                    stage.show();
                 } else {
                     errorText.setText("Άγνωστος ρόλος χρήστη.");
-                    return;
                 }
-
-                Parent root = FXMLLoader.load(getClass().getResource(fxmlToLoad));
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Αρχική Σελίδα");
-                stage.show();
-
+    
             } else {
                 errorText.setText("Λάθος email ή κωδικός.");
             }
-
+    
         } catch (SQLException | IOException e) {
             e.printStackTrace();
             errorText.setText("Σφάλμα σύνδεσης.");
         }
-        System.out.println("Το κουμπί πατήθηκε!");
-
     }
+    
 
     @FXML
     private void goToRegister() {

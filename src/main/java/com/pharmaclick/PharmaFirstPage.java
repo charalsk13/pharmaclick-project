@@ -2,7 +2,6 @@ package com.pharmaclick;
 
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +11,12 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 
 public class PharmaFirstPage {
+
+    private String pharmacyEmail;
+
+    public void setPharmacyEmail(String email) {
+        this.pharmacyEmail = email;
+    }
 
     @FXML
     public void goToProfile() {
@@ -32,20 +37,23 @@ public class PharmaFirstPage {
     public void handleReject() {
         System.out.println("Απόρριψη αιτήματος");
     }
-    
-    @FXML
-public void goToAddForm(MouseEvent event) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddMedicine.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 350, 600);
-        stage.setScene(scene);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
 
+    @FXML
+    public void goToAddForm(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AddMedicine.fxml"));
+            Parent root = loader.load();
+
+            AddMedicineController controller = loader.getController();
+            controller.setPharmacyName(pharmacyEmail);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 350, 600);
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     public void handleConfirmReservation1() {
@@ -77,68 +85,15 @@ public void goToAddForm(MouseEvent event) {
         System.out.println("Απορρίφθηκε το αίτημα 2");
     }
 
-    @FXML
-    public void goToCategoryA1(MouseEvent event) {
-        goToAddFormWithCategory("Αναλγητικά και Αντιφλεγμονώδη", "/images/category1.png", event);
-    }
-
-    @FXML
-    public void goToCategoryB2(MouseEvent event) {
-        goToAddFormWithCategory("Βιταμίνες και Συμπληρώματα", "/images/category2.png", event);
-    }
-
-    @FXML
-    public void goToCategoryA2(MouseEvent event) {
-        goToAddFormWithCategory("Βιταμίνες και Συμπληρώματα", "/images/category2.png", event);
-    }
-
-    @FXML
-    public void goToCategoryA3(MouseEvent event) {
-        goToAddFormWithCategory("Κρυολογήματα και Γρίπη", "/images/category3.png", event);
-    }
-
-    @FXML
-    public void goToCategoryB3(MouseEvent event) {
-        goToAddFormWithCategory("Κρυολογήματα και Γρίπη", "/images/category3.png", event);
-    }
-
-    @FXML
-    public void goToCategoryA4(MouseEvent event) {
-        goToAddFormWithCategory("Βρεφικά Προϊόντα", "/images/category4.png", event);
-    }
-
-    @FXML
-    public void goToCategoryB4(MouseEvent event) {
-        goToAddFormWithCategory("Βρεφικά Προϊόντα", "/images/category4.png", event);
-    }
-
-    @FXML
-    public void goToCategoryA5(MouseEvent event) {
-        goToAddFormWithCategory("Δερματολογικά", "/images/category5.png", event);
-    }
-
-    @FXML
-    public void goToCategoryB5(MouseEvent event) {
-        goToAddFormWithCategory("Δερματολογικά", "/images/category5.png", event);
-    }
-
-    @FXML
-    public void goToCategoryA6(MouseEvent event) {
-        goToAddFormWithCategory("Ερωτική Υγεία και Προφυλάξεις", "/images/category6.png", event);
-    }
-
-    @FXML
-    public void goToCategoryB6(MouseEvent event) {
-        goToAddFormWithCategory("Ερωτική Υγεία και Προφυλάξεις", "/images/category6.png", event);
-    }
-
+    // Για κάθε κατηγορία
     public void goToAddFormWithCategory(String categoryName, String iconPath, MouseEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AddMedicine.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/AddMedicine.fxml"));
             Parent root = loader.load();
 
             AddMedicineController controller = loader.getController();
             controller.setCategory(categoryName, iconPath);
+            controller.setPharmacyName(pharmacyEmail);  // περνάει το email
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 350, 600);
@@ -148,8 +103,20 @@ public void goToAddForm(MouseEvent event) {
         }
     }
 
+    @FXML public void goToCategoryA1(MouseEvent event) { goToAddFormWithCategory("Αναλγητικά και Αντιφλεγμονώδη", "/images/category1.png", event); }
+    @FXML public void goToCategoryB2(MouseEvent event) { goToAddFormWithCategory("Βιταμίνες και Συμπληρώματα", "/images/category2.png", event); }
+    @FXML public void goToCategoryA2(MouseEvent event) { goToAddFormWithCategory("Βιταμίνες και Συμπληρώματα", "/images/category2.png", event); }
+    @FXML public void goToCategoryA3(MouseEvent event) { goToAddFormWithCategory("Κρυολογήματα και Γρίπη", "/images/category3.png", event); }
+    @FXML public void goToCategoryB3(MouseEvent event) { goToAddFormWithCategory("Κρυολογήματα και Γρίπη", "/images/category3.png", event); }
+    @FXML public void goToCategoryA4(MouseEvent event) { goToAddFormWithCategory("Βρεφικά Προϊόντα", "/images/category4.png", event); }
+    @FXML public void goToCategoryB4(MouseEvent event) { goToAddFormWithCategory("Βρεφικά Προϊόντα", "/images/category4.png", event); }
+    @FXML public void goToCategoryA5(MouseEvent event) { goToAddFormWithCategory("Δερματολογικά", "/images/category5.png", event); }
+    @FXML public void goToCategoryB5(MouseEvent event) { goToAddFormWithCategory("Δερματολογικά", "/images/category5.png", event); }
+    @FXML public void goToCategoryA6(MouseEvent event) { goToAddFormWithCategory("Ερωτική Υγεία και Προφυλάξεις", "/images/category6.png", event); }
+    @FXML public void goToCategoryB6(MouseEvent event) { goToAddFormWithCategory("Ερωτική Υγεία και Προφυλάξεις", "/images/category6.png", event); }
+
     @FXML
     public void goToCategoryC() {
         System.out.println("Σελίδα Γ");
     }
-} 
+}
