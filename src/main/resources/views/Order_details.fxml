@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.OrderDetailsController">
+   <children>
+      <Pane layoutX="1.0" prefHeight="81.0" prefWidth="367.0" style="-fx-background-color: #A7CCD7;">
+         <children>
+            <Label layoutX="62.0" layoutY="1.0" text="ΠΛΗΡΟΦΟΡΙΕΣ ΚΡΑΤΗΣΗΣ">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="orderNumberLabel" layoutX="43.0" layoutY="32.0" prefHeight="17.0" prefWidth="126.0"  />
+            <Label fx:id="orderDateLabel" layoutX="43.0" layoutY="51.0" prefHeight="17.0" prefWidth="126.0"  />
+            <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="14.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/box.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="15.0" fitWidth="15.0" layoutX="14.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/calendar.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="backButton" layoutX="9.0" layoutY="2.0" mnemonicParsing="false" onAction="#goBack" prefHeight="25.0" prefWidth="41.0" text="←" />
+         </children>
+      </Pane>
+      <Pane layoutX="1.0" layoutY="104.0" prefHeight="110.0" prefWidth="367.0" style="-fx-background-color: #A7CCD7;">
+         <children>
+            <Label fx:id="customerNameLabel" layoutX="16.0" layoutY="6.0"  />
+            <Label fx:id="addressLabel" layoutX="16.0" layoutY="23.0"  />
+            <Label fx:id="cityLabel" layoutX="16.0" layoutY="40.0"  />
+            <Label fx:id="countryLabel" layoutX="16.0" layoutY="57.0" />
+            <Label fx:id="postalCodeLabel" layoutX="16.0" layoutY="74.0"  />
+            <Label fx:id="phoneLabel" layoutX="16.0" layoutY="91.0" />
+         </children>
+      </Pane>
+      <Label layoutX="16.0" layoutY="87.0" text="ΟΙ ΠΛΗΡΟΦΟΡΙΕΣ ΜΟΥ" />
+      <Label layoutX="16.0" layoutY="221.0" text="ΠΛΗΡΟΦΟΡΙΕΣ ΦΑΡΜΑΚΕΙΟΥ" />
+      <Pane layoutX="1.0" layoutY="238.0" prefHeight="110.0" prefWidth="367.0" style="-fx-background-color: #A7CCD7;">
+         <children>
+            <Label fx:id="pharmacyNameLabel" layoutX="16.0" layoutY="6.0"  />
+            <Label fx:id="pharmacyAddressLabel" layoutX="16.0" layoutY="23.0"  />
+            <Label fx:id="pharmacyCityLabel" layoutX="16.0" layoutY="40.0" />
+            <Label fx:id="pharmacyCountryLabel" layoutX="16.0" layoutY="57.0"  />
+            <Label fx:id="pharmacyPostalCodeLabel" layoutX="16.0" layoutY="74.0"  />
+            <Label fx:id="pharmacyPhoneLabel" layoutX="16.0" layoutY="91.0"  />
+         </children>
+      </Pane>
+      <Pane layoutX="1.0" layoutY="356.0" prefHeight="36.0" prefWidth="367.0" style="-fx-background-color: #A7CCD7;">
+         <children>
+            <Text layoutX="16.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Αξιολογήστε το φαρμακείο">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutX="1.0" layoutY="396.0" prefHeight="167.0" prefWidth="367.0" style="-fx-background-color: #A7CCD7;">
+         <children>
+            <Label fx:id="statusLabel" layoutX="16.0" layoutY="4.0" text="ΠΑΡΑΔΟΘΗΚΕ!">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="deliveryDateLabel" layoutX="16.0" layoutY="24.0" text="ΠΑΡΑΔΟΘΗΚΕ 6 ΣΕΠ 2024">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <ProgressBar fx:id="progressBar" layoutX="16.0" layoutY="46.0" prefHeight="15.0" prefWidth="343.0" progress="1.0" style="-fx-accent: green;" />
+            <ImageView fitHeight="69.0" fitWidth="84.0" layoutX="16.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/category3.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="productNameLabel" layoutX="132.0" layoutY="75.0" text="Depon 500 mg">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="productDescriptionLabel" layoutX="132.0" layoutY="92.0" text="Παυσίπονο, αντιπυρετικό (20 δισκία)" textFill="WHITE" />
+            <Label fx:id="productPriceLabel" layoutX="132.0" layoutY="109.0" text="2,50 €">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

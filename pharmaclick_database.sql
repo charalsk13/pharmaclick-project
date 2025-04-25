@@ -30,6 +30,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
+
+CREATE TABLE IF NOT EXISTS medicines (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    pharmacy_name VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    form VARCHAR(50),
+    quantity INT,
+    price DECIMAL(10, 2),
+    availability VARCHAR(50),
+    drug_code VARCHAR(100),
+    category VARCHAR(100)
+);
 -- Data exporting was unselected.
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
