@@ -43,6 +43,7 @@ public class LoginController {
             errorText.setText("Συμπλήρωσε όλα τα πεδία.");
             return;
         }
+        
 
         try (Connection conn = connect()) {
             String sql = "SELECT user_type FROM users WHERE email = ? AND password = ?";
@@ -70,9 +71,10 @@ public class LoginController {
                 Parent root = FXMLLoader.load(getClass().getResource(fxmlToLoad));
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.setScene(new Scene(root));
+                
                 stage.setTitle("Αρχική Σελίδα");
                 stage.show();
-
+                
             } else {
                 errorText.setText("Λάθος email ή κωδικός.");
             }
@@ -82,6 +84,8 @@ public class LoginController {
             errorText.setText("Σφάλμα σύνδεσης.");
         }
         System.out.println("Το κουμπί πατήθηκε!");
+        
+
 
     }
 
@@ -98,4 +102,6 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+    
+
 }
