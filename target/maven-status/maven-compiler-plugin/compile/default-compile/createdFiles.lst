@@ -4,7 +4,9 @@ com\pharmaclick\PharmaFirstPage.class
 com\pharmaclick\OrderDetailsController.class
 com\pharmaclick\OrderDetailsApp.class
 com\pharmaclick\DatabaseConnection.class
+com\pharmaclick\NotificationsUserController.class
 com\pharmaclick\RegisterController.class
+com\pharmaclick\PharmacyProfileController.class
 com\pharmaclick\FrontpageUserController.class
 com\pharmaclick\AddCategoryController.class
 com\pharmaclick\App.class

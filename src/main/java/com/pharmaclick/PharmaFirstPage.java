@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import javafx.scene.image.ImageView;
 
 public class PharmaFirstPage {
 
@@ -18,6 +19,8 @@ public class PharmaFirstPage {
     public void setPharmacyEmail(String email) {
         this.pharmacyEmail = email;
     }
+    @FXML
+    private ImageView profileIcon;
 
     @FXML
     public void goToProfile() {
@@ -148,6 +151,24 @@ public void goBackToHome(ActionEvent event) {
     } catch (IOException e) {
         e.printStackTrace();
     }
+}
+
+@FXML
+private void initialize() {
+    profileIcon.setOnMouseClicked(event -> {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharmacy_profile.fxml"));
+
+            Parent profileRoot = loader.load();
+            Scene profileScene = new Scene(profileRoot);
+
+            // Παίρνουμε το τρέχον Stage
+            Stage stage = (Stage) profileIcon.getScene().getWindow();
+            stage.setScene(profileScene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    });
 }
 
 }

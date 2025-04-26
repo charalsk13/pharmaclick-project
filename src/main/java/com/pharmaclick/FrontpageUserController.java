@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
 
 public class FrontpageUserController {
 
@@ -15,7 +16,8 @@ public class FrontpageUserController {
     private WebView mapView;
 
     @FXML
-    private Button notificationsButton; // Το κουμπί με το φακελάκι!
+    private ImageView notificationsButton;
+
 
     @FXML
     public void initialize() {
@@ -35,15 +37,17 @@ public class FrontpageUserController {
     @FXML
 private void openNotificationsPage(javafx.scene.input.MouseEvent event) {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/NotificationsPage.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/notifications_user.fxml"));
         Parent root = loader.load();
-        Stage stage = new Stage();
-        stage.setTitle("Ειδοποιήσεις");
+
+        // Παίρνουμε το ΙΔΙΟ παράθυρο και αλλάζουμε Scene
+        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     } catch (Exception e) {
         System.out.println("⚠️ Σφάλμα ανοίγματος σελίδας ειδοποιήσεων: " + e.getMessage());
     }
 }
+
 
 }
