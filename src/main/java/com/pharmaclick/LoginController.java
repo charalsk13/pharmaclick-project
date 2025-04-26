@@ -91,11 +91,6 @@ public class LoginController {
                     errorText.setText("Άγνωστος ρόλος χρήστη.");
                 }
 
-                Parent root = FXMLLoader.load(getClass().getResource(fxmlToLoad));
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.setTitle("Αρχική Σελίδα");
-                stage.show();
 
             } else {
                 errorText.setText("Λάθος email ή κωδικός.");

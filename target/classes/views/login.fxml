@@ -18,8 +18,8 @@
             <Image url="@../images/logo2.png" />
          </image>
       </ImageView>
-      <TextField fx:id="emailField1" layoutX="53.0" layoutY="309.0" prefHeight="43.0" prefWidth="223.0" promptText="Email" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5; -fx-background-radius: 5;" styleClass="textfield-with-icon" stylesheets="@../styles/style.css" />
-      <PasswordField fx:id="passwordField1" layoutX="53.0" layoutY="389.0" prefHeight="43.0" prefWidth="223.0" promptText="Κωδικός" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5; -fx-background-radius: 5;" styleClass="passwordfield-with-icon" stylesheets="@../styles/style.css" />
+      <TextField fx:id="emailField1" layoutX="53.0" layoutY="309.0" prefHeight="43.0" prefWidth="223.0" promptText="Email" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5; -fx-background-radius: 5;" />
+      <PasswordField fx:id="passwordField1" layoutX="53.0" layoutY="389.0" prefHeight="43.0" prefWidth="223.0" promptText="Κωδικός" style="-fx-font-size: 14px; -fx-padding: 10; -fx-background-color: white; -fx-border-radius: 5; -fx-background-radius: 5;" />
       <Text layoutX="56.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email" wrappingWidth="47.38831329345703">
          <font>
             <Font name="Times New Roman" size="12.0" />

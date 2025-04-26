@@ -27,12 +27,12 @@
                               <Image url="@../images/logo.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="68.0" fitWidth="25.0" layoutX="241.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="notificationsButton" fitHeight="68.0" fitWidth="25.0" layoutX="262.0" layoutY="6.0" onMouseClicked="#openNotificationsPage" pickOnBounds="true" preserveRatio="true" styleClass="notifications-button">
                            <image>
                               <Image url="@../images/envelope-dot.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="60.0" fitWidth="25.0" layoutX="296.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="60.0" fitWidth="25.0" layoutX="309.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/shopping-cart.png" />
                            </image>
