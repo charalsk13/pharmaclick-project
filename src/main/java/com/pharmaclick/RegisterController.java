@@ -17,7 +17,6 @@ import java.sql.SQLException;
 
 public class RegisterController {
 
-    // Σύνδεση με τα πεδία της φόρμας (με βάση τα fx:id του FXML)
     @FXML
     private TextField emailField1;
 
@@ -39,11 +38,8 @@ public class RegisterController {
     @FXML
     private javafx.scene.control.Hyperlink loginLink1;
 
-
-    // Η μέθοδος που καλείται όταν ο χρήστης πατήσει "Δημιουργία Λογαριασμού"
     public void handleRegister() {
-        // Πάρε τα δεδομένα από τα πεδία της φόρμας
-        String email = emailField1.getText(); 
+        String email = emailField1.getText();
         String password = passwordField1.getText();
         String address = addressField1.getText();
         String amka = amkaField1.getText();
@@ -57,11 +53,17 @@ public class RegisterController {
             userType = "unknown";
         }
 
-        // Κάλεσε τη μέθοδο για να προσθέσεις το χρήστη στη βάση δεδομένων
         registerUser(email, password, address, amka, userType);
+
+        if (userType.equals("pharmacist")) {
+            registerPharmacist(email, address, amka, password);  // 👈 Εδώ περνάμε και το password
+        } else if (userType.equals("customer")) {
+            registerCustomer(email, address, amka, password);
+        }
+        // Μόλις τελειώσει η εγγραφή, δείξε Alert επιτυχίας
+showSuccessAndRedirect();
     }
 
-    // Μέθοδος για την εισαγωγή του χρήστη στη βάση δεδομένων
     private void registerUser(String email, String password, String address, String amka, String userType) {
         String query = "INSERT INTO users (email, password, address, amka, user_type) VALUES (?, ?, ?, ?, ?)";
 
@@ -81,33 +83,78 @@ public class RegisterController {
                 System.out.println("Η εγγραφή απέτυχε.");
             }
         } catch (SQLException e) {
-            System.out.println("Σφάλμα κατά την εγγραφή: " + e.getMessage());
+            System.out.println("Σφάλμα κατά την εγγραφή χρήστη: " + e.getMessage());
         }
     }
+
+    private void registerPharmacist(String email, String address, String amka, String password) {
+        String query = "INSERT INTO pharmacists (email, address, amka, password) VALUES (?, ?, ?, ?)";
+
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, email);
+            statement.setString(2, address);
+            statement.setString(3, amka);
+            statement.setString(4, password);
+
+            statement.executeUpdate();
+            System.out.println("Ο φαρμακοποιός εγγράφηκε με επιτυχία!");
+        } catch (SQLException e) {
+            System.out.println("Σφάλμα κατά την εγγραφή φαρμακοποιού: " + e.getMessage());
+        }
+    }
+
+    private void registerCustomer(String email, String address, String amka, String password) {
+        String query = "INSERT INTO customers (email, address, amka, password) VALUES (?, ?, ?, ?)";
+    
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+    
+            statement.setString(1, email);
+            statement.setString(2, address);
+            statement.setString(3, amka);
+            statement.setString(4, password);
+    
+            statement.executeUpdate();
+            System.out.println("Ο πελάτης εγγράφηκε με επιτυχία!");
+        } catch (SQLException e) {
+            System.out.println("Σφάλμα κατά την εγγραφή πελάτη: " + e.getMessage());
+        }
+    }
+    
+
     @FXML
     private void goToLogin() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/login.fxml"));
             Parent root = loader.load();
 
-    
             Stage stage = (Stage) loginLink1.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Σύνδεση Χρήστη");
             stage.show();
-    
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    
 
-    
-    // Μέθοδος για τη σύνδεση με τη βάση δεδομένων
     private Connection getConnection() throws SQLException {
         String url = "jdbc:mariadb://localhost:3306/pharmaclick";
         String user = "pharmaclick";
         String password = "1111";
         return DriverManager.getConnection(url, user, password);
     }
+    private void showSuccessAndRedirect() {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.INFORMATION);
+        alert.setTitle("Επιτυχία");
+        alert.setHeaderText(null);
+        alert.setContentText("Η εγγραφή ολοκληρώθηκε επιτυχώς! Παρακαλώ συνδεθείτε.");
+        alert.showAndWait(); // Περιμένει να πατήσεις ΟΚ
+    
+        // Μετά σε πάει στη σελίδα Σύνδεσης
+        goToLogin();
+    }
+    
 }
