@@ -1,3 +1,4 @@
+com\pharmaclick\OrdersController.class
 com\pharmaclick\AddressessApp.class
 com\pharmaclick\LoginController.class
 com\pharmaclick\PharmaFirstPage.class
@@ -14,3 +15,4 @@ com\pharmaclick\CustomerOrdersController.class
 com\pharmaclick\CustomerOrdersApp.class
 com\pharmaclick\AddressessController.class
 com\pharmaclick\AddMedicineController.class
+com\pharmaclick\PharmacyMyInfoController.class

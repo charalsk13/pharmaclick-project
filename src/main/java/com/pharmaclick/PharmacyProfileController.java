@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.Node;
-
+import javafx.scene.image.ImageView;
 
 public class PharmacyProfileController {
 
@@ -20,7 +20,16 @@ public class PharmacyProfileController {
 
     @FXML
     private void handleBookingsClick(MouseEvent event) {
-        System.out.println("Πατήθηκαν οι Κρατήσεις!");
+        System.out.println("CLICKED ON BOOKINGS!");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/orders.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 350, 600);
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -29,9 +38,18 @@ public class PharmacyProfileController {
     }
 
     @FXML
-    private void handleInfoClick(MouseEvent event) {
-        System.out.println("Πληροφορίες!");
+private void handleInfoClick(MouseEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharmacy_myInfo.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 350, 600);
+        stage.setScene(scene);
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
 
     @FXML
     private void handleNotificationsClick(MouseEvent event) {
@@ -49,16 +67,17 @@ public class PharmacyProfileController {
     }
 
     @FXML
-private void goBackHome(MouseEvent event) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharma_firstpage.fxml"));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 350, 600);
-        stage.setScene(scene);
-    } catch (IOException e) {
-        e.printStackTrace();
+    private void goBackHome(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharma_firstpage.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 350, 600);
+            stage.setScene(scene);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-}
+
 
 }
