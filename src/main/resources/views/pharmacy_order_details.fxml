@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="79.0" layoutY="14.0" text="ΠΛΗΡΟΦΟΡΙΕΣ ΚΡΑΤΗΣΗΣ">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="25.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/back-arrow.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="121.0" fitWidth="30.0" layoutX="14.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/fast-delivery.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="22.0" fitWidth="25.0" layoutX="18.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/calendar.png" />
+         </image>
+      </ImageView>
+      <HBox layoutX="56.0" layoutY="63.0" prefHeight="30.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="30.0" prefWidth="62.0" text="Order No.">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="orderNumberLabel" prefHeight="34.0" prefWidth="121.0" text="orderNumber">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="56.0" layoutY="101.0" prefHeight="30.0" prefWidth="200.0">
+         <children>
+            <Label prefHeight="30.0" prefWidth="69.0" text="Order date.">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="orderDateLabel" prefHeight="34.0" prefWidth="121.0" text="orderDate">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Pane layoutY="140.0" prefHeight="35.0" prefWidth="335.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="14.0" layoutY="9.0" text="ΠΛΗΡΟΦΟΡΙΕΣ ΠΕΛΑΤΗ" />
+         </children>
+      </Pane>
+      <VBox layoutX="18.0" layoutY="186.0" prefHeight="167.0" prefWidth="242.0">
+         <children>
+            <Label fx:id="nameLabel" text="name">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="addressLabel" text="address">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="cityLabel" text="city">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="countryLabel" text="country">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="tkLabel" text="TK">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="phoneLabel" text="phone">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="20.0" prefWidth="200.0">
+               <children>
+                  <Label text="ΑΜΚΑ :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="amkaLabel" text="amka">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="5.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Pane layoutX="-1.0" layoutY="343.0" prefHeight="20.0" prefWidth="335.0" style="-fx-background-color: white;" />
+      <Label layoutX="12.0" layoutY="390.0" prefHeight="26.0" prefWidth="142.0" text="STATUS">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <HBox layoutX="12.0" layoutY="416.0" prefHeight="20.0" prefWidth="200.0">
+         <children>
+            <Label text="ΠΑΡΑΔΟΣΗ ΣΤΙΣ : " />
+            <Label fx:id="deliveryDateLabel" prefHeight="18.0" prefWidth="97.0" text="deliveryDate" />
+         </children>
+      </HBox>
+      <Label layoutX="246.0" layoutY="408.0" />
+      <HBox layoutX="190.0" layoutY="393.0" prefHeight="20.0" prefWidth="112.0">
+         <children>
+            <Label text="ΤΕΜΑΧΙΑ :" />
+            <Label fx:id="quantityLabel" text="quantity">
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </Label>
+         </children>
+      </HBox>
+      <Label fx:id="medicineTitleLabel" layoutX="130.0" layoutY="454.0" text="medicineTitle" />
+      <Label fx:id="medicineDescriptionLabel" layoutX="128.0" layoutY="472.0" text="medicineDescription" textFill="WHITE" />
+      <Label fx:id="priceLabel" layoutX="130.0" layoutY="498.0" text="price">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="medicineImage" fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
