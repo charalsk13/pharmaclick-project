@@ -1,56 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="el">
 <head>
-  <title>Χάρτης Φαρμακείων Πάτρας</title>
   <meta charset="utf-8" />
+  <title>Χάρτης Φαρμακείων</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
-<body>
-    <div id="map" style="width: 100%; height: 300px;"></div>
+<body style="margin: 0; padding: 0;">
+  <div id="map" style="width: 100%; height: 100vh;"></div>
 
-<script>
-  // Δημιουργία χάρτη
-  var map = L.map('map').setView([38.2466, 21.7346], 13);
+  <script>
+    // Δημιουργία Leaflet χάρτη
+    const map = L.map('map').setView([38.2466, 21.7346], 13);
 
-  // Φόρτωση πλακιδίων από OpenStreetMap
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '© OpenStreetMap contributors'
-  }).addTo(map);
+    }).addTo(map);
 
-  // Πίνακας με φαρμακεία
-  const pharmacies = [
-    { name: "Φαρμακείο Παπανικολάου", coords: [38.2466, 21.7346], info: "Ώρες: 08:00 - 20:00, Τηλ: 2610 123456" },
-    { name: "Φαρμακείο Αθανασίου", coords: [38.2485, 21.7355], info: "Ώρες: 09:00 - 21:00, Τηλ: 2610 654321" },
-    { name: "Φαρμακείο Λεοντίδη", coords: [38.2432, 21.7320], info: "24ωρο, Τηλ: 2610 111111" },
-    { name: "Φαρμακείο Σαμαρά", coords: [38.2500, 21.7400], info: "Ώρες: 07:00 - 15:00, Τηλ: 2610 222222" },
-    { name: "Φαρμακείο Νεοφύτου", coords: [38.2470, 21.7290], info: "Ώρες: 10:00 - 18:00, Τηλ: 2610 333333" }
-  ];
+    // Συνάρτηση που καλείται από JavaFX
+    window.setPharmacies = function(pharmacies) {
+      console.log("📦 Εκτελείται setPharmacies:", pharmacies);
 
-  // Προσθήκη markers
-  pharmacies.forEach(pharmacy => {
-    L.marker(pharmacy.coords)
-     .addTo(map)
-     .bindPopup(`<b>${pharmacy.name}</b><br>${pharmacy.info}`);
-  });
+      pharmacies.forEach(pharmacy => {
+        // Έλεγχος εγκυρότητας συντεταγμένων
+        if (!pharmacy.coords || pharmacy.coords.length !== 2 ||
+            pharmacy.coords[0] == null || pharmacy.coords[1] == null) {
+          console.warn("❌ Αγνόησα φαρμακείο με άκυρες συντεταγμένες:", pharmacy);
+          return;
+        }
 
-  // Τοποθεσία χρήστη (αν επιτρέψει)
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(position => {
-      const userCoords = [position.coords.latitude, position.coords.longitude];
-      L.marker(userCoords, {
-        icon: L.icon({
-          iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-          iconSize: [30, 41],
-          iconAnchor: [15, 41]
-        })
-      }).addTo(map).bindPopup("Η τοποθεσία μου").openPopup();
-      map.setView(userCoords, 14);
-    });
-  }
-</script>
+        const marker = L.marker(pharmacy.coords).addTo(map);
+        marker.bindPopup(`<b>${pharmacy.name}</b><br>${pharmacy.info}`);
+
+        marker.on('click', () => {
+          console.log("🟢 Πάτησες το marker:", pharmacy.name);
+
+          
+            if (window.javaApp && typeof window.javaApp.openPharmacy === 'function') {
+              console.log("✅ Καλείται javaApp.openPharmacy για:", pharmacy.name);
+              window.javaApp.openPharmacy(pharmacy.name);
+            } else {
+              console.warn("❌ Η javaApp ή η μέθοδος openPharmacy δεν είναι διαθέσιμη.");
+            }
+           // μικρή καθυστέρηση για ασφάλεια
+        });
+      });
+    };
+
+    // Προσθήκη θέσης χρήστη αν επιτρέψει το browser
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        const userCoords = [position.coords.latitude, position.coords.longitude];
+        L.marker(userCoords, {
+          icon: L.icon({
+            iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
+            iconSize: [30, 41],
+            iconAnchor: [15, 41]
+          })
+        }).addTo(map).bindPopup("Η τοποθεσία μου").openPopup();
+
+        map.setView(userCoords, 14);
+      });
+    }
+  </script>
 </body>
-
-  
 </html>

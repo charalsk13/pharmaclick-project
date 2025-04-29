@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="900.0" prefWidth="349.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.PharmacyDetailsMapController">
+   <top>
+      <ScrollPane fx:id="mainScroll" fitToWidth="true" prefHeight="60.0" prefWidth="350.0" style="-fx-background-color: #A7CCD7; -fx-border-color: #A7CCD7; -fx-background: #A7CCD7;" stylesheets="@../styles/scroll-style.css" BorderPane.alignment="CENTER">
+         <content>
+            <VBox alignment="CENTER" prefWidth="740.0" style="-fx-background-color: #A7CCD7;">
+               <children>
+                  <Pane prefHeight="45.0" prefWidth="328.0">
+                     <children>
+                        <ImageView fx:id="homeButton" fitHeight="61.0" fitWidth="69.0" layoutX="123.0" layoutY="-5.0" onMouseClicked="#goToFrontpage" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/logo.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="notificationsButton" fitHeight="68.0" fitWidth="25.0" layoutX="248.0" layoutY="6.0" onMouseClicked="#openNotificationsPage" pickOnBounds="true" preserveRatio="true" styleClass="notifications-button">
+                           <image>
+                              <Image url="@../images/envelope-dot.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="60.0" fitWidth="25.0" layoutX="296.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/shopping-cart.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="32.0" fitWidth="27.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../images/circle-user.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </top>
+   <center>
+      <VBox prefHeight="649.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="110.0" prefWidth="350.0">
+               <children>
+                  <ImageView fitHeight="69.0" fitWidth="74.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="pharmacyNameLabel" layoutX="88.0" layoutY="14.0" text="Όνομα φαρμακείου">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <Label fx:id="pharmacyAddressLabel" layoutX="88.0" layoutY="47.0" text="Διεύθυνση" />
+                  <Label fx:id="pharmacyPhoneLabel" layoutX="88.0" layoutY="72.0" text="Τηλέφωνο" />
+               </children>
+            </Pane>
+            <Pane prefHeight="184.0" prefWidth="350.0">
+               <children>
+                  <TextField layoutX="55.0" layoutY="14.0" prefHeight="23.0" prefWidth="243.0" />
+               </children>
+            </Pane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

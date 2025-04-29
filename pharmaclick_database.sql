@@ -38,18 +38,21 @@ INSERT INTO `categories` (`id`, `name`) VALUES
 -- Dumping structure for πίνακας pharmaclick.customers
 CREATE TABLE IF NOT EXISTS `customers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `amka` varchar(20) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `amka` (`amka`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Dumping data for table pharmaclick.customers: ~0 rows (approximately)
+-- Dumping data for table pharmaclick.customers: ~1 rows (approximately)
+INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `address`, `phone`, `amka`, `password`) VALUES
+	(1, NULL, NULL, 'chara@gmail.com', 'patra 10', NULL, '43434', '1111');
 
 -- Dumping structure for πίνακας pharmaclick.medicines
 CREATE TABLE IF NOT EXISTS `medicines` (
@@ -83,35 +86,41 @@ CREATE TABLE IF NOT EXISTS `pharmacies` (
   `address` varchar(255) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
+  `latitude` double DEFAULT NULL,
+  `longitude` double DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.pharmacies: ~3 rows (approximately)
-INSERT INTO `pharmacies` (`id`, `name`, `address`, `phone`, `email`) VALUES
-	(1, 'Φαρμακείο Υγεία', 'Αθηνάς 25, Αθήνα', '2101234567', 'info@ygeia-pharmacy.gr'),
-	(2, 'Φαρμακείο Κεντρικό', 'Ερμού 50, Αθήνα', '2107654321', 'info@kentriko-pharmacy.gr'),
-	(3, 'Φαρμακείο Life', 'Σταδίου 15, Αθήνα', '2109988776', 'info@life-pharmacy.gr');
+INSERT INTO `pharmacies` (`id`, `name`, `address`, `phone`, `email`, `latitude`, `longitude`) VALUES
+	(1, 'Φαρμακείο Υγεία', 'Αθηνάς 25, Αθήνα', '2101234567', 'info@ygeia-pharmacy.gr', 38.2466, 21.7346),
+	(2, 'Φαρμακείο Κεντρικό', 'Ερμού 50, Αθήνα', '2107654321', 'info@kentriko-pharmacy.gr', 38.2485, 21.7355),
+	(3, 'Φαρμακείο Life', 'Σταδίου 15, Αθήνα', '2109988776', 'info@life-pharmacy.gr', 38.247, 21.734);
 
 -- Dumping structure for πίνακας pharmaclick.pharmacists
 CREATE TABLE IF NOT EXISTS `pharmacists` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `full_name` varchar(100) NOT NULL,
+  `full_name` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `address` varchar(255) DEFAULT NULL,
+  `amka` varchar(20) DEFAULT NULL,
   `pharmacy_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `amka` (`amka`),
   KEY `pharmacy_id` (`pharmacy_id`),
   CONSTRAINT `pharmacists_ibfk_1` FOREIGN KEY (`pharmacy_id`) REFERENCES `pharmacies` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Dumping data for table pharmaclick.pharmacists: ~3 rows (approximately)
-INSERT INTO `pharmacists` (`id`, `full_name`, `email`, `phone`, `password`, `address`, `pharmacy_id`) VALUES
-	(1, 'Νίκος Παπαδόπουλος', 'nikos.papadopoulos@gmail.com', '6901234567', '123456', 'Πανεπιστημίου 40, Αθήνα', 1),
-	(2, 'Μαρία Ιωάννου', 'maria.ioannou@gmail.com', '6907654321', '123456', 'Σόλωνος 100, Αθήνα', 2),
-	(3, 'Γιώργος Κωνσταντίνου', 'giorgos.konstantinou@gmail.com', '6988887777', '123456', 'Ακαδημίας 20, Αθήνα', 3);
+-- Dumping data for table pharmaclick.pharmacists: ~5 rows (approximately)
+INSERT INTO `pharmacists` (`id`, `full_name`, `email`, `phone`, `password`, `address`, `amka`, `pharmacy_id`) VALUES
+	(1, 'Νίκος Παπαδόπουλος', 'nikos.papadopoulos@gmail.com', '6901234567', '123456', 'Πανεπιστημίου 40, Αθήνα', NULL, 1),
+	(2, 'Μαρία Ιωάννου', 'maria.ioannou@gmail.com', '6907654321', '123456', 'Σόλωνος 100, Αθήνα', NULL, 2),
+	(3, 'Γιώργος Κωνσταντίνου', 'giorgos.konstantinou@gmail.com', '6988887777', '123456', 'Ακαδημίας 20, Αθήνα', NULL, 3),
+	(4, NULL, 'charoula@gmail.com', NULL, '1111', 'pente 2', '48493892', NULL),
+	(5, NULL, 'fotis@gmail.com', NULL, '1111', 'deka 10', '48595489', NULL);
 
 -- Dumping structure for πίνακας pharmaclick.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -122,16 +131,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `amka` varchar(255) DEFAULT NULL,
   `user_type` enum('customer','pharmacist') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Dumping data for table pharmaclick.users: ~6 rows (approximately)
+-- Dumping data for table pharmaclick.users: ~8 rows (approximately)
 INSERT INTO `users` (`id`, `email`, `password`, `address`, `amka`, `user_type`) VALUES
 	(1, 'email@gmail.com', '1111', 'Aigio 1', '100101', 'customer'),
 	(5, 'emffail@gmail.com', '1111', 'pame', '4838394', 'pharmacist'),
 	(8, 'nikos.papadopoulos@gmail.com', '123456', 'Πανεπιστημίου 40, Αθήνα', '12345678901', 'pharmacist'),
 	(9, 'maria.ioannou@gmail.com', '123456', 'Σόλωνος 100, Αθήνα', '10987654321', 'pharmacist'),
 	(10, 'giorgos.konstantinou@gmail.com', '123456', 'Ακαδημίας 20, Αθήνα', '11223344556', 'pharmacist'),
-	(11, 'charoula@gmail.com', '1111', 'AIGIOU 58', '48738947', 'pharmacist');
+	(14, 'charoula@gmail.com', '1111', 'pente 2', '48493892', 'pharmacist'),
+	(15, 'fotis@gmail.com', '1111', 'deka 10', '48595489', 'pharmacist'),
+	(18, 'chara@gmail.com', '1111', 'patra 10', '43434', 'customer');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
