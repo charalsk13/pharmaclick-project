@@ -67,17 +67,20 @@ CREATE TABLE IF NOT EXISTS `medicines` (
   `drug_code` varchar(100) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   `category` varchar(100) DEFAULT NULL,
+  `pharmacy_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_category` (`category_id`),
-  CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+  KEY `fk_pharmacy` (`pharmacy_id`),
+  CONSTRAINT `fk_category` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
+  CONSTRAINT `fk_pharmacy` FOREIGN KEY (`pharmacy_id`) REFERENCES `pharmacies` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.medicines: ~4 rows (approximately)
-INSERT INTO `medicines` (`id`, `pharmacy_name`, `name`, `description`, `form`, `quantity`, `price`, `availability`, `drug_code`, `category_id`, `category`) VALUES
-	(1, 'Φαρμακείο Υγεία', 'Vitamin C 1000mg', 'Συμπλήρωμα βιταμίνης C', 'Δισκία Αναβράζοντα', 70, 6.00, 'Διαθέσιμο', 'VITC1000', 1, NULL),
-	(2, 'Φαρμακείο Υγεία', 'Depon', 'Παυσίπονο και αντιπυρετικό', 'Δισκία', 100, 2.50, 'Διαθέσιμο', 'DEPON500', 6, NULL),
-	(3, 'Φαρμακείο Κεντρικό', 'Vicks', 'Σιρόπι για βήχα', 'Σιρόπι', 30, 5.50, 'Διαθέσιμο', 'VICKS100', 5, NULL),
-	(4, 'Φαρμακείο Life', 'Daktarin', 'Αντιμυκητιασικό στόματος', 'Gel', 20, 7.20, 'Διαθέσιμο', 'DAKTARINGEL', 3, NULL);
+INSERT INTO `medicines` (`id`, `pharmacy_name`, `name`, `description`, `form`, `quantity`, `price`, `availability`, `drug_code`, `category_id`, `category`, `pharmacy_id`) VALUES
+	(1, 'Φαρμακείο Υγεία', 'Vitamin C 1000mg', 'Συμπλήρωμα βιταμίνης C', 'Δισκία Αναβράζοντα', 70, 6.00, 'Διαθέσιμο', 'VITC1000', 1, NULL, 1),
+	(2, 'Φαρμακείο Υγεία', 'Depon', 'Παυσίπονο και αντιπυρετικό', 'Δισκία', 100, 2.50, 'Διαθέσιμο', 'DEPON500', 6, NULL, 1),
+	(3, 'Φαρμακείο Κεντρικό', 'Vicks', 'Σιρόπι για βήχα', 'Σιρόπι', 30, 5.50, 'Διαθέσιμο', 'VICKS100', 5, NULL, 2),
+	(4, 'Φαρμακείο Life', 'Daktarin', 'Αντιμυκητιασικό στόματος', 'Gel', 20, 7.20, 'Διαθέσιμο', 'DAKTARINGEL', 3, NULL, 3);
 
 -- Dumping structure for πίνακας pharmaclick.pharmacies
 CREATE TABLE IF NOT EXISTS `pharmacies` (
