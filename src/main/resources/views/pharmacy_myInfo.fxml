@@ -11,10 +11,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.PharmacyMyInfoController">
    <children>
-      <ImageView fitHeight="150.0" fitWidth="60.0" layoutX="138.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="homeIcon" fitHeight="150.0" fitWidth="60.0" layoutX="138.0" layoutY="5.0" onMouseClicked="#goBackToHome" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/logo.png" />
          </image>
@@ -60,7 +59,7 @@
                </image>
             </ImageView>
             <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
-            <TextField prefHeight="27.0" prefWidth="136.0" promptText="Όνομα Φαρμακείου" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Όνομα Φαρμακείου">
+            <TextField fx:id="pharmacyNameField" prefHeight="27.0" prefWidth="136.0" promptText="Όνομα Φαρμακείου" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;">
                <font>
                   <Font size="13.0" />
                </font>
@@ -75,7 +74,7 @@
                </image>
             </ImageView>
             <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
-            <TextField prefHeight="27.0" prefWidth="135.0" promptText="Κωδικος Φαρμακείου" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Κωδικός Φαρμακείου" />
+            <TextField fx:id="pharmacyCodeField" prefHeight="27.0" prefWidth="135.0" promptText="Κωδικός Φαρμακείου" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" layoutX="68.0" layoutY="405.0" onMouseClicked="#handleLocationClick" prefHeight="30.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 5 10;">
@@ -86,7 +85,7 @@
                </image>
             </ImageView>
             <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
-            <TextField prefHeight="20.0" prefWidth="117.0" promptText="Διεύθυνση" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Διεύθυνση">
+            <TextField fx:id="addressField" prefHeight="20.0" prefWidth="117.0" promptText="Διεύθυνση" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;">
                <font>
                   <Font size="13.0" />
                </font>
@@ -101,7 +100,7 @@
                </image>
             </ImageView>
             <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
-            <TextField prefHeight="20.0" prefWidth="117.0" promptText="Κωδικός" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Κωδικός">
+            <TextField fx:id="passwordField" prefHeight="20.0" prefWidth="117.0" promptText="Κωδικός" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;">
                <font>
                   <Font size="13.0" />
                </font>
@@ -116,7 +115,7 @@
                </image>
             </ImageView>
             <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
-            <TextField prefHeight="20.0" prefWidth="117.0" promptText="Ονοματεπώνυμο" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Ονοματεπώνυμο">
+            <TextField fx:id="fullNameField" prefHeight="20.0" prefWidth="117.0" promptText="Ονοματεπώνυμο" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;">
                <font>
                   <Font size="13.0" />
                </font>
@@ -131,7 +130,7 @@
                </image>
             </ImageView>
             <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
-            <TextField prefHeight="20.0" prefWidth="117.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Email">
+            <TextField fx:id="emailField" prefHeight="20.0" prefWidth="117.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;">
                <font>
                   <Font size="13.0" />
                </font>
@@ -146,14 +145,14 @@
                </image>
             </ImageView>
             <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
-            <TextField prefHeight="20.0" prefWidth="117.0" promptText="Τηλέφωνο" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" text="Τηλέφωνο">
+            <TextField fx:id="phoneField" prefHeight="20.0" prefWidth="117.0" promptText="Τηλέφωνο" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;">
                <font>
                   <Font size="13.0" />
                </font>
             </TextField>
          </children>
       </HBox>
-      <Button layoutX="99.0" layoutY="515.0" maxWidth="180.0" mnemonicParsing="false" prefHeight="40.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 20; -fx-font-size: 14px;" text="Υποβολή Αλλαγών" />
+      <Button fx:id="submitButton" layoutX="99.0" layoutY="515.0" maxWidth="180.0" mnemonicParsing="false" onAction="#handleSubmitChanges" prefHeight="40.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 20; -fx-font-size: 14px;" text="Υποβολή Αλλαγών" />
       <Label layoutX="112.0" layoutY="562.0" onMouseClicked="#handleDeleteAccountClick" style="-fx-text-fill: #0a4b5b; -fx-underline: true; -fx-cursor: hand;" text="Διαγραφή Λογαριασμού">
          <font>
             <Font size="10.0" />
