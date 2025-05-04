@@ -77,27 +77,22 @@ public class FrontpageUserController {
             ResultSet rs = stmt.executeQuery();
     
             if (rs.next()) {
+                int id = rs.getInt("id");
                 String address = rs.getString("address");
                 String phone = rs.getString("phone");
     
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/PharmacyDetailsMap.fxml"));
                 Parent root = loader.load();
     
-                // DEBUG ΕΚΤΥΠΩΣΗ για σιγουριά
-                System.out.println("📦 Controller loaded: " + loader.getController());
-    
                 PharmacyDetailsMapController controller = loader.getController();
                 if (controller != null) {
-                    controller.setPharmacyDetails(name, address, phone);
-                } else {
-                    System.out.println("⚠️ Controller είναι null");
+                    Pharmacy pharmacy = new Pharmacy(id, name, address, phone);
+                    controller.setPharmacyDetails(pharmacy);
                 }
     
-                // Απόκτηση του τρέχοντος stage και αλλαγή σκηνής
                 Stage stage = (Stage) mapView.getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.show();
-    
             } else {
                 showAlert("Το φαρμακείο δεν βρέθηκε στη βάση.");
             }
@@ -106,6 +101,7 @@ public class FrontpageUserController {
             showAlert("Σφάλμα φόρτωσης στοιχείων φαρμακείου: " + e.getMessage());
         }
     }
+    
     
 
     public String loadPharmaciesFromDatabase() {
