@@ -182,6 +182,13 @@ public class PharmacyDetailsMapController {
         cartButton.setGraphic(cartIcon);
         cartButton.setStyle("-fx-background-color: transparent;");
         cartButton.setPrefWidth(30);
+
+        cartButton.setOnAction(e -> {
+            int qty = quantity.getValue();
+            CartManager.getInstance().addItem(m, qty);
+            System.out.println("✅ Προστέθηκε: " + m.getName() + " x" + qty);
+        });
+        
     
         HBox item = new HBox(textBox, price, quantity, cartButton);
         item.setSpacing(10);
