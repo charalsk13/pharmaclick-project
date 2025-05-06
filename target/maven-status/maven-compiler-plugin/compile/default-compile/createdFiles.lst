@@ -18,6 +18,7 @@ com\pharmaclick\AddCategoryController.class
 com\pharmaclick\App.class
 com\pharmaclick\PharmacyDetailsMapController.class
 com\pharmaclick\CustomerOrdersController.class
+com\pharmaclick\Cart.class
 com\pharmaclick\CustomerOrdersApp.class
 com\pharmaclick\AddressessController.class
 com\pharmaclick\AddMedicineController.class
