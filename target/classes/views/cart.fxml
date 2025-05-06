@@ -14,7 +14,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.Cart">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane layoutY="7.0" prefHeight="45.0" prefWidth="328.0">
          <children>
@@ -23,7 +24,7 @@
                   <Image url="@../images/logo.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="notificationsButton" fitHeight="32.0" fitWidth="25.0" layoutX="232.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" styleClass="notifications-button">
+            <ImageView fx:id="notificationsButton" fitHeight="32.0" fitWidth="25.0" layoutX="232.0" layoutY="9.0" onMouseClicked="#openNotificationsPage" pickOnBounds="true" preserveRatio="true" styleClass="notifications-button">
                <image>
                   <Image url="@../images/envelope-dot.png" />
                </image>
@@ -96,7 +97,7 @@
             <HBox prefHeight="20.0" prefWidth="239.0">
                <children>
                   <Label text="Ονοματεπώνυμο:" />
-                  <TextField fx:id="customerNameField" prefHeight="0.0" prefWidth="180.0">
+                  <TextField prefHeight="0.0" prefWidth="180.0">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -109,7 +110,7 @@
             <HBox prefHeight="20.0" prefWidth="239.0">
                <children>
                   <Label text="Διεύθυνση:" />
-                  <TextField fx:id="customerAddressField" prefWidth="180.0">
+                  <TextField prefWidth="180.0">
                      <HBox.margin>
                         <Insets left="55.0" />
                      </HBox.margin>
@@ -122,7 +123,7 @@
             <HBox prefHeight="20.0" prefWidth="239.0">
                <children>
                   <Label text="Τηλέφωνο:" />
-                  <TextField fx:id="customerPhoneField" prefWidth="180.0">
+                  <TextField prefWidth="180.0">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -135,7 +136,7 @@
             <HBox prefHeight="20.0" prefWidth="239.0">
                <children>
                   <Label text="Email:" />
-                  <TextField fx:id="customerEmailField" prefWidth="180.0">
+                  <TextField prefWidth="180.0">
                      <padding>
                         <Insets left="10.0" />
                      </padding>
@@ -148,7 +149,7 @@
             <HBox prefHeight="20.0" prefWidth="239.0">
                <children>
                   <Label text="ΑΜΚΑ:" />
-                  <TextField fx:id="customerAmkaField" prefWidth="180.0">
+                  <TextField prefWidth="180.0">
                      <HBox.margin>
                         <Insets left="79.0" />
                      </HBox.margin>
@@ -162,17 +163,17 @@
       </VBox>
       <Pane layoutY="477.0" prefHeight="1.0" prefWidth="335.0" style="-fx-background-color: white;" />
       <Label layoutX="7.0" layoutY="487.0" text="Επιλογή Ημερομηνίας Παραλαβής:" />
-      <DatePicker fx:id="pickupDate" layoutX="194.0" layoutY="483.0" prefHeight="26.0" prefWidth="134.0" />
+      <DatePicker layoutX="194.0" layoutY="483.0" prefHeight="26.0" prefWidth="134.0" />
       <Label layoutX="7.0" layoutY="516.0" text="Σχόλια:" />
-      <TextField fx:id="commentField" layoutX="55.0" layoutY="512.0" prefHeight="10.0" prefWidth="274.0" />
+      <TextField layoutX="55.0" layoutY="512.0" prefHeight="10.0" prefWidth="274.0" />
       <Label layoutX="14.0" layoutY="556.0" text="Σύνολο:" />
-      <Label fx:id="totalLabel" layoutX="63.0" layoutY="556.0" text="ευρω" />
-      <Button fx:id="confirmBookingButton" layoutX="166.0" layoutY="548.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="128.0" text="ΚΡΑΤΗΣΗ" />
+      <Label layoutX="63.0" layoutY="556.0" text="ευρω" />
+      <Button layoutX="166.0" layoutY="548.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="128.0" text="ΚΡΑΤΗΣΗ" />
       <ScrollPane layoutX="12.0" layoutY="87.0" prefHeight="144.0" prefWidth="316.0">
          <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="246.0" prefWidth="293.0">
                <children>
-                  <VBox fx:id="cartVBox" layoutX="-2.0" layoutY="4.0" prefHeight="238.0" prefWidth="300.0" style="-fx-background-color: #A7CCD7;" />
+                  <VBox layoutX="-2.0" layoutY="4.0" prefHeight="238.0" prefWidth="300.0" style="-fx-background-color: #A7CCD7;" />
                </children>
             </AnchorPane>
          </content>

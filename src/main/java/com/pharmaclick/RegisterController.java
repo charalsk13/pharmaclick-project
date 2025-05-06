@@ -65,16 +65,14 @@ showSuccessAndRedirect();
     }
 
     private void registerUser(String email, String password, String address, String amka, String userType) {
-        String query = "INSERT INTO users (email, password, address, amka, user_type) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users (email, password, user_type) VALUES (?, ?, ?)";
 
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setString(1, email);
             statement.setString(2, password);
-            statement.setString(3, address);
-            statement.setString(4, amka);
-            statement.setString(5, userType);
+            statement.setString(3, userType);
 
             int rowsAffected = statement.executeUpdate();
             if (rowsAffected > 0) {
@@ -88,22 +86,43 @@ showSuccessAndRedirect();
     }
 
     private void registerPharmacist(String email, String address, String amka, String password) {
-        String query = "INSERT INTO pharmacists (email, address, amka, password) VALUES (?, ?, ?, ?)";
-
-        try (Connection connection = getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
-
-            statement.setString(1, email);
-            statement.setString(2, address);
-            statement.setString(3, amka);
-            statement.setString(4, password);
-
-            statement.executeUpdate();
-            System.out.println("Ο φαρμακοποιός εγγράφηκε με επιτυχία!");
+        String pharmacyInsert = "INSERT INTO pharmacies (email, address) VALUES (?, ?)";
+        String pharmacistInsert = "INSERT INTO pharmacists (email, password, amka, pharmacy_id) VALUES (?, ?, ?, ?)";
+    
+        try (Connection connection = getConnection()) {
+            connection.setAutoCommit(false); // ξεκινάμε συναλλαγή
+    
+            // 1. Εισαγωγή φαρμακείου
+            PreparedStatement pharmacyStmt = connection.prepareStatement(pharmacyInsert, PreparedStatement.RETURN_GENERATED_KEYS);
+            pharmacyStmt.setString(1, email);  // ίδιο email με φαρμακοποιό
+            pharmacyStmt.setString(2, address);
+            pharmacyStmt.executeUpdate();
+    
+            // Απόκτηση pharmacy_id
+            int pharmacyId = -1;
+            try (var generatedKeys = pharmacyStmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    pharmacyId = generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Αποτυχία λήψης ID νέου φαρμακείου.");
+                }
+            }
+    
+            // 2. Εισαγωγή φαρμακοποιού με το pharmacy_id
+            PreparedStatement pharmacistStmt = connection.prepareStatement(pharmacistInsert);
+            pharmacistStmt.setString(1, email);  // ίδιο email με φαρμακείο
+            pharmacistStmt.setString(2, password);
+            pharmacistStmt.setString(3, amka);
+            pharmacistStmt.setInt(4, pharmacyId);
+            pharmacistStmt.executeUpdate();
+    
+            connection.commit(); // οριστικοποίηση
+            System.out.println("Ο φαρμακοποιός και το φαρμακείο εγγράφηκαν με επιτυχία!");
         } catch (SQLException e) {
-            System.out.println("Σφάλμα κατά την εγγραφή φαρμακοποιού: " + e.getMessage());
+            System.out.println("Σφάλμα κατά την εγγραφή φαρμακοποιού/φαρμακείου: " + e.getMessage());
         }
     }
+    
 
     private void registerCustomer(String email, String address, String amka, String password) {
         String query = "INSERT INTO customers (email, address, amka, password) VALUES (?, ?, ?, ?)";
