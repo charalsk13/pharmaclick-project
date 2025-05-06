@@ -15,9 +15,11 @@ com\pharmaclick\PharmacyProfileController.class
 com\pharmaclick\FrontpageUserController.class
 com\pharmaclick\Session.class
 com\pharmaclick\AddCategoryController.class
+com\pharmaclick\CartItem.class
 com\pharmaclick\App.class
 com\pharmaclick\PharmacyDetailsMapController.class
 com\pharmaclick\CustomerOrdersController.class
+com\pharmaclick\CartManager.class
 com\pharmaclick\CustomerOrdersApp.class
 com\pharmaclick\AddressessController.class
 com\pharmaclick\AddMedicineController.class
