@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Cart implements Initializable {
+public class CartController implements Initializable {
 
     @FXML private VBox cartVBox;
 

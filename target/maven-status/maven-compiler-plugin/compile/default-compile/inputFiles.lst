@@ -3,7 +3,9 @@ C:\Users\HP\OneDrive\Έγγραφα\GitHub\software-engineering-project\src\main
 C:\Users\HP\OneDrive\Έγγραφα\GitHub\software-engineering-project\src\main\java\com\pharmaclick\AddressessApp.java
 C:\Users\HP\OneDrive\Έγγραφα\GitHub\software-engineering-project\src\main\java\com\pharmaclick\AddressessController.java
 C:\Users\HP\OneDrive\Έγγραφα\GitHub\software-engineering-project\src\main\java\com\pharmaclick\App.java
-C:\Users\HP\OneDrive\Έγγραφα\GitHub\software-engineering-project\src\main\java\com\pharmaclick\Cart.java
+C:\Users\HP\OneDrive\Έγγραφα\GitHub\software-engineering-project\src\main\java\com\pharmaclick\CartController.java
+C:\Users\HP\OneDrive\Έγγραφα\GitHub\software-engineering-project\src\main\java\com\pharmaclick\CartItem.java
+C:\Users\HP\OneDrive\Έγγραφα\GitHub\software-engineering-project\src\main\java\com\pharmaclick\CartManager.java
 C:\Users\HP\OneDrive\Έγγραφα\GitHub\software-engineering-project\src\main\java\com\pharmaclick\CustomerOrdersApp.java
 C:\Users\HP\OneDrive\Έγγραφα\GitHub\software-engineering-project\src\main\java\com\pharmaclick\CustomerOrdersController.java
 C:\Users\HP\OneDrive\Έγγραφα\GitHub\software-engineering-project\src\main\java\com\pharmaclick\DatabaseConnection.java
