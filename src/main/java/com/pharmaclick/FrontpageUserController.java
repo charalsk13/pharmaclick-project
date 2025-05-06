@@ -1,5 +1,6 @@
 package com.pharmaclick;
 
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.web.WebView;
 import javafx.scene.control.Alert;
@@ -17,6 +18,9 @@ import netscape.javascript.JSObject;
 import javafx.concurrent.Worker;
 import com.pharmaclick.DatabaseConnection;
 import java.net.URL;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.Node;
+
 
 public class FrontpageUserController {
 
@@ -163,4 +167,22 @@ public class FrontpageUserController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    
+@FXML
+private void handleCartClick(MouseEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/cart.fxml"));
+        Parent root = loader.load();
+
+        // Εδώ κάνεις αλλαγή σκηνής στο ίδιο παράθυρο (όχι νέο)
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+
 }
