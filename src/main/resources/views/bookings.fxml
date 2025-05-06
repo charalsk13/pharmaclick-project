@@ -127,11 +127,6 @@
                      </opaqueInsets>
                   </HBox>
                   <HBox prefHeight="19.0" prefWidth="245.0" />
-                  <ImageView fitHeight="18.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/right-arrow%20(1).png" />
-                     </image>
-                  </ImageView>
                </children></VBox>
          </children>
       </Pane>

@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.categories: ~6 rows (approximately)
-INSERT INTO `categories` (`id`, `name`) VALUES
+INSERT IGNORE INTO `categories` (`id`, `name`) VALUES
 	(1, 'Βιταμίνες & Συμπληρώματα'),
 	(2, 'Βρεφικά Προϊόντα'),
 	(3, 'Δερματολογικά'),
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.customers: ~1 rows (approximately)
-INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `address`, `phone`, `amka`, `password`) VALUES
+INSERT IGNORE INTO `customers` (`id`, `first_name`, `last_name`, `email`, `address`, `phone`, `amka`, `password`) VALUES
 	(1, NULL, NULL, 'chara@gmail.com', 'patra 10', NULL, '43434', '1111');
 
 -- Dumping structure for πίνακας pharmaclick.medicines
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `medicines` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.medicines: ~8 rows (approximately)
-INSERT INTO `medicines` (`id`, `name`, `description`, `form`, `quantity`, `price`, `availability`, `drug_code`, `category_id`, `category`, `pharmacy_id`, `pharmacy_name`) VALUES
+INSERT IGNORE INTO `medicines` (`id`, `name`, `description`, `form`, `quantity`, `price`, `availability`, `drug_code`, `category_id`, `category`, `pharmacy_id`, `pharmacy_name`) VALUES
 	(1, 'Vitamin C 1000mg', 'Συμπλήρωμα βιταμίνης C', 'Δισκία Αναβράζοντα', 70, 6.00, 'Διαθέσιμο', 'VITC1000', 1, NULL, 1, NULL),
 	(2, 'Depon', 'Παυσίπονο και αντιπυρετικό', 'Δισκία', 100, 2.50, 'Διαθέσιμο', 'DEPON500', 6, NULL, 1, NULL),
 	(3, 'Vicks', 'Σιρόπι για βήχα', 'Σιρόπι', 30, 5.50, 'Διαθέσιμο', 'VICKS100', 5, NULL, 2, NULL),
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `pharmacies` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.pharmacies: ~6 rows (approximately)
-INSERT INTO `pharmacies` (`id`, `name`, `address`, `phone`, `email`, `latitude`, `longitude`) VALUES
+INSERT IGNORE INTO `pharmacies` (`id`, `name`, `address`, `phone`, `email`, `latitude`, `longitude`) VALUES
 	(1, 'Φαρμακείο Υγεία', 'Αθηνάς 25, Πάτρα', '2101234567', 'info@ygeia-pharmacy.gr', 38.2466, 21.7346),
 	(2, 'Φαρμακείο Κεντρικό', 'Ερμού 50, Πάτρα', '2107654321', 'info@kentriko-pharmacy.gr', 38.2485, 21.7355),
 	(3, 'Φαρμακείο Life', 'Σταδίου 15, Αθήνα', '2109988776', 'info@life-pharmacy.gr', 38.247, 21.734),
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `pharmacists` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.pharmacists: ~6 rows (approximately)
-INSERT INTO `pharmacists` (`id`, `full_name`, `email`, `phone`, `password`, `address`, `amka`, `pharmacy_id`) VALUES
+INSERT IGNORE INTO `pharmacists` (`id`, `full_name`, `email`, `phone`, `password`, `address`, `amka`, `pharmacy_id`) VALUES
 	(1, 'Νίκος Παπαδόπουλος', 'nikos.papadopoulos@gmail.com', '6901234567', '123456', 'Πανεπιστημίου 40, Αθήνα', NULL, 1),
 	(2, 'Μαρία Ιωάννου', 'maria.ioannou@gmail.com', '6907654321', '123456', 'Σόλωνος 100, Αθήνα', NULL, 2),
 	(3, 'Γιώργος Κωνσταντίνου', 'giorgos.konstantinou@gmail.com', '6988887777', '123456', 'Ακαδημίας 20, Αθήνα', NULL, 3),
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.users: ~8 rows (approximately)
-INSERT INTO `users` (`id`, `email`, `password`, `address`, `amka`, `user_type`) VALUES
+INSERT IGNORE INTO `users` (`id`, `email`, `password`, `address`, `amka`, `user_type`) VALUES
 	(1, 'email@gmail.com', '1111', 'Aigio 1', '100101', 'customer'),
 	(5, 'emffail@gmail.com', '1111', 'pame', '4838394', 'pharmacist'),
 	(8, 'nikos.papadopoulos@gmail.com', '123456', 'Πανεπιστημίου 40, Αθήνα', '12345678901', 'pharmacist'),
