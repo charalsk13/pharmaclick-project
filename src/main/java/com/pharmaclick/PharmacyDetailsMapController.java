@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import com.pharmaclick.Pharmacy;
 import javafx.geometry.Bounds;
 
-
+import java.io.InputStream;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
@@ -43,6 +43,12 @@ public class PharmacyDetailsMapController {
     private TextField searchBar;
 
     private List<Medicine> allMedicines;
+    private int currentUserId;
+
+    public void setUserId(int userId) {
+    this.currentUserId = userId;    
+    }
+
 
     @FXML
     private ImageView filterButton;
@@ -108,25 +114,65 @@ public class PharmacyDetailsMapController {
      * Δημιουργεί ένα HBox με τα στοιχεία του φαρμάκου.
      */
     private HBox createMedicineItem(Medicine m) {
+        // 🧡 Εικονίδιο Καρδιάς
+        Button favoriteButton = new Button();
+        ImageView heartIcon = new ImageView(new Image(getClass().getResourceAsStream(
+            m.isFavorite() ? "/images/heart.png" : "/images/heart-full.png"
+        )));
+        heartIcon.setFitHeight(16);
+        heartIcon.setFitWidth(16);
+        favoriteButton.setGraphic(heartIcon);
+        favoriteButton.setStyle("-fx-background-color: transparent;");
+        favoriteButton.setPrefWidth(20);
+    
+        // Εναλλαγή καρδιάς
+        favoriteButton.setOnAction(e -> {
+    m.setFavorite(!m.isFavorite());
+    System.out.println("👉 Πάτησες καρδιά για: " + m.getName() + ", νέο status: " + m.isFavorite());
+
+    String iconPath = m.isFavorite() ? "/images/heart.png" : "/images/heart-full.png";
+    InputStream stream = getClass().getResourceAsStream(iconPath);
+    if (stream == null) {
+        System.out.println("❌ Η εικόνα ΔΕΝ βρέθηκε: " + iconPath);
+        return;
+    }
+    heartIcon.setImage(new Image(stream));
+
+    if (m.isFavorite()) {
+        DatabaseHelper.addFavorite(currentUserId, m.getId());
+    } else {
+        DatabaseHelper.removeFavorite(currentUserId, m.getId());
+    }
+});
+
+        
+    
+        // 📛 Όνομα Φαρμάκου
         Label name = new Label(m.getName());
         name.setStyle("-fx-font-weight: bold; -fx-font-size: 13;");
     
+        // 💡 Τοποθέτηση ονόματος και καρδιάς σε HBox
+        HBox nameRow = new HBox(name, favoriteButton);
+        nameRow.setSpacing(5);
+        nameRow.setAlignment(Pos.CENTER_LEFT);
+    
+        // 📝 Περιγραφή
         Label desc = new Label(m.getDescription());
         desc.setWrapText(true);
-        desc.setMaxWidth(150);  // σημαντικό για περιορισμό
+        desc.setMaxWidth(150);
         desc.setStyle("-fx-font-size: 12;");
     
-        VBox textBox = new VBox(name, desc);
+        VBox textBox = new VBox(nameRow, desc);
         textBox.setSpacing(4);
-        textBox.setPrefWidth(150); // ✅ περιορισμός πλάτους για αποφυγή "ξεχειλώματος"
+        textBox.setPrefWidth(150);
     
         Label price = new Label(String.format("%.2f €", m.getPrice()));
         price.setMinWidth(50);
-        price.setPrefWidth(50); // ✅ εγγύηση ορατότητας
+        price.setPrefWidth(50);
         price.setStyle("-fx-font-size: 12;");
     
         Spinner<Integer> quantity = new Spinner<>(1, 99, 1);
-        quantity.setPrefWidth(85); // ✅ ελαφρώς μεγαλύτερο
+        quantity.setPrefWidth(85);
         quantity.setMaxWidth(85);
     
         Button cartButton = new Button();
@@ -145,6 +191,8 @@ public class PharmacyDetailsMapController {
     
         return item;
     }
+    
+    
     
 
     

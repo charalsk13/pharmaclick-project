@@ -26,6 +26,13 @@ public class FrontpageUserController {
     @FXML
     private ImageView notificationsButton;
 
+    private int currentUserId;
+
+    public void setUserId(int userId) {
+    this.currentUserId = userId;
+    }
+
+
     @FXML
     public void initialize() {
         try {
@@ -87,8 +94,10 @@ public class FrontpageUserController {
                 PharmacyDetailsMapController controller = loader.getController();
                 if (controller != null) {
                     Pharmacy pharmacy = new Pharmacy(id, name, address, phone);
-                    controller.setPharmacyDetails(pharmacy);
+                    controller.setUserId(currentUserId);           // ✅ Πέρασμα χρήστη
+                    controller.setPharmacyDetails(pharmacy);       // ✅ Πέρασμα φαρμακείου
                 }
+                
     
                 Stage stage = (Stage) mapView.getScene().getWindow();
                 stage.setScene(new Scene(root));

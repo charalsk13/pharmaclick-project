@@ -45,7 +45,8 @@ public class LoginController {
         String email = emailField1.getText().trim();
         String password = passwordField1.getText().trim();
     
-        LoginController.loggedInEmail = email;
+        Session.setLoggedInEmail(email);
+
     
         if (email.isEmpty() || password.isEmpty()) {
             errorText.setText("Συμπλήρωσε όλα τα πεδία.");
@@ -53,7 +54,7 @@ public class LoginController {
         }
 
         try (Connection conn = connect()) {
-            String sql = "SELECT user_type FROM users WHERE email = ? AND password = ?";
+            String sql = "SELECT id, user_type FROM users WHERE email = ? AND password = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, email);
             stmt.setString(2, password);
@@ -61,7 +62,12 @@ public class LoginController {
             ResultSet rs = stmt.executeQuery();
     
             if (rs.next()) {
+                int userId = rs.getInt("id");
                 String role = rs.getString("user_type");
+
+            Session.setLoggedInEmail(email);     // ✅ αποθήκευση email
+            Session.setLoggedInUserId(userId);   // ✅ αποθήκευση ID
+
     
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 Scene scene;
@@ -82,7 +88,8 @@ public class LoginController {
                 } else if (role.equalsIgnoreCase("customer")) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/frontpage_user.fxml"));
                     root = loader.load();
-    
+                    FrontpageUserController controller = loader.getController();
+                    controller.setUserId(userId);  // ✅ ΕΔΩ ΠΕΡΝΙΕΤΑΙ το ID του χρήστη
                     scene = new Scene(root);
                     stage.setScene(scene);
                     stage.setTitle("Αρχική Χρήστη");

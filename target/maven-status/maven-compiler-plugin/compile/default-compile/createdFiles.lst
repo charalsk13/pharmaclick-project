@@ -1,7 +1,6 @@
 com\pharmaclick\OrdersController.class
 com\pharmaclick\JSBridge.class
 com\pharmaclick\AddressessApp.class
-Session.class
 com\pharmaclick\DatabaseHelper.class
 com\pharmaclick\LoginController.class
 com\pharmaclick\Medicine.class
@@ -14,6 +13,7 @@ com\pharmaclick\RegisterController.class
 com\pharmaclick\Pharmacy.class
 com\pharmaclick\PharmacyProfileController.class
 com\pharmaclick\FrontpageUserController.class
+com\pharmaclick\Session.class
 com\pharmaclick\AddCategoryController.class
 com\pharmaclick\App.class
 com\pharmaclick\PharmacyDetailsMapController.class
