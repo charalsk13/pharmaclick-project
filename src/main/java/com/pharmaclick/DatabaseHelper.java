@@ -25,13 +25,16 @@ public class DatabaseHelper {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                medicines.add(new Medicine(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getString("description"),
-                    rs.getDouble("price")
-                ));
-            }
+    Medicine med = new Medicine(
+        rs.getInt("id"),
+        rs.getString("name"),
+        rs.getString("description"),
+        rs.getDouble("price")
+    );
+    med.setPharmacyId(pharmacyId); // ✅ Βάλε το σωστό id φαρμακείου
+    medicines.add(med);
+}
+
 
         } catch (SQLException e) {
             System.out.println("⚠️ Σφάλμα στη λήψη φαρμάκων: " + e.getMessage());
@@ -67,5 +70,5 @@ public class DatabaseHelper {
         }
     }
     
-    
+
 }

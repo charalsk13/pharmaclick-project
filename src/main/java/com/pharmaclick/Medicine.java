@@ -10,11 +10,20 @@ public class Medicine {
     private boolean favorite = false;
 
     public Medicine(int id, String name, String description, double price) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-    }
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.price = price;
+}
+
+public Medicine(int id, String name, String description, double price, int pharmacyId) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.price = price;
+    this.pharmacyId = pharmacyId;
+}
+
 
     // Getters
     public int getId() {
@@ -41,4 +50,16 @@ public class Medicine {
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
     }
+
+    private int pharmacyId;
+
+public int getPharmacyId() {
+    return pharmacyId;
+}
+
+// Αν χρειάζεται, πρόσθεσε και setter:
+public void setPharmacyId(int pharmacyId) {
+    this.pharmacyId = pharmacyId;
+}
+
 }
