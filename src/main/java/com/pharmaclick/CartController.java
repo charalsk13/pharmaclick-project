@@ -74,10 +74,11 @@ public void initialize(URL location, ResourceBundle resources) {
     totalLabel.setText(String.format("%.2f €", total));
 
     // ❗ Πάρε το pharmacyId από το πρώτο φάρμακο στο καλάθι
-    if (!items.isEmpty()) {
-        int pharmacyId = items.get(0).getMedicine().getPharmacyId();
-        loadPharmacyInfoById(pharmacyId);
-    }
+  if (!items.isEmpty()) {
+    this.pharmacyId = items.get(0).getMedicine().getPharmacyId();
+    loadPharmacyInfoById(this.pharmacyId);
+}
+
 
     confirmBookingButton.setOnAction(e -> confirmBooking());
 }
@@ -112,11 +113,42 @@ public void loadPharmacyInfoById(int id) {
         String email = customerEmailField.getText();
         String amka = customerAmkaField.getText();
         String comments = commentField.getText();
-        String pickup = (pickupDate.getValue() != null) ? pickupDate.getValue().toString() : "Καμία ημερομηνία";
+        String pickupDateStr = (pickupDate.getValue() != null) ? pickupDate.getValue().toString() : null;
 
         System.out.println("✅ Νέα κράτηση από: " + name);
-        System.out.println("📦 Σχόλια: " + comments + ", Ημερομηνία: " + pickup);
+        System.out.println("📦 Σχόλια: " + comments + ", Ημερομηνία: " + pickupDateStr);
         showAlert("Η κράτησή σας καταχωρήθηκε!");
+        // Αποθήκευση κράτησης στη βάση
+    String sql = "INSERT INTO bookings (pharmacy_id, customer_name, customer_address, customer_phone, customer_email, customer_amka, comment, pickup_date, total_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+        stmt.setInt(1, pharmacyId);
+        stmt.setString(2, name);
+        stmt.setString(3, address);
+        stmt.setString(4, phone);
+        stmt.setString(5, email);
+        stmt.setString(6, amka);
+        stmt.setString(7, comments);
+        if (pickupDateStr != null)
+            stmt.setDate(8, java.sql.Date.valueOf(pickupDateStr));
+        else
+            stmt.setNull(8, java.sql.Types.DATE);
+        stmt.setDouble(9, total);
+
+        int rows = stmt.executeUpdate();
+        if (rows > 0) {
+            showAlert("Η κράτησή σας καταχωρήθηκε!");
+        } else {
+            showAlert("⚠️ Κάτι πήγε στραβά. Δοκιμάστε ξανά.");
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        showAlert("⚠️ Σφάλμα κατά την αποθήκευση: " + e.getMessage());
+    }
+
     }
 
     private void showAlert(String message) {
