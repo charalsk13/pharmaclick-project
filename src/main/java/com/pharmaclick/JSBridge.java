@@ -12,5 +12,7 @@ public class JSBridge {
         System.out.println("📞 JSBridge: Κλήση openPharmacy με " + name);
         controller.openPharmacyDetails(name);
     }
+
+    
 }
 
