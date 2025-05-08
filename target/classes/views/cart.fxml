@@ -275,7 +275,7 @@
    <top>
       <Pane prefHeight="45.0" prefWidth="328.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="50.0" fitWidth="67.0" layoutX="130.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="homeButton" fitHeight="50.0" fitWidth="67.0" layoutX="130.0" layoutY="-5.0" onMouseClicked="#goToHome" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/logo.png" />
                </image>

@@ -25,6 +25,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.Priority;
+import javafx.scene.image.ImageView;
+
 
 
 
@@ -52,6 +54,7 @@ public class CartController implements Initializable {
     @FXML private TextField customerPhoneField;
     @FXML private TextField customerEmailField;
     @FXML private TextField customerAmkaField;
+    @FXML private ImageView homeButton;
 
     private int pharmacyId;
     private double total = 0.0;
@@ -205,6 +208,18 @@ private void togglePharmacyInfo() {
     boolean currentlyVisible = pharmacyInfoBox.isVisible();
     pharmacyInfoBox.setVisible(!currentlyVisible);
     pharmacyInfoBox.setManaged(!currentlyVisible); // για να μην κρατάει κενό όταν είναι κρυφό
+}
+
+@FXML
+private void goToHome() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/frontpage_user.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) homeButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
 }
 
 

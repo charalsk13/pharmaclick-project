@@ -36,6 +36,8 @@ public class FrontpageUserController {
     this.currentUserId = userId;
     }
 
+@FXML private ImageView cartIcon;
+
 
     @FXML
     public void initialize() {
@@ -183,6 +185,19 @@ private void handleCartClick(MouseEvent event) {
         e.printStackTrace();
     }
 }
+
+@FXML
+private void handleCartClick() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/cart.fxml"));
+        Parent root = loader.load();
+        Stage stage = (Stage) cartIcon.getScene().getWindow(); // Ή από άλλο node
+        stage.setScene(new Scene(root));
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
 
 
 }
