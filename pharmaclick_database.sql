@@ -16,8 +16,45 @@
 
 
 -- Dumping database structure for pharmaclick
-CREATE DATABASE IF NOT EXISTS `pharmaclick` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci */;
+CREATE DATABASE IF NOT EXISTS `pharmaclick` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 USE `pharmaclick`;
+
+-- Dumping structure for πίνακας pharmaclick.bookings
+CREATE TABLE IF NOT EXISTS `bookings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pharmacy_id` int(11) DEFAULT NULL,
+  `customer_name` varchar(100) DEFAULT NULL,
+  `customer_address` varchar(255) DEFAULT NULL,
+  `customer_phone` varchar(20) DEFAULT NULL,
+  `customer_email` varchar(100) DEFAULT NULL,
+  `customer_amka` varchar(20) DEFAULT NULL,
+  `comment` text DEFAULT NULL,
+  `pickup_date` date DEFAULT NULL,
+  `total_price` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table pharmaclick.bookings: ~5 rows (approximately)
+INSERT INTO `bookings` (`id`, `pharmacy_id`, `customer_name`, `customer_address`, `customer_phone`, `customer_email`, `customer_amka`, `comment`, `pickup_date`, `total_price`) VALUES
+	(1, 0, '', '', '', '', '', '', NULL, 51.480000000000004),
+	(2, 0, 'user1 user', 'patra 1', '5254225', 'email@gmail.com', '100101', 'παραλαβη απο εμενα', '2025-05-10', 51.480000000000004),
+	(3, 1, 'user test', 'patras 2', '135525465', 'emailtest@gmail.com', '987654321', 'avrio', '2025-05-08', 41),
+	(4, 4, 'chara', 'patra10', '15432', 'chara@gmail.com', '4334', 'ifhcisufnh', '2025-05-09', 11.7),
+	(5, 5, 'charal', 'patra127', '54541521265', '@gmail.com', '51462849', 'tha erthw egv', '2025-05-13', 8.399999999999999);
+
+-- Dumping structure for πίνακας pharmaclick.cart_items
+CREATE TABLE IF NOT EXISTS `cart_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pharmacy_id` int(11) NOT NULL,
+  `product_name` varchar(255) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pharmacy_id` (`pharmacy_id`),
+  CONSTRAINT `cart_items_ibfk_1` FOREIGN KEY (`pharmacy_id`) REFERENCES `pharmacies` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Dumping data for table pharmaclick.cart_items: ~0 rows (approximately)
 
 -- Dumping structure for πίνακας pharmaclick.categories
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -27,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.categories: ~6 rows (approximately)
-INSERT IGNORE INTO `categories` (`id`, `name`) VALUES
+INSERT INTO `categories` (`id`, `name`) VALUES
 	(1, 'Βιταμίνες & Συμπληρώματα'),
 	(2, 'Βρεφικά Προϊόντα'),
 	(3, 'Δερματολογικά'),
@@ -48,11 +85,12 @@ CREATE TABLE IF NOT EXISTS `customers` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `amka` (`amka`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Dumping data for table pharmaclick.customers: ~1 rows (approximately)
-INSERT IGNORE INTO `customers` (`id`, `first_name`, `last_name`, `email`, `address`, `phone`, `amka`, `password`) VALUES
-	(1, NULL, NULL, 'chara@gmail.com', 'patra 10', NULL, '43434', '1111');
+-- Dumping data for table pharmaclick.customers: ~2 rows (approximately)
+INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `address`, `phone`, `amka`, `password`) VALUES
+	(1, NULL, NULL, 'chara@gmail.com', 'patra 10', NULL, '43434', '1111'),
+	(2, NULL, NULL, 'email@gmail.com', 'patra 404', NULL, '43434555', '1111');
 
 -- Dumping structure for πίνακας pharmaclick.medicines
 CREATE TABLE IF NOT EXISTS `medicines` (
@@ -76,7 +114,7 @@ CREATE TABLE IF NOT EXISTS `medicines` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.medicines: ~8 rows (approximately)
-INSERT IGNORE INTO `medicines` (`id`, `name`, `description`, `form`, `quantity`, `price`, `availability`, `drug_code`, `category_id`, `category`, `pharmacy_id`, `pharmacy_name`) VALUES
+INSERT INTO `medicines` (`id`, `name`, `description`, `form`, `quantity`, `price`, `availability`, `drug_code`, `category_id`, `category`, `pharmacy_id`, `pharmacy_name`) VALUES
 	(1, 'Vitamin C 1000mg', 'Συμπλήρωμα βιταμίνης C', 'Δισκία Αναβράζοντα', 70, 6.00, 'Διαθέσιμο', 'VITC1000', 1, NULL, 1, NULL),
 	(2, 'Depon', 'Παυσίπονο και αντιπυρετικό', 'Δισκία', 100, 2.50, 'Διαθέσιμο', 'DEPON500', 6, NULL, 1, NULL),
 	(3, 'Vicks', 'Σιρόπι για βήχα', 'Σιρόπι', 30, 5.50, 'Διαθέσιμο', 'VICKS100', 5, NULL, 2, NULL),
@@ -95,17 +133,18 @@ CREATE TABLE IF NOT EXISTS `pharmacies` (
   `email` varchar(100) DEFAULT NULL,
   `latitude` double DEFAULT NULL,
   `longitude` double DEFAULT NULL,
+  `hours` varchar(255) DEFAULT 'Ωράριο μη διαθέσιμο',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.pharmacies: ~6 rows (approximately)
-INSERT IGNORE INTO `pharmacies` (`id`, `name`, `address`, `phone`, `email`, `latitude`, `longitude`) VALUES
-	(1, 'Φαρμακείο Υγεία', 'Αθηνάς 25, Πάτρα', '2101234567', 'info@ygeia-pharmacy.gr', 38.2466, 21.7346),
-	(2, 'Φαρμακείο Κεντρικό', 'Ερμού 50, Πάτρα', '2107654321', 'info@kentriko-pharmacy.gr', 38.2485, 21.7355),
-	(3, 'Φαρμακείο Life', 'Σταδίου 15, Αθήνα', '2109988776', 'info@life-pharmacy.gr', 38.247, 21.734),
-	(4, 'Φαρμακείο Αθηνών', 'Ιπποκράτους 22, Αθήνα', '2101111222', 'info@ath-pharmacy.gr', 38.2491, 21.7362),
-	(5, 'Φαρμακείο Πλάκα', 'Λυσίου 8, Αθήνα', '2109998877', 'info@plaka-pharmacy.gr', 38.2483, 21.7339),
-	(6, 'Φαρμακείο Περιστέρι', 'Θηβών 12, Περιστέρι', '2101230000', 'info@peristeri-pharmacy.gr', 38.016, 23.685);
+INSERT INTO `pharmacies` (`id`, `name`, `address`, `phone`, `email`, `latitude`, `longitude`, `hours`) VALUES
+	(1, 'Φαρμακείο Υγεία', 'Αθηνάς 25, Πάτρα', '2101234567', 'info@ygeia-pharmacy.gr', 38.2466, 21.7346, '8:00-20:00'),
+	(2, 'Φαρμακείο Κεντρικό', 'Ερμού 50, Πάτρα', '2107654321', 'info@kentriko-pharmacy.gr', 38.2485, 21.7355, 'Ωράριο μη διαθέσιμο'),
+	(3, 'Φαρμακείο Life', 'Σταδίου 15, Αθήνα', '2109988776', 'info@life-pharmacy.gr', 38.247, 21.734, 'Ωράριο μη διαθέσιμο'),
+	(4, 'Φαρμακείο Αθηνών', 'Ιπποκράτους 22, Αθήνα', '2101111222', 'info@ath-pharmacy.gr', 38.2491, 21.7362, 'Ωράριο μη διαθέσιμο'),
+	(5, 'Φαρμακείο Πλάκα', 'Λυσίου 8, Αθήνα', '2109998877', 'info@plaka-pharmacy.gr', 38.2483, 21.7339, 'Ωράριο μη διαθέσιμο'),
+	(6, 'Φαρμακείο Περιστέρι', 'Θηβών 12, Περιστέρι', '2101230000', 'info@peristeri-pharmacy.gr', 38.016, 23.685, 'Ωράριο μη διαθέσιμο');
 
 -- Dumping structure for πίνακας pharmaclick.pharmacists
 CREATE TABLE IF NOT EXISTS `pharmacists` (
@@ -125,9 +164,9 @@ CREATE TABLE IF NOT EXISTS `pharmacists` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.pharmacists: ~6 rows (approximately)
-INSERT IGNORE INTO `pharmacists` (`id`, `full_name`, `email`, `phone`, `password`, `address`, `amka`, `pharmacy_id`) VALUES
-	(1, 'Νίκος Παπαδόπουλος', 'nikos.papadopoulos@gmail.com', '6901234567', '123456', 'Πανεπιστημίου 40, Αθήνα', NULL, 1),
-	(2, 'Μαρία Ιωάννου', 'maria.ioannou@gmail.com', '6907654321', '123456', 'Σόλωνος 100, Αθήνα', NULL, 2),
+INSERT INTO `pharmacists` (`id`, `full_name`, `email`, `phone`, `password`, `address`, `amka`, `pharmacy_id`) VALUES
+	(1, 'NIKOS PAPAS', 'NIKOSPAPA@GMAIL.COM', '54646', '1111', 'GEORGIOU 25', '5858', 1),
+	(2, 'Μαρία Ιωάννου', 'maria.ioannou@gmail.com', '6907654321', '123456', 'Σόλωνος 100, Αθήνα', '255415', 2),
 	(3, 'Γιώργος Κωνσταντίνου', 'giorgos.konstantinou@gmail.com', '6988887777', '123456', 'Ακαδημίας 20, Αθήνα', NULL, 3),
 	(4, NULL, 'charoula@gmail.com', NULL, '1111', 'pente 2', '48493892', 4),
 	(5, NULL, 'fotis@gmail.com', NULL, '1111', 'deka 10', '48595489', 5),
@@ -145,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.users: ~8 rows (approximately)
-INSERT IGNORE INTO `users` (`id`, `email`, `password`, `address`, `amka`, `user_type`) VALUES
+INSERT INTO `users` (`id`, `email`, `password`, `address`, `amka`, `user_type`) VALUES
 	(1, 'email@gmail.com', '1111', 'Aigio 1', '100101', 'customer'),
 	(5, 'emffail@gmail.com', '1111', 'pame', '4838394', 'pharmacist'),
 	(8, 'nikos.papadopoulos@gmail.com', '123456', 'Πανεπιστημίου 40, Αθήνα', '12345678901', 'pharmacist'),
