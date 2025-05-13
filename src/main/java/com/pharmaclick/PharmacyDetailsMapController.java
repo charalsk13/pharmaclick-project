@@ -40,6 +40,10 @@ public class PharmacyDetailsMapController {
     private VBox medicineListVBox;
 
     @FXML
+    private ImageView cartIcon;
+
+
+    @FXML
     private TextField searchBar;
 
     private List<Medicine> allMedicines;
@@ -271,4 +275,26 @@ public class PharmacyDetailsMapController {
         Bounds bounds = filterButton.localToScreen(filterButton.getBoundsInLocal());
         filterMenu.show(filterButton, bounds.getMinX(), bounds.getMaxY());
     }
+
+
+    @FXML
+private void goToCartPage(javafx.scene.input.MouseEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/cart.fxml"));
+        Parent root = loader.load();
+
+        // Αν θέλεις να περάσεις userId ή άλλα δεδομένα:
+        CartController controller = loader.getController();
+        //controller.setUserId(currentUserId); // αν το υποστηρίζει
+
+        Stage stage = (Stage) ((ImageView) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    } catch (Exception e) {
+        System.out.println("⚠️ Σφάλμα ανοίγματος σελίδας καλαθιού: " + e.getMessage());
+    }
+}
+
+
+
 }    

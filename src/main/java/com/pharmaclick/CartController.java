@@ -109,23 +109,26 @@ public void loadPharmacyInfoById(int id) {
 
 
 
-    private void confirmBooking() {
-        String name = customerNameField.getText();
-        String address = customerAddressField.getText();
-        String phone = customerPhoneField.getText();
-        String email = customerEmailField.getText();
-        String amka = customerAmkaField.getText();
-        String comments = commentField.getText();
-        String pickupDateStr = (pickupDate.getValue() != null) ? pickupDate.getValue().toString() : null;
+private void confirmBooking() {
+    String name = customerNameField.getText();
+    String address = customerAddressField.getText();
+    String phone = customerPhoneField.getText();
+    String email = customerEmailField.getText();
+    String amka = customerAmkaField.getText();
+    String comments = commentField.getText();
+    String pickupDateStr = (pickupDate.getValue() != null) ? pickupDate.getValue().toString() : null;
 
-        System.out.println("✅ Νέα κράτηση από: " + name);
-        System.out.println("📦 Σχόλια: " + comments + ", Ημερομηνία: " + pickupDateStr);
-        showAlert("Η κράτησή σας καταχωρήθηκε!");
-        // Αποθήκευση κράτησης στη βάση
-    String sql = "INSERT INTO bookings (pharmacy_id, customer_name, customer_address, customer_phone, customer_email, customer_amka, comment, pickup_date, total_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    List<CartItem> items = CartManager.getInstance().getItems();
+
+    if (items.isEmpty()) {
+        showAlert("⚠️ Το καλάθι είναι άδειο.");
+        return;
+    }
+
+    String sql = "INSERT INTO bookings (pharmacy_id, customer_name, customer_address, customer_phone, customer_email, customer_amka, comment, pickup_date, total_price, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try (Connection conn = DatabaseConnection.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+         PreparedStatement stmt = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
         stmt.setInt(1, pharmacyId);
         stmt.setString(2, name);
@@ -139,20 +142,43 @@ public void loadPharmacyInfoById(int id) {
         else
             stmt.setNull(8, java.sql.Types.DATE);
         stmt.setDouble(9, total);
+        stmt.setString(10, "pending");
 
         int rows = stmt.executeUpdate();
-        if (rows > 0) {
-            showAlert("Η κράτησή σας καταχωρήθηκε!");
-        } else {
+        if (rows == 0) {
             showAlert("⚠️ Κάτι πήγε στραβά. Δοκιμάστε ξανά.");
+            return;
         }
+
+        ResultSet generatedKeys = stmt.getGeneratedKeys();
+        int bookingId = -1;
+        if (generatedKeys.next()) {
+            bookingId = generatedKeys.getInt(1);
+        }
+
+        // ➕ Αποθήκευση των φαρμάκων στην booking_items
+        String insertItemSql = "INSERT INTO booking_items (booking_id, medicine_id, quantity) VALUES (?, ?, ?)";
+        try (PreparedStatement itemStmt = conn.prepareStatement(insertItemSql)) {
+            for (CartItem item : items) {
+                itemStmt.setInt(1, bookingId);
+                itemStmt.setInt(2, item.getMedicine().getId());
+                itemStmt.setInt(3, item.getQuantity());
+                itemStmt.addBatch();
+            }
+            itemStmt.executeBatch();
+        }
+
+        showAlert("✅ Η κράτησή σας καταχωρήθηκε με επιτυχία!");
+        CartManager.getInstance().clearCart(); // καθάρισε το καλάθι
+
+        // (προαιρετικά) redirect στην αρχική ή άλλη σελίδα
 
     } catch (Exception e) {
         e.printStackTrace();
         showAlert("⚠️ Σφάλμα κατά την αποθήκευση: " + e.getMessage());
     }
+}
 
-    }
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
