@@ -39,11 +39,16 @@ public class PharmacyProfileController {
         System.out.println("Χρειάζεσαι βοήθεια!");
     }
 
-    @FXML
+   @FXML
 private void handleInfoClick(MouseEvent event) {
     try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharmacy_myInfo.fxml"));
         Parent root = loader.load();
+
+        // Πέρνα το ID στον controller
+        PharmacyMyInfoController controller = loader.getController();
+        controller.setPharmacyId(this.pharmacyId);
+
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 350, 600);
         stage.setScene(scene);
@@ -51,6 +56,7 @@ private void handleInfoClick(MouseEvent event) {
         e.printStackTrace();
     }
 }
+
 
 
     @FXML
