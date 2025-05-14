@@ -160,9 +160,10 @@ private void initialize() {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharmacy_profile.fxml"));
 
             Parent profileRoot = loader.load();
-            Scene profileScene = new Scene(profileRoot);
+            PharmacyProfileController controller = loader.getController();
+            controller.setPharmacyId(pharmacyId); // ✨ Περνάς το ID εδώ
 
-            // Παίρνουμε το τρέχον Stage
+            Scene profileScene = new Scene(profileRoot);
             Stage stage = (Stage) profileIcon.getScene().getWindow();
             stage.setScene(profileScene);
         } catch (IOException e) {
@@ -170,5 +171,14 @@ private void initialize() {
         }
     });
 }
+
+
+
+private int pharmacyId;
+
+public void setPharmacyId(int id) {
+    this.pharmacyId = id;
+}
+
 
 }

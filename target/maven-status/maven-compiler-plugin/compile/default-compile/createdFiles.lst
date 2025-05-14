@@ -12,7 +12,9 @@ com\pharmaclick\NotificationsUserController.class
 com\pharmaclick\RegisterController.class
 com\pharmaclick\Pharmacy.class
 com\pharmaclick\PharmacyProfileController.class
+com\pharmaclick\PharmBookingsController.class
 com\pharmaclick\FrontpageUserController.class
+com\pharmaclick\models\Booking.class
 com\pharmaclick\Session.class
 com\pharmaclick\AddCategoryController.class
 com\pharmaclick\CartItem.class

@@ -198,6 +198,23 @@ private void handleCartClick() {
     }
 }
 
+@FXML
+private void handleAvatarClick(MouseEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/user_menu.fxml")); // ή όποιο είναι το σωστό path
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 350, 600); // αν έχεις σταθερό μέγεθος
+        stage.setScene(scene);
+        stage.show();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
+
+
 
 
 }
