@@ -13,20 +13,24 @@ public class Booking {
     private String comment;
     private Date pickupDate;
     private double totalPrice;
+    private String status;
 
-    public Booking(int id, int pharmacyId, String customerName, String customerAddress, String customerPhone,
-                   String customerEmail, String customerAmka, String comment, Date pickupDate, double totalPrice) {
-        this.id = id;
-        this.pharmacyId = pharmacyId;
-        this.customerName = customerName;
-        this.customerAddress = customerAddress;
-        this.customerPhone = customerPhone;
-        this.customerEmail = customerEmail;
-        this.customerAmka = customerAmka;
-        this.comment = comment;
-        this.pickupDate = pickupDate;
-        this.totalPrice = totalPrice;
-    }
+    public Booking(int id, int pharmacyId, String customerName, String customerAddress,
+               String customerPhone, String customerEmail, String customerAmka,
+               String comment, Date pickupDate, double totalPrice, String status) {
+    this.id = id;
+    this.pharmacyId = pharmacyId;
+    this.customerName = customerName;
+    this.customerAddress = customerAddress;
+    this.customerPhone = customerPhone;
+    this.customerEmail = customerEmail;
+    this.customerAmka = customerAmka;
+    this.comment = comment;
+    this.pickupDate = pickupDate;
+    this.totalPrice = totalPrice;
+    this.status = status;
+}
+
 
     public int getId() {
         return id;
@@ -67,4 +71,11 @@ public class Booking {
     public double getTotalPrice() {
         return totalPrice;
     }
+
+    
+
+public String getStatus() {
+    return status;
+}
+
 }

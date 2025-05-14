@@ -87,6 +87,8 @@ public class LoginController {
         errorText.setText("Δεν βρέθηκε φαρμακείο για τον χρήστη.");
         return;
             }
+            Session.setLoggedInPharmacyId(pharmacyId); // ✅ αποθηκεύει το pharmacy_id στη session
+
                     
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharma_firstpage.fxml"));
     root = loader.load();

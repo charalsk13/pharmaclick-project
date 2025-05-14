@@ -15,6 +15,7 @@ import javafx.scene.image.Image;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 
 import java.io.IOException;
 import java.sql.*;
@@ -66,17 +67,19 @@ public class OrdersController {
 
             while (rs.next()) {
                 Booking booking = new Booking(
-                    rs.getInt("id"),
-                    rs.getInt("pharmacy_id"),
-                    rs.getString("customer_name"),
-                    rs.getString("customer_address"),
-                    rs.getString("customer_phone"),
-                    rs.getString("customer_email"),
-                    rs.getString("customer_amka"),
-                    rs.getString("comment"),
-                    rs.getDate("pickup_date"),
-                    rs.getDouble("total_price")
-                );
+    rs.getInt("id"),
+    rs.getInt("pharmacy_id"),
+    rs.getString("customer_name"),
+    rs.getString("customer_address"),
+    rs.getString("customer_phone"),
+    rs.getString("customer_email"),
+    rs.getString("customer_amka"),
+    rs.getString("comment"),
+    rs.getDate("pickup_date"),
+    rs.getDouble("total_price"),
+    rs.getString("status") // ✅ νέο πεδίο
+);
+
                 bookings.add(booking);
             }
 
@@ -92,29 +95,54 @@ public class OrdersController {
     }
 
     private HBox createBookingBox(Booking booking) {
-        HBox hbox = new HBox(10);
-        hbox.setStyle("-fx-background-color: #A7CCD7;");
-        hbox.setPrefHeight(110.0);
-        hbox.setPrefWidth(280.0);
+    HBox hbox = new HBox(10);
+    hbox.setStyle("-fx-background-color: #E8F0F2; -fx-border-color: #B0C4DE; -fx-border-radius: 10; -fx-background-radius: 10;");
+    hbox.setPrefHeight(120);
+    hbox.setPrefWidth(300);
+    hbox.setPadding(new Insets(10));
 
-        ImageView avatar = new ImageView(new Image(getClass().getResource("/images/circle (1).png").toExternalForm()));
-        avatar.setFitHeight(40);
-        avatar.setFitWidth(40);
+    // Avatar
+    ImageView avatar = new ImageView(new Image(getClass().getResource("/images/circle (1).png").toExternalForm()));
+    avatar.setFitHeight(50);
+    avatar.setFitWidth(50);
 
-        VBox vbox = new VBox(5);
-        Label medicineLabel = new Label("MEDICINE"); // Αν προσθέσεις φάρμακα ανά κράτηση, μπορείς να τα αλλάζεις εδώ
-        Label nameLabel = new Label("Όνομα: " + booking.getCustomerName());
-        Label amkaLabel = new Label("ΑΜΚΑ: " + booking.getCustomerAmka());
-        Label bookingIdLabel = new Label("No: " + booking.getId());
-        Label dateLabel = new Label("Ημ/νία: " + booking.getPickupDate());
+    // Πληροφορίες
+    VBox vbox = new VBox(5);
+    Label nameLabel = new Label("👤 Όνομα: " + booking.getCustomerName());
+    Label amkaLabel = new Label("🆔 ΑΜΚΑ: " + booking.getCustomerAmka());
+    Label bookingIdLabel = new Label("🔢 No: " + booking.getId());
+    Label dateLabel = new Label("📅 Ημ/νία: " + booking.getPickupDate());
+    Label statusLabel = new Label("📦 Κατάσταση: " + booking.getStatus());
 
-        vbox.getChildren().addAll(medicineLabel, nameLabel, amkaLabel, bookingIdLabel, dateLabel);
+    nameLabel.setStyle("-fx-font-weight: bold;");
+    statusLabel.setStyle("-fx-text-fill: #2A7F62; -fx-font-style: italic;");
 
-        ImageView arrow = new ImageView(new Image(getClass().getResource("/images/right-arrow (1).png").toExternalForm()));
-        arrow.setFitHeight(18);
-        arrow.setFitWidth(22);
+    vbox.getChildren().addAll(nameLabel, amkaLabel, bookingIdLabel, dateLabel, statusLabel);
+    vbox.setPrefWidth(200);
 
-        hbox.getChildren().addAll(avatar, vbox, arrow);
-        return hbox;
+    // Clickable arrow
+    ImageView arrow = new ImageView(new Image(getClass().getResource("/images/right-arrow (1).png").toExternalForm()));
+    arrow.setFitHeight(25);
+    arrow.setFitWidth(25);
+    arrow.setOnMouseClicked(e -> {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharmacy_order_details.fxml"));
+        Parent root = loader.load();
+
+        PharmacyOrderDetailsController controller = loader.getController();
+        controller.setBooking(booking);  // Περνάμε το αντικείμενο κράτησης
+
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root, 350, 600));
+        stage.show();
+    } catch (IOException ex) {
+        ex.printStackTrace();
     }
+});
+
+
+    hbox.getChildren().addAll(avatar, vbox, arrow);
+    return hbox;
+}
+
 }
