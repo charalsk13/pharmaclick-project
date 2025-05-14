@@ -68,7 +68,7 @@
                   <Image url="@../images/envelope-dot.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="60.0" fitWidth="25.0" layoutX="296.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="cartIcon" fitHeight="60.0" fitWidth="25.0" layoutX="296.0" layoutY="6.0" onMouseClicked="#goToCartPage" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/shopping-cart.png" />
                </image>
