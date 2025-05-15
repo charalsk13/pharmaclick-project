@@ -24,7 +24,7 @@
             <Font size="17.0" />
          </font>
       </Label>
-      <ImageView fx:id="backprofile" fitHeight="150.0" fitWidth="25.0" layoutX="14.0" layoutY="15.0" onMouseClicked="#backprofileclicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backprofile" fitHeight="150.0" fitWidth="25.0" layoutX="14.0" layoutY="15.0" onMouseClicked="#goBackToProfile" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/back-arrow.png" />
          </image>
@@ -35,10 +35,5 @@
             <VBox fx:id="OrdersVBox" prefHeight="406.0" prefWidth="300.0" />
          </children>
       </Pane>
-      <ImageView fitHeight="150.0" fitWidth="40.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/circle%20(1).png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

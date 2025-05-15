@@ -145,4 +145,22 @@ public class OrdersController {
     return hbox;
 }
 
+
+@FXML
+private void goBackToProfile(MouseEvent event) {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharmacy_profile.fxml"));
+        Parent root = loader.load();
+
+        // Αν θέλεις να περάσεις pharmacyId:
+        // PharmacyProfileController controller = loader.getController();
+        // controller.setPharmacyId(this.pharmacyId);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root, 335, 600));
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
+
 }
