@@ -34,12 +34,13 @@ CREATE TABLE IF NOT EXISTS `bookings` (
   `status` varchar(20) DEFAULT 'pending',
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Dumping data for table pharmaclick.bookings: ~2 rows (approximately)
+-- Dumping data for table pharmaclick.bookings: ~1 rows (approximately)
 INSERT INTO `bookings` (`id`, `pharmacy_id`, `customer_name`, `customer_address`, `customer_phone`, `customer_email`, `customer_amka`, `comment`, `pickup_date`, `total_price`, `status`, `created_at`) VALUES
 	(6, 3, 'CHARA', 'PATRA 5', '56584552', 'HARA@GMAIL.COM', '1113434', '', '2025-05-23', 7.2, 'pending', '2025-05-13 20:38:50'),
-	(7, 1, 'chara', 'agio 6', '37287848', 'haral@gmail.com', '4898493', '', '2025-05-31', 30.98, 'pending', '2025-05-13 20:45:42');
+	(7, 1, 'chara', 'agio 6', '37287848', 'haral@gmail.com', '4898493', '', '2025-05-31', 30.98, 'pending', '2025-05-13 20:45:42'),
+	(8, 1, 'HAJSD', 'DSJKCJHDFVN DFJ', '84384384', 'ASHHD@gmail.com', '21828', '', '2025-06-06', 18.490000000000002, 'pending', '2025-05-19 18:08:31');
 
 -- Dumping structure for πίνακας pharmaclick.booking_items
 CREATE TABLE IF NOT EXISTS `booking_items` (
@@ -52,13 +53,16 @@ CREATE TABLE IF NOT EXISTS `booking_items` (
   KEY `medicine_id` (`medicine_id`),
   CONSTRAINT `booking_items_ibfk_1` FOREIGN KEY (`booking_id`) REFERENCES `bookings` (`id`) ON DELETE CASCADE,
   CONSTRAINT `booking_items_ibfk_2` FOREIGN KEY (`medicine_id`) REFERENCES `medicines` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Dumping data for table pharmaclick.booking_items: ~3 rows (approximately)
+-- Dumping data for table pharmaclick.booking_items: ~6 rows (approximately)
 INSERT INTO `booking_items` (`id`, `booking_id`, `medicine_id`, `quantity`) VALUES
 	(1, 7, 7, 2),
 	(2, 7, 2, 2),
-	(3, 7, 1, 1);
+	(3, 7, 1, 1),
+	(4, 8, 1, 1),
+	(5, 8, 2, 1),
+	(6, 8, 7, 1);
 
 -- Dumping structure for πίνακας pharmaclick.categories
 CREATE TABLE IF NOT EXISTS `categories` (
@@ -91,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   UNIQUE KEY `amka` (`amka`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Dumping data for table pharmaclick.customers: ~1 rows (approximately)
+-- Dumping data for table pharmaclick.customers: ~0 rows (approximately)
 INSERT INTO `customers` (`id`, `first_name`, `last_name`, `email`, `address`, `phone`, `amka`, `password`) VALUES
 	(1, NULL, NULL, 'chara@gmail.com', 'patra 10', NULL, '43434', '1111');
 
@@ -105,8 +109,9 @@ CREATE TABLE IF NOT EXISTS `favorites` (
   CONSTRAINT `favorites_ibfk_2` FOREIGN KEY (`medicine_id`) REFERENCES `medicines` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Dumping data for table pharmaclick.favorites: ~1 rows (approximately)
+-- Dumping data for table pharmaclick.favorites: ~3 rows (approximately)
 INSERT INTO `favorites` (`user_id`, `medicine_id`) VALUES
+	(1, 1),
 	(1, 3);
 
 -- Dumping structure for πίνακας pharmaclick.medicines
@@ -139,6 +144,20 @@ INSERT INTO `medicines` (`id`, `name`, `description`, `form`, `quantity`, `price
 	(7, 'Centrum', 'Πολυβιταμίνες', 'Δισκία', 100, 9.99, 'Διαθέσιμο', 'CENTRUM', 1, 1),
 	(8, 'OTRIVIN', 'Ρινικό αποσυμφορητικό', 'Σπρέι', 30, 5.20, 'Διαθέσιμο', 'OTRI15', 5, 2);
 
+-- Dumping structure for πίνακας pharmaclick.notifications
+CREATE TABLE IF NOT EXISTS `notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_email` varchar(100) DEFAULT NULL,
+  `message` text DEFAULT NULL,
+  `is_read` tinyint(1) DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+
+-- Dumping data for table pharmaclick.notifications: ~1 rows (approximately)
+INSERT INTO `notifications` (`id`, `user_email`, `message`, `is_read`, `created_at`) VALUES
+	(1, 'email@gmail.com', 'Η κράτησή σου καταχωρήθηκε και αναμένει επιβεβαίωση από το φαρμακείο.', 0, '2025-05-19 18:08:31');
+
 -- Dumping structure for πίνακας pharmaclick.pharmacies
 CREATE TABLE IF NOT EXISTS `pharmacies` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -150,9 +169,9 @@ CREATE TABLE IF NOT EXISTS `pharmacies` (
   `longitude` double DEFAULT NULL,
   `hours` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
--- Dumping data for table pharmaclick.pharmacies: ~6 rows (approximately)
+-- Dumping data for table pharmaclick.pharmacies: ~7 rows (approximately)
 INSERT INTO `pharmacies` (`id`, `name`, `address`, `phone`, `email`, `latitude`, `longitude`, `hours`) VALUES
 	(1, 'Φαρμακείο Υγεία', 'Αθηνάς 25, Πάτρα', '2101234567', 'info@ygeia-pharmacy.gr', 38.2466, 21.7346, 'Δευ-Παρ 08:00-20:00, Σαβ 09:00-14:00'),
 	(2, 'Φαρμακείο Κεντρικό', 'Ερμού 50, Πάτρα', '2107654321', 'info@kentriko-pharmacy.gr', 38.2485, 21.7355, 'Καθημερινά 09:00-21:00'),
@@ -175,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `pharmacists` (
   UNIQUE KEY `amka` (`amka`),
   KEY `pharmacy_id` (`pharmacy_id`),
   CONSTRAINT `pharmacists_ibfk_1` FOREIGN KEY (`pharmacy_id`) REFERENCES `pharmacies` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.pharmacists: ~6 rows (approximately)
 INSERT INTO `pharmacists` (`id`, `full_name`, `email`, `password`, `amka`, `pharmacy_id`) VALUES
@@ -194,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_type` enum('customer','pharmacist') NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
 
 -- Dumping data for table pharmaclick.users: ~11 rows (approximately)
 INSERT INTO `users` (`id`, `email`, `password`, `user_type`) VALUES
