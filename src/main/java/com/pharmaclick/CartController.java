@@ -167,6 +167,14 @@ private void confirmBooking() {
             }
             itemStmt.executeBatch();
         }
+        // ➕ Εισαγωγή ειδοποίησης για τον χρήστη
+String notificationSql = "INSERT INTO notifications (user_email, message) VALUES (?, ?)";
+try (PreparedStatement notifStmt = conn.prepareStatement(notificationSql)) {
+    notifStmt.setString(1, email);
+    notifStmt.setString(2, "Η κράτησή σου καταχωρήθηκε και αναμένει επιβεβαίωση από το φαρμακείο.");
+    notifStmt.executeUpdate();
+}
+
 
         showAlert("✅ Η κράτησή σας καταχωρήθηκε με επιτυχία!");
         CartManager.getInstance().clearCart(); // καθάρισε το καλάθι
@@ -177,6 +185,8 @@ private void confirmBooking() {
         e.printStackTrace();
         showAlert("⚠️ Σφάλμα κατά την αποθήκευση: " + e.getMessage());
     }
+
+
 }
 
 
