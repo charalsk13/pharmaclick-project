@@ -10,15 +10,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="335.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.PharmacyOrderDetailsController">
    <children>
       <Label layoutX="79.0" layoutY="14.0" text="ΠΛΗΡΟΦΟΡΙΕΣ ΚΡΑΤΗΣΗΣ">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="25.0" layoutX="14.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backArrow" fitHeight="150.0" fitWidth="25.0" layoutX="14.0" layoutY="12.0" onMouseClicked="#handleBackToOrdersClick" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/back-arrow.png" />
          </image>
@@ -118,35 +117,6 @@
          </children>
       </VBox>
       <Pane layoutX="-1.0" layoutY="343.0" prefHeight="20.0" prefWidth="335.0" style="-fx-background-color: white;" />
-      <Label layoutX="12.0" layoutY="390.0" prefHeight="26.0" prefWidth="142.0" text="STATUS">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <HBox layoutX="12.0" layoutY="416.0" prefHeight="20.0" prefWidth="200.0">
-         <children>
-            <Label text="ΠΑΡΑΔΟΣΗ ΣΤΙΣ : " />
-            <Label fx:id="deliveryDateLabel" prefHeight="18.0" prefWidth="97.0" text="deliveryDate" />
-         </children>
-      </HBox>
-      <Label layoutX="246.0" layoutY="408.0" />
-      <HBox layoutX="190.0" layoutY="393.0" prefHeight="20.0" prefWidth="112.0">
-         <children>
-            <Label text="ΤΕΜΑΧΙΑ :" />
-            <Label fx:id="quantityLabel" text="quantity">
-               <padding>
-                  <Insets left="5.0" />
-               </padding>
-            </Label>
-         </children>
-      </HBox>
-      <Label fx:id="medicineTitleLabel" layoutX="130.0" layoutY="454.0" text="medicineTitle" />
-      <Label fx:id="medicineDescriptionLabel" layoutX="128.0" layoutY="472.0" text="medicineDescription" textFill="WHITE" />
-      <Label fx:id="priceLabel" layoutX="130.0" layoutY="498.0" text="price">
-         <font>
-            <Font size="15.0" />
-         </font>
-      </Label>
-      <ImageView fx:id="medicineImage" fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true" />
+      <VBox fx:id="medicineItemsBox" layoutX="12.0" layoutY="390.0" prefWidth="310.0" spacing="10.0" />
    </children>
 </AnchorPane>

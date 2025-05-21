@@ -74,7 +74,7 @@
                </image>
             </ImageView>
             <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
-            <TextField fx:id="pharmacyCodeField" prefHeight="27.0" prefWidth="135.0" promptText="Κωδικός Φαρμακείου" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" />
+            <TextField fx:id="pharmacyCodeField" editable="false" focusTraversable="false" prefHeight="27.0" prefWidth="135.0" promptText="Κωδικός Φαρμακείου" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;" />
          </children>
       </HBox>
       <HBox alignment="CENTER_LEFT" layoutX="68.0" layoutY="405.0" onMouseClicked="#handleLocationClick" prefHeight="30.0" prefWidth="200.0" spacing="10.0" style="-fx-border-color: white; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 5 10;">
@@ -130,7 +130,7 @@
                </image>
             </ImageView>
             <Pane prefHeight="40.0" prefWidth="1.0" style="-fx-background-color: white;" />
-            <TextField fx:id="emailField" prefHeight="20.0" prefWidth="117.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;">
+            <TextField fx:id="emailField" editable="false" focusTraversable="false" prefHeight="20.0" prefWidth="117.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-width: 0; -fx-text-fill: white; -fx-prompt-text-fill: white;">
                <font>
                   <Font size="13.0" />
                </font>
@@ -152,11 +152,12 @@
             </TextField>
          </children>
       </HBox>
-      <Button fx:id="submitButton" layoutX="99.0" layoutY="515.0" maxWidth="180.0" mnemonicParsing="false" onAction="#handleSubmitChanges" prefHeight="40.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 20; -fx-font-size: 14px;" text="Υποβολή Αλλαγών" />
-      <Label layoutX="112.0" layoutY="562.0" onMouseClicked="#handleDeleteAccountClick" style="-fx-text-fill: #0a4b5b; -fx-underline: true; -fx-cursor: hand;" text="Διαγραφή Λογαριασμού">
+      <Button fx:id="submitButton" layoutX="98.0" layoutY="499.0" maxWidth="180.0" mnemonicParsing="false" onAction="#handleSubmitChanges" prefHeight="40.0" style="-fx-background-color: white; -fx-text-fill: black; -fx-background-radius: 20; -fx-font-size: 14px;" text="Υποβολή Αλλαγών" />
+      <Label fx:id="deleteAccountLabel" layoutX="111.0" layoutY="546.0" onMouseClicked="#handleDeleteAccountClick" style="-fx-text-fill: #0a4b5b; -fx-underline: true; -fx-cursor: hand;" text="Διαγραφή Λογαριασμού">
          <font>
             <Font size="10.0" />
          </font>
       </Label>
+      <Label fx:id="successLabel" layoutX="87.0" layoutY="61.0" prefHeight="16.0" prefWidth="162.0" style="-fx-font-size: 11;" textFill="WHITE" />
    </children>
 </AnchorPane>

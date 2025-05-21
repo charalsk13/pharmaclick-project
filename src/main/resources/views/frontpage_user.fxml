@@ -37,7 +37,7 @@
                               <Image url="@../images/shopping-cart.png" />
                            </image>
                         </ImageView>
-                        <ImageView fitHeight="32.0" fitWidth="27.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="avatarIcon" fitHeight="32.0" fitWidth="27.0" layoutX="14.0" layoutY="5.0" onMouseClicked="#handleAvatarClick" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/circle-user.png" />
                            </image>

@@ -67,23 +67,40 @@ public class LoginController {
 
             Session.setLoggedInEmail(email);     // ✅ αποθήκευση email
             Session.setLoggedInUserId(userId);   // ✅ αποθήκευση ID
-
+            LoginController.loggedInEmail = email; 
     
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 Scene scene;
                 Parent root;
     
                 if (role.equalsIgnoreCase("pharmacist")) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharma_firstpage.fxml"));
-                    root = loader.load();
+                   // Νέο query για να βρεις το pharmacy_id με βάση το email
+                String pharmacyQuery = "SELECT pharmacy_id FROM pharmacists WHERE email = ?";
+                PreparedStatement pharmacyStmt = conn.prepareStatement(pharmacyQuery);
+                pharmacyStmt.setString(1, email);
+                ResultSet pharmacyRs = pharmacyStmt.executeQuery();
+
+                int pharmacyId = -1;
+                if (pharmacyRs.next()) {
+                pharmacyId = pharmacyRs.getInt("pharmacy_id");
+                } else {
+        errorText.setText("Δεν βρέθηκε φαρμακείο για τον χρήστη.");
+        return;
+            }
+            Session.setLoggedInPharmacyId(pharmacyId); // ✅ αποθηκεύει το pharmacy_id στη session
+            
                     
-                    PharmaFirstPage controller = loader.getController();
-                    controller.setPharmacyEmail(email); // ✅ περνάμε το email
-    
-                    scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.setTitle("Αρχική Φαρμακοποιού");
-                    stage.show();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharma_firstpage.fxml"));
+    root = loader.load();
+
+    PharmaFirstPage controller = loader.getController();
+    controller.setPharmacyEmail(email);     // ✅ περνάς email
+    controller.setPharmacyId(pharmacyId);   // ✅ περνάς το ΣΩΣΤΟ pharmacy_id
+
+    scene = new Scene(root);
+    stage.setScene(scene);
+    stage.setTitle("Αρχική Φαρμακοποιού");
+    stage.show();
     
                 } else if (role.equalsIgnoreCase("customer")) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/frontpage_user.fxml"));
