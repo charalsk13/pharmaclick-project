@@ -238,6 +238,14 @@ INSERT INTO `users` (`id`, `email`, `password`, `user_type`) VALUES
 	(20, 'charalamp@gmail.com', '1111', 'pharmacist'),
 	(21, 'emailll@gmail.com', '1111', 'pharmacist');
 
+
+
+-- 1. Αλλάζουμε τον τύπο σε ENUM('pending','approve') με default 'pending'
+ALTER TABLE `bookings` MODIFY COLUMN `status`ENUM('pending','approve') NOT NULL DEFAULT 'pending';
+
+-- 2. (Προαιρετικά) Ενημερώνουμε τυχόν υπάρχουσες εγγραφές που δεν είναι 'pending' ή 'approve'
+UPDATE `bookings`SET `status` = 'pending' WHERE `status` NOT IN ('pending','approve');
+
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

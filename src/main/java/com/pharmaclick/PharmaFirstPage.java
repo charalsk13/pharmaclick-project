@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -20,13 +21,20 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import com.pharmaclick.models.Booking;
+import com.pharmaclick.models.BookingItem;
+import javafx.scene.layout.HBox;
+import javafx.geometry.Pos;
+import javafx.scene.control.Separator;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 
 
 public class PharmaFirstPage {
 
     private String pharmacyEmail;
-
+    private int pharmacyId;
     public void setPharmacyEmail(String email) {
         this.pharmacyEmail = email;
     }
@@ -166,6 +174,8 @@ public void goBackToHome(ActionEvent event) {
     } catch (IOException e) {
         e.printStackTrace();
     }
+    
+
 }
 
 @FXML
@@ -281,10 +291,103 @@ private void displayCategories(List<Category> categories) {
 
 
 
-private int pharmacyId;
+
 
 public void setPharmacyId(int id) {
     this.pharmacyId = id;
+    List<Booking> bookings = loadBookingsForPharmacy(pharmacyId);
+    displayBookings(bookings);
+}
+
+
+ @FXML
+    private VBox bookingsVBox;      // ο container από το FXML
+
+    private List<Booking> loadBookingsForPharmacy(int pharmacyId) {
+    List<Booking> list = new ArrayList<>();
+    String sql = "SELECT id, pharmacy_id, customer_name, customer_address, customer_phone, customer_email, customer_amka, comment, pickup_date, total_price, status FROM bookings WHERE pharmacy_id = ? ORDER BY pickup_date DESC";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, pharmacyId);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Booking b = new Booking(
+                rs.getInt("id"),
+                rs.getInt("pharmacy_id"),
+                rs.getString("customer_name"),
+                rs.getString("customer_address"),
+                rs.getString("customer_phone"),
+                rs.getString("customer_email"),
+                rs.getString("customer_amka"),
+                rs.getString("comment"),
+                rs.getDate("pickup_date"),
+                rs.getDouble("total_price"),
+                rs.getString("status")
+            );
+            list.add(b);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return list;
+}
+
+private List<BookingItem> loadItemsForBooking(int bookingId) {
+    List<BookingItem> items = new ArrayList<>();
+    String sql = "SELECT m.name, m.description, m.price, bi.quantity FROM booking_items bi JOIN medicines m ON bi.medicine_id = m.id WHERE bi.booking_id = ?";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, bookingId);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            items.add(new BookingItem(
+                rs.getString("name"),
+                rs.getString("description"),
+                rs.getDouble("price"),
+                rs.getInt("quantity")
+            ));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return items;
+}
+
+private void displayBookings(List<Booking> bookings) {
+    bookingsVBox.getChildren().clear();
+    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    for (Booking b : bookings) {
+        // Φόρτωσε τα είδη
+        List<BookingItem> items = loadItemsForBooking(b.getId());
+
+        VBox box = new VBox(8);
+        box.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;");
+
+        // 1η γραμμή: Όνομα πελάτη + AMKA
+        Label lblClient = new Label(b.getCustomerName() + " (AMKA: " + b.getCustomerAmka() + ")");
+        lblClient.setStyle("-fx-font-weight: bold;");
+
+        // 2η γραμμή: Ημερομηνία, Σύνολο, Κατάσταση
+        HBox row2 = new HBox(15);
+        row2.setAlignment(Pos.CENTER_LEFT);
+        row2.getChildren().addAll(
+            new Label("Ημ/νία: " + df.format(b.getPickupDate().toLocalDate())),
+            new Label("Σύνολο: " + b.getTotalPrice() + " €"),
+            new Label("Κατάσταση: " + b.getStatus())
+        );
+
+        // 3ο: Λίστα ειδών
+        VBox itemsBox = new VBox(4);
+        for (BookingItem it : items) {
+            Label li = new Label("• " + it.getMedicineName() + " ×" + it.getQuantity()
+                                + " (" + it.getPrice() + " €)");
+            itemsBox.getChildren().add(li);
+        }
+
+        box.getChildren().addAll(lblClient, row2, new Separator(), itemsBox);
+        bookingsVBox.getChildren().add(box);
+    }
 }
 
 
