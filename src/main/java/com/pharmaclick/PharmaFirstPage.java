@@ -1,16 +1,27 @@
 package com.pharmaclick;
 
 import java.io.IOException;
-
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.Connection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.TilePane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+
 
 public class PharmaFirstPage {
 
@@ -107,7 +118,9 @@ public class PharmaFirstPage {
         }
     }
 
+
     @FXML public void goToCategoryA1(MouseEvent event) { goToAddFormWithCategory("Αναλγητικά και Αντιφλεγμονώδη", "/images/category1.png", event); }
+    @FXML public void goToCategoryB1(MouseEvent event) { goToAddFormWithCategory("Αναλγητικά και Αντιφλεγμονώδη", "/images/category1.png", event); }
     @FXML public void goToCategoryB2(MouseEvent event) { goToAddFormWithCategory("Βιταμίνες και Συμπληρώματα", "/images/category2.png", event); }
     @FXML public void goToCategoryA2(MouseEvent event) { goToAddFormWithCategory("Βιταμίνες και Συμπληρώματα", "/images/category2.png", event); }
     @FXML public void goToCategoryA3(MouseEvent event) { goToAddFormWithCategory("Κρυολογήματα και Γρίπη", "/images/category3.png", event); }
@@ -119,6 +132,8 @@ public class PharmaFirstPage {
     @FXML public void goToCategoryA6(MouseEvent event) { goToAddFormWithCategory("Ερωτική Υγεία και Προφυλάξεις", "/images/category6.png", event); }
     @FXML public void goToCategoryB6(MouseEvent event) { goToAddFormWithCategory("Ερωτική Υγεία και Προφυλάξεις", "/images/category6.png", event); }
 
+
+    
     @FXML
     public void goToCategoryC(ActionEvent event) {
         try {
@@ -170,7 +185,99 @@ private void initialize() {
             e.printStackTrace();
         }
     });
+
+
+// Φόρτωση κατηγοριών
+    if (pharmacyEmail == null || pharmacyEmail.isEmpty()) {
+        System.out.println("Pharmacy email is null or empty!");
+        return;
+    }
+    List<Category> categories = loadCategoriesForPharmacy(pharmacyEmail);
+    displayCategories(categories);
 }
+
+private List<Category> loadCategoriesForPharmacy(String pharmacyEmail) {
+    List<Category> categories = new ArrayList<>();
+    try (Connection conn = DatabaseConnection.getConnection()) {
+        String sql = "SELECT name, description, image_url FROM categories WHERE pharmacy_name = ? OR is_global = 1";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, pharmacyEmail);
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            Category cat = new Category();
+            cat.setName(rs.getString("name"));
+            cat.setDescription(rs.getString("description"));
+            cat.setImageUrl(rs.getString("image_url"));
+            categories.add(cat);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return categories;
+}
+
+public static class Category {
+    private String name;
+    private String description;
+    private String imageUrl;
+
+    public Category() {}
+
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+}
+
+
+@FXML
+private TilePane categoriesTilePane;  // πρέπει να έχεις @FXML το TilePane από το FXML
+
+private void displayCategories(List<Category> categories) {
+    categoriesTilePane.getChildren().clear();
+
+    for (Category category : categories) {
+        VBox box = new VBox();
+        box.setSpacing(5);
+        box.setStyle("-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10;");
+
+        Label nameLabel = new Label(category.getName());
+        nameLabel.setWrapText(true);
+        nameLabel.setStyle("-fx-font-weight: bold; -fx-text-alignment: center;");
+
+        ImageView imageView = new ImageView();
+        imageView.setFitHeight(48);
+        imageView.setFitWidth(48);
+        Image image = new Image("/images/" + category.getImageUrl()); // προσαρμογή διαδρομής εικόνας
+        imageView.setImage(image);
+
+        box.getChildren().addAll(nameLabel, imageView);
+        categoriesTilePane.getChildren().add(box);
+
+        // Προαιρετικά: event handler για κλικ στην κατηγορία
+        box.setOnMouseClicked(e -> {
+            goToAddFormWithCategory(category.getName(), "/images/" + category.getImageUrl(), e);
+        });
+    }
+}
+
 
 
 

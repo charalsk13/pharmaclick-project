@@ -66,19 +66,28 @@ INSERT INTO `booking_items` (`id`, `booking_id`, `medicine_id`, `quantity`) VALU
 
 -- Dumping structure for πίνακας pharmaclick.categories
 CREATE TABLE IF NOT EXISTS `categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_uca1400_ai_ci;
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(100) NOT NULL COLLATE 'utf8mb4_uca1400_ai_ci',
+	`description` TEXT NULL DEFAULT NULL COLLATE 'utf8mb4_uca1400_ai_ci',
+	`image_url` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_uca1400_ai_ci',
+	`pharmacy_name` VARCHAR(100) NOT NULL COLLATE 'utf8mb4_uca1400_ai_ci',
+	PRIMARY KEY (`id`) USING BTREE
+)
+COLLATE='utf8mb4_uca1400_ai_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2
+;
+
+ALTER TABLE categories ADD COLUMN is_global BOOLEAN NOT NULL DEFAULT FALSE;
 
 -- Dumping data for table pharmaclick.categories: ~6 rows (approximately)
-INSERT INTO `categories` (`id`, `name`) VALUES
-	(1, 'Βιταμίνες & Συμπληρώματα'),
-	(2, 'Βρεφικά Προϊόντα'),
-	(3, 'Δερματολογικά'),
-	(4, 'Ερωτική Υγεία & Προφυλάξεις'),
-	(5, 'Κρυολόγημα & Γρίπη'),
-	(6, 'Αναλγητικά & Αντιφλεγμονώδη');
+INSERT INTO `categories` (`id`, `name`, `description`, `image_url`, `pharmacy_name`, `is_global`) VALUES
+(1, 'Βιταμίνες & Συμπληρώματα', NULL, NULL, '', TRUE),
+(2, 'Βρεφικά Προϊόντα', NULL, NULL, '', TRUE),
+(3, 'Δερματολογικά', NULL, NULL, '', TRUE),
+(4, 'Ερωτική Υγεία & Προφυλάξεις', NULL, NULL, '', TRUE),
+(5, 'Κρυολόγημα & Γρίπη', NULL, NULL, '', TRUE),
+(6, 'Αναλγητικά & Αντιφλεγμονώδη', NULL, NULL, '', TRUE);
 
 -- Dumping structure for πίνακας pharmaclick.customers
 CREATE TABLE IF NOT EXISTS `customers` (

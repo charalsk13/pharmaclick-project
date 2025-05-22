@@ -1,3 +1,4 @@
+// Updated controller for AddMedicineController with category support
 package com.pharmaclick;
 
 import javafx.event.ActionEvent;
@@ -29,8 +30,10 @@ public class AddMedicineController {
     @FXML private TextField CodeField;
 
     private String pharmacyName;
+    private String selectedCategory;
 
     public void setCategory(String name, String iconPath) {
+        selectedCategory = name;
         categoryLabel.setText(name);
         categoryIcon.setImage(new Image(getClass().getResourceAsStream(iconPath)));
     }
@@ -54,11 +57,16 @@ public class AddMedicineController {
         int quantity = quantitySpinner.getValue() != null ? quantitySpinner.getValue() : 0;
         double price = Double.parseDouble(priceField.getText());
         String availability = availabilityCombo.getValue();
-        String Code = CodeField.getText();
+        String drug_code = CodeField.getText();
+
+        if (name.isEmpty() || selectedCategory == null || pharmacyName == null) {
+            System.out.println("❌ Όλα τα πεδία είναι υποχρεωτικά");
+            return;
+        }
 
         try (Connection conn = DatabaseConnection.getConnection()) {
-            String sql = "INSERT INTO medicines (pharmacy_name, name, description, form, quantity, price, availability, code) " +
-                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO medicines (pharmacy_name, name, description, form, quantity, price, availability, drug_code, category) " +
+                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, pharmacyName);
             stmt.setString(2, name);
@@ -67,17 +75,17 @@ public class AddMedicineController {
             stmt.setInt(5, quantity);
             stmt.setDouble(6, price);
             stmt.setString(7, availability);
-            stmt.setString(8, Code);
+            stmt.setString(8, drug_code);
+            stmt.setString(9, selectedCategory);
             stmt.executeUpdate();
 
             System.out.println("✅ Φάρμακο προστέθηκε: " + name);
-
         } catch (SQLException e) {
             System.out.println("❌ Σφάλμα κατά την προσθήκη: " + e.getMessage());
         }
     }
 
-     @FXML
+    @FXML
     public void goBackToHome(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharma_firstpage.fxml"));
@@ -88,6 +96,4 @@ public class AddMedicineController {
             e.printStackTrace();
         }
     }
-    
 }
-

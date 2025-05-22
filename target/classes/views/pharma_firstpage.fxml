@@ -115,7 +115,7 @@
                         <ImageView fx:id="category1Image" fitHeight="48.0" fitWidth="48.0" onMouseClicked="#goToCategoryA1">
                             <image><Image url="@../images/category1.png" /></image>
                         </ImageView>
-                        <ImageView fx:id="addCategory1" fitHeight="20" fitWidth="20" onMouseClicked="#goToAddForm">
+                        <ImageView fx:id="addCategory1" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB1">
                             <image><Image url="@../images/add-button.png" /></image>
                         </ImageView>
                     </VBox>
@@ -174,6 +174,9 @@
                             <image><Image url="@../images/add-button.png" /></image>
                         </ImageView>
                     </VBox>
+                    <TilePane fx:id="categoriesTilePane" hgap="10" vgap="10" prefColumns="2" style="-fx-padding: 10;">
+    <!-- Οι κατηγορίες θα προστεθούν δυναμικά εδώ -->
+</TilePane>
                 </TilePane>
 
                 <!-- Προσθήκη κατηγορίας -->
