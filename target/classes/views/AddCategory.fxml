@@ -39,37 +39,44 @@
 
     <!-- Φόρμα Προσθήκης Κατηγορίας -->
     <VBox layoutX="20" layoutY="70" prefWidth="310" spacing="15" style="-fx-background-color: white; -fx-padding: 15; -fx-background-radius: 10;">
-        
-        <ImageView fitHeight="40" fitWidth="40">
-            <image>
-                <Image url="@../images/add-category.png" />
-            </image>
-        </ImageView>
+    
+    <ImageView fitHeight="40" fitWidth="40">
+        <image>
+            <Image url="@../images/add-category.png" />
+        </image>
+    </ImageView>
 
-        <Label fx:id="categoryLabel" style="-fx-font-weight: bold; -fx-font-size: 16px;" text="Πρόσθεσε κατηγορία" />
-        <Separator />
+    <Label fx:id="categoryLabel" style="-fx-font-weight: bold; -fx-font-size: 16px;" text="Πρόσθεσε κατηγορία" />
+    <Separator />
 
-        <Label text="Όνομα Κατηγορίας" />
-        <TextField fx:id="categoryNameField" />
+    <Label text="Όνομα Κατηγορίας" />
+    <TextField fx:id="categoryNameField" />
 
-        <Label text="Περιγραφή" />
-        <TextField fx:id="descriptionField" />
+    <Label text="Περιγραφή" />
+    <TextField fx:id="descriptionField" />
 
-        <Label text="Φωτογραφία" />
-        <VBox spacing="10">
-            <StackPane prefHeight="100" prefWidth="246.0" style="-fx-border-color: gray; -fx-border-width: 2; -fx-border-radius: 5; -fx-background-color: #F0F0F0;">
-                <ImageView fx:id="imagePreview" fitHeight="92.0" fitWidth="198.0" pickOnBounds="true" preserveRatio="true">
-                    <image>
-                        <Image url="@../images/foto.png" />
-                    </image>
-                </ImageView>
-            </StackPane>
-            <Button onAction="#handleChooseImage" text="Επιλογή Φωτογραφίας" />
-        </VBox>
-
-       
-         <Button onAction="#handleAddCategory" style="-fx-background-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;" text="Προσθήκη" />
-         <Button onAction="#goBackToHome" text="Επιστροφή" style="-fx-background-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;" />
+    <Label text="Φωτογραφία" />
+    <VBox spacing="10">
+        <StackPane prefHeight="100" prefWidth="246.0" style="-fx-border-color: gray; -fx-border-width: 2; -fx-border-radius: 5; -fx-background-color: #F0F0F0;">
+            <ImageView fx:id="imagePreview" fitHeight="92.0" fitWidth="198.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../images/foto.png" />
+                </image>
+            </ImageView>
+        </StackPane>
+        <Button onAction="#handleChooseImage" text="Επιλογή Φωτογραφίας" />
     </VBox>
 
+    <!-- Εδώ τα κουμπιά μέσα στο ίδιο VBox -->
+    <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
+        <Button onAction="#handleAddCategory" style="-fx-background-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;" text="Προσθήκη" />
+        <Button onAction="#goBackToHome" text="Επιστροφή" style="-fx-background-color: #cccccc; -fx-border-radius: 5; -fx-background-radius: 5;" />
+    </HBox>
+
+</VBox>
+
+    
+    
+    
+    
 </AnchorPane>
