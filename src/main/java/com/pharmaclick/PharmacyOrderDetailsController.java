@@ -15,7 +15,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
-import com.pharmaclick.models.Booking;
+import com.pharmaclick.Booking;
 
 import java.io.IOException;
 import java.sql.*;

@@ -1,4 +1,4 @@
-package com.pharmaclick.models;
+package com.pharmaclick;
 
 public class BookingItem {
     private String medicineName;

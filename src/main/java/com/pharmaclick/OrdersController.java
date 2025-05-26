@@ -20,7 +20,7 @@ import javafx.geometry.Insets;
 import java.io.IOException;
 import java.sql.*;
 
-import com.pharmaclick.models.Booking;
+import com.pharmaclick.Booking;
 
 public class OrdersController {
 

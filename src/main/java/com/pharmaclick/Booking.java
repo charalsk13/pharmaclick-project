@@ -1,4 +1,4 @@
-package com.pharmaclick.models;
+package com.pharmaclick;
 
 import java.sql.Date;
 
