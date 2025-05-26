@@ -1,12 +1,13 @@
 package com.pharmaclick;
 
-import java.io.IOException;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.io.IOException;
 import java.sql.Connection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,8 +22,8 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import com.pharmaclick.models.Booking;
-import com.pharmaclick.models.BookingItem;
+import com.pharmaclick.Booking;
+import com.pharmaclick.BookingItem;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
 import javafx.scene.control.Separator;
@@ -34,6 +35,7 @@ import javafx.scene.layout.Region;
 public class PharmaFirstPage {
 
     private String pharmacyEmail;
+
     private int pharmacyId;
     public void setPharmacyEmail(String email) {
         this.pharmacyEmail = email;
@@ -73,9 +75,9 @@ public class PharmaFirstPage {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 350, 600);
             stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        }  catch (IOException e) {
+        e.printStackTrace();
+    }
     }
 
     @FXML
@@ -121,9 +123,11 @@ public class PharmaFirstPage {
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 350, 600);
             stage.setScene(scene);
+     
+
         } catch (IOException e) {
-            e.printStackTrace();
-        }
+        e.printStackTrace();
+    }
     }
 
 
@@ -156,25 +160,11 @@ public class PharmaFirstPage {
             stage.setScene(new Scene(root, 350, 600));
             stage.setTitle("Προσθήκη Κατηγορίας");
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    
-
-@FXML
-public void goBackToHome(ActionEvent event) {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/pharma_firstpage.fxml"));
-        Parent root = loader.load();
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 350, 600);
-        stage.setScene(scene);
-    } catch (IOException e) {
+        } 
+     catch (IOException e) {
         e.printStackTrace();
     }
-    
+
 
 }
 
@@ -191,9 +181,10 @@ private void initialize() {
             Scene profileScene = new Scene(profileRoot);
             Stage stage = (Stage) profileIcon.getScene().getWindow();
             stage.setScene(profileScene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } 
+         catch (IOException e) {
+        e.printStackTrace();
+    }
     });
 
 
@@ -296,7 +287,8 @@ private void displayCategories(List<Category> categories) {
 public void setPharmacyId(int id) {
     this.pharmacyId = id;
     List<Booking> bookings = loadBookingsForPharmacy(pharmacyId);
-    displayBookings(bookings);
+    displayBookings(bookings); // για όλα
+    displayApprovedBookings(bookings); // για τα approved
 }
 
 
@@ -391,4 +383,26 @@ private void displayBookings(List<Booking> bookings) {
 }
 
 
+@FXML
+private VBox approvedBookingsVBox;
+private void displayApprovedBookings(List<Booking> bookings) {
+    approvedBookingsVBox.getChildren().clear();
+    DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    for (Booking b : bookings) {
+        if (!b.getStatus().equalsIgnoreCase("approve")) continue;
+
+        VBox box = new VBox(5);
+        box.setStyle("-fx-background-color: #f2f2f2; -fx-padding: 10; -fx-background-radius: 10;");
+
+        Label client = new Label(b.getCustomerName() + " (" + b.getCustomerPhone() + ")");
+        Label pickup = new Label("Παραλαβή: " + df.format(b.getPickupDate().toLocalDate()));
+        Label total = new Label("Σύνολο: " + b.getTotalPrice() + " €");
+
+        box.getChildren().addAll(client, pickup, total);
+        approvedBookingsVBox.getChildren().add(box);
+    }
 }
+
+}
+

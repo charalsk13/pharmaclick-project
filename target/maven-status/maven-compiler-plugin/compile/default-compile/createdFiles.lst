@@ -1,11 +1,11 @@
 com\pharmaclick\OrdersController.class
 com\pharmaclick\JSBridge.class
 com\pharmaclick\AddressessApp.class
+com\pharmaclick\Booking.class
 com\pharmaclick\DatabaseHelper.class
 com\pharmaclick\LoginController.class
 com\pharmaclick\Medicine.class
 com\pharmaclick\PharmaFirstPage.class
-com\pharmaclick\models\BookingItem.class
 com\pharmaclick\OrderDetailsController.class
 com\pharmaclick\PharmacyOrderDetailsController.class
 com\pharmaclick\OrderDetailsApp.class
@@ -15,7 +15,6 @@ com\pharmaclick\RegisterController.class
 com\pharmaclick\Pharmacy.class
 com\pharmaclick\PharmacyProfileController.class
 com\pharmaclick\FrontpageUserController.class
-com\pharmaclick\models\Booking.class
 com\pharmaclick\Session.class
 com\pharmaclick\AddCategoryController.class
 com\pharmaclick\CartItem.class
@@ -24,6 +23,7 @@ com\pharmaclick\PharmacyDetailsMapController.class
 com\pharmaclick\CartController.class
 com\pharmaclick\CustomerOrdersController.class
 com\pharmaclick\CartManager.class
+com\pharmaclick\BookingItem.class
 com\pharmaclick\CustomerOrdersApp.class
 com\pharmaclick\PharmaFirstPage$Category.class
 com\pharmaclick\AddressessController.class
