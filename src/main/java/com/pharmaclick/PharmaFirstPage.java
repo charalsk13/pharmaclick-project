@@ -37,9 +37,47 @@ public class PharmaFirstPage {
     private String pharmacyEmail;
 
     private int pharmacyId;
+
     public void setPharmacyEmail(String email) {
         this.pharmacyEmail = email;
+
+        if (email == null || email.isEmpty()) {
+        System.out.println("EMAIL ΕΙΝΑΙ ΑΚΥΡΟ");
+        return;
     }
+
+    System.out.println("✅ Email που πέρασε: " + email);
+
+    List<Category> categories = loadCategoriesForPharmacy(pharmacyEmail);
+    displayCategories(categories);
+    }
+
+    private List<Category> loadCategoriesForPharmacy(String pharmacyEmail) {
+    List<Category> categories = new ArrayList<>();
+
+    try (Connection conn = DatabaseConnection.getConnection()) {
+        String sql = "SELECT name, description, image_url FROM categories WHERE pharmacy_name = ? OR is_global = 1";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1, pharmacyEmail);
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            Category category = new Category();
+            category.setName(rs.getString("name"));
+            category.setDescription(rs.getString("description"));
+            category.setImageUrl(rs.getString("image_url"));
+            categories.add(category);
+        }
+    } catch (SQLException e) {
+        System.err.println("Σφάλμα κατά τη φόρτωση κατηγοριών:");
+        e.printStackTrace();
+    }
+
+    return categories;
+}
+
+
     @FXML
     private ImageView profileIcon;
 
@@ -186,36 +224,6 @@ private void initialize() {
         e.printStackTrace();
     }
     });
-
-
-// Φόρτωση κατηγοριών
-    if (pharmacyEmail == null || pharmacyEmail.isEmpty()) {
-        System.out.println("Pharmacy email is null or empty!");
-        return;
-    }
-    List<Category> categories = loadCategoriesForPharmacy(pharmacyEmail);
-    displayCategories(categories);
-}
-
-private List<Category> loadCategoriesForPharmacy(String pharmacyEmail) {
-    List<Category> categories = new ArrayList<>();
-    try (Connection conn = DatabaseConnection.getConnection()) {
-        String sql = "SELECT name, description, image_url FROM categories WHERE pharmacy_name = ? OR is_global = 1";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setString(1, pharmacyEmail);
-        ResultSet rs = stmt.executeQuery();
-
-        while (rs.next()) {
-            Category cat = new Category();
-            cat.setName(rs.getString("name"));
-            cat.setDescription(rs.getString("description"));
-            cat.setImageUrl(rs.getString("image_url"));
-            categories.add(cat);
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return categories;
 }
 
 public static class Category {
@@ -248,15 +256,13 @@ public static class Category {
 }
 
 
-@FXML
-private TilePane categoriesTilePane;  // πρέπει να έχεις @FXML το TilePane από το FXML
+@FXML private TilePane categoriesTilePane;  // πρέπει να έχεις @FXML το TilePane από το FXML
 
 private void displayCategories(List<Category> categories) {
     categoriesTilePane.getChildren().clear();
 
     for (Category category : categories) {
-        VBox box = new VBox();
-        box.setSpacing(5);
+        VBox box = new VBox(5);
         box.setStyle("-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10;");
 
         Label nameLabel = new Label(category.getName());
@@ -266,18 +272,25 @@ private void displayCategories(List<Category> categories) {
         ImageView imageView = new ImageView();
         imageView.setFitHeight(48);
         imageView.setFitWidth(48);
-        Image image = new Image("/images/" + category.getImageUrl()); // προσαρμογή διαδρομής εικόνας
-        imageView.setImage(image);
+
+        try {
+            Image image = new Image(getClass().getResource("/images/" + category.getImageUrl()).toExternalForm());
+            imageView.setImage(image);
+        } catch (Exception e) {
+            System.out.println("Image not found: " + category.getImageUrl());
+        }
 
         box.getChildren().addAll(nameLabel, imageView);
-        categoriesTilePane.getChildren().add(box);
 
-        // Προαιρετικά: event handler για κλικ στην κατηγορία
+        // Προαιρετικό: onClick μετάβαση με category info
         box.setOnMouseClicked(e -> {
             goToAddFormWithCategory(category.getName(), "/images/" + category.getImageUrl(), e);
         });
+
+        categoriesTilePane.getChildren().add(box);
     }
 }
+
 
 
 
@@ -287,13 +300,12 @@ private void displayCategories(List<Category> categories) {
 public void setPharmacyId(int id) {
     this.pharmacyId = id;
     List<Booking> bookings = loadBookingsForPharmacy(pharmacyId);
-    displayBookings(bookings); // για όλα
-    displayApprovedBookings(bookings); // για τα approved
+    displayBookings(bookings); // αιτήματα
+    displayApprovedBookings(bookings); // κρατήσεις
 }
 
 
- @FXML
-    private VBox bookingsVBox;      // ο container από το FXML
+ @FXML private VBox bookingsVBox;      // ο container από το FXML
 
     private List<Booking> loadBookingsForPharmacy(int pharmacyId) {
     List<Booking> list = new ArrayList<>();
@@ -350,17 +362,17 @@ private void displayBookings(List<Booking> bookings) {
     DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     for (Booking b : bookings) {
-        // Φόρτωσε τα είδη
+        if ("approve".equalsIgnoreCase(b.getStatus())) continue;
         List<BookingItem> items = loadItemsForBooking(b.getId());
 
         VBox box = new VBox(8);
         box.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;");
 
-        // 1η γραμμή: Όνομα πελάτη + AMKA
+ 
         Label lblClient = new Label(b.getCustomerName() + " (AMKA: " + b.getCustomerAmka() + ")");
         lblClient.setStyle("-fx-font-weight: bold;");
 
-        // 2η γραμμή: Ημερομηνία, Σύνολο, Κατάσταση
+
         HBox row2 = new HBox(15);
         row2.setAlignment(Pos.CENTER_LEFT);
         row2.getChildren().addAll(
@@ -369,7 +381,7 @@ private void displayBookings(List<Booking> bookings) {
             new Label("Κατάσταση: " + b.getStatus())
         );
 
-        // 3ο: Λίστα ειδών
+ 
         VBox itemsBox = new VBox(4);
         for (BookingItem it : items) {
             Label li = new Label("• " + it.getMedicineName() + " ×" + it.getQuantity()
@@ -383,14 +395,15 @@ private void displayBookings(List<Booking> bookings) {
 }
 
 
-@FXML
-private VBox approvedBookingsVBox;
+
+@FXML private VBox approvedBookingsVBox;
+
 private void displayApprovedBookings(List<Booking> bookings) {
     approvedBookingsVBox.getChildren().clear();
     DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     for (Booking b : bookings) {
-        if (!b.getStatus().equalsIgnoreCase("approve")) continue;
+        if (!"approve".equalsIgnoreCase(b.getStatus())) continue;
 
         VBox box = new VBox(5);
         box.setStyle("-fx-background-color: #f2f2f2; -fx-padding: 10; -fx-background-radius: 10;");
@@ -402,7 +415,10 @@ private void displayApprovedBookings(List<Booking> bookings) {
         box.getChildren().addAll(client, pickup, total);
         approvedBookingsVBox.getChildren().add(box);
     }
+
+    System.out.println("Total bookings loaded: " + bookings.size());
 }
+
 
 }
 
