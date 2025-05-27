@@ -30,7 +30,7 @@ public class NotificationsUserController {
     
     private void loadNotifications() {
         notificationsVBox.getChildren().clear();
-        String email = Session.getLoggedInEmail(); // ⬅ Χρήση της κλάσης Session
+        String email = Session.getLoggedInEmail();
     
         try (Connection conn = DatabaseConnection.getConnection()) {
             String sql = "SELECT message, created_at FROM notifications WHERE user_email = ? ORDER BY created_at DESC";
@@ -42,9 +42,19 @@ public class NotificationsUserController {
                 String message = rs.getString("message");
                 String timestamp = rs.getString("created_at");
     
-                Label messageLabel = new Label("• " + message + "\n" + timestamp);
-                messageLabel.setStyle("-fx-background-color: #D7E6EC; -fx-padding: 10; -fx-font-size: 13px;");
-                notificationsVBox.getChildren().add(messageLabel);
+                // Δημιουργία VBox για κάθε ειδοποίηση
+                VBox notifBox = new VBox(4);
+                notifBox.setStyle("-fx-background-color: #EAF6FF; -fx-padding: 10; -fx-background-radius: 8;");
+    
+                Label messageLabel = new Label(message);
+                messageLabel.setWrapText(true);
+                messageLabel.setStyle("-fx-font-size: 13px; -fx-text-fill: #333333;");
+    
+                Label dateLabel = new Label(timestamp);
+                dateLabel.setStyle("-fx-font-size: 11px; -fx-text-fill: #666666;");
+    
+                notifBox.getChildren().addAll(messageLabel, dateLabel);
+                notificationsVBox.getChildren().add(notifBox);
             }
     
             if (notificationsVBox.getChildren().isEmpty()) {

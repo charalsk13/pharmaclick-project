@@ -425,18 +425,63 @@ private void refreshBookings() {
     displayApprovedBookings(updatedBookings);
 }
 
-
-private void updateBookingStatus(int bookingId, String newStatus) {
-    String sql = "UPDATE bookings SET status = ? WHERE id = ?";
+private Booking getBookingById(int bookingId) {
+    String sql = "SELECT * FROM bookings WHERE id = ?";
     try (Connection conn = DatabaseConnection.getConnection();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
-        stmt.setString(1, newStatus);
-        stmt.setInt(2, bookingId);
-        stmt.executeUpdate();
+        stmt.setInt(1, bookingId);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return new Booking(
+                rs.getInt("id"),
+                rs.getInt("pharmacy_id"),
+                rs.getString("customer_name"),
+                rs.getString("customer_address"),
+                rs.getString("customer_phone"),
+                rs.getString("customer_email"),
+                rs.getString("customer_amka"),
+                rs.getString("comment"),
+                rs.getDate("pickup_date"),
+                rs.getDouble("total_price"),
+                rs.getString("status")
+            );
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+
+
+private void updateBookingStatus(int bookingId, String newStatus) {
+    String sqlUpdate = "UPDATE bookings SET status = ? WHERE id = ?";
+    String sqlNotif = "INSERT INTO notifications (user_email, message, is_read) VALUES (?, ?, 0)";
+
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement updateStmt = conn.prepareStatement(sqlUpdate);
+         PreparedStatement notifStmt = conn.prepareStatement(sqlNotif)) {
+
+        updateStmt.setString(1, newStatus);
+        updateStmt.setInt(2, bookingId);
+        updateStmt.executeUpdate();
+
+        if ("approve".equalsIgnoreCase(newStatus)) {
+            Booking b = getBookingById(bookingId);
+            if (b != null) {
+                String message = "Η κράτησή σας για τις " +
+                        b.getPickupDate().toLocalDate() +
+                        " επιβεβαιώθηκε από το φαρμακείο.";
+                notifStmt.setString(1, b.getCustomerEmail());
+                notifStmt.setString(2, message);
+                notifStmt.executeUpdate();
+            }
+        }
+
     } catch (SQLException e) {
         e.printStackTrace();
     }
 }
+
 
 
 
