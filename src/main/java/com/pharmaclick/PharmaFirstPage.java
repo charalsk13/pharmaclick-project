@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
@@ -313,6 +314,7 @@ public void setPharmacyId(int id) {
     try (Connection conn = DatabaseConnection.getConnection();
          PreparedStatement stmt = conn.prepareStatement(sql)) {
         stmt.setInt(1, pharmacyId);
+        System.out.println("Loading bookings for pharmacyId = " + pharmacyId);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()) {
             Booking b = new Booking(
@@ -363,16 +365,17 @@ private void displayBookings(List<Booking> bookings) {
 
     for (Booking b : bookings) {
         if ("approve".equalsIgnoreCase(b.getStatus())) continue;
+
         List<BookingItem> items = loadItemsForBooking(b.getId());
 
         VBox box = new VBox(8);
         box.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;");
 
- 
+        // 1η γραμμή: Πελάτης + AMKA
         Label lblClient = new Label(b.getCustomerName() + " (AMKA: " + b.getCustomerAmka() + ")");
         lblClient.setStyle("-fx-font-weight: bold;");
 
-
+        // 2η γραμμή: Ημ/νία, Σύνολο, Κατάσταση
         HBox row2 = new HBox(15);
         row2.setAlignment(Pos.CENTER_LEFT);
         row2.getChildren().addAll(
@@ -381,7 +384,7 @@ private void displayBookings(List<Booking> bookings) {
             new Label("Κατάσταση: " + b.getStatus())
         );
 
- 
+        // 3η γραμμή: Λίστα ειδών
         VBox itemsBox = new VBox(4);
         for (BookingItem it : items) {
             Label li = new Label("• " + it.getMedicineName() + " ×" + it.getQuantity()
@@ -389,10 +392,52 @@ private void displayBookings(List<Booking> bookings) {
             itemsBox.getChildren().add(li);
         }
 
-        box.getChildren().addAll(lblClient, row2, new Separator(), itemsBox);
+        // 4η γραμμή: Κουμπιά αποδοχής/απόρριψης
+        Button acceptBtn = new Button("Αποδοχή");
+        Button denyBtn = new Button("Απόρριψη");
+
+        acceptBtn.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
+        denyBtn.setStyle("-fx-background-color: #f44336; -fx-text-fill: white;");
+
+        HBox actionRow = new HBox(10, acceptBtn, denyBtn);
+        actionRow.setAlignment(Pos.CENTER_RIGHT);
+
+        // Προσθήκη listener
+        acceptBtn.setOnAction(e -> {
+            updateBookingStatus(b.getId(), "approve");
+            refreshBookings();
+        });
+
+        denyBtn.setOnAction(e -> {
+            updateBookingStatus(b.getId(), "denied");
+            refreshBookings();
+        });
+
+        // Προσθήκη όλων στο κουτί
+        box.getChildren().addAll(lblClient, row2, new Separator(), itemsBox, actionRow);
         bookingsVBox.getChildren().add(box);
     }
 }
+
+private void refreshBookings() {
+    List<Booking> updatedBookings = loadBookingsForPharmacy(this.pharmacyId);
+    displayBookings(updatedBookings);
+    displayApprovedBookings(updatedBookings);
+}
+
+
+private void updateBookingStatus(int bookingId, String newStatus) {
+    String sql = "UPDATE bookings SET status = ? WHERE id = ?";
+    try (Connection conn = DatabaseConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setString(1, newStatus);
+        stmt.setInt(2, bookingId);
+        stmt.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
+
 
 
 

@@ -245,6 +245,9 @@ ALTER TABLE `bookings` MODIFY COLUMN `status`ENUM('pending','approve') NOT NULL 
 
 -- 2. (Προαιρετικά) Ενημερώνουμε τυχόν υπάρχουσες εγγραφές που δεν είναι 'pending' ή 'approve'
 UPDATE `bookings`SET `status` = 'pending' WHERE `status` NOT IN ('pending','approve');
+ALTER TABLE `bookings`
+	CHANGE COLUMN `status` `status` ENUM('pending','approve','denied') NOT NULL DEFAULT 'pending' COLLATE 'utf8mb4_general_ci' AFTER `total_price`;
+
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

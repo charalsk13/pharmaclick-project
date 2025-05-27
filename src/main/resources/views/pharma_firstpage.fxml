@@ -49,77 +49,10 @@
         <!-- Κατηγορίες -->
         <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;">
             <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="➕ Πρόσθεσε φάρμακα" />
-            <TilePane hgap="10" prefColumns="2" vgap="10">
-
-                <!-- Κατηγορία 1 -->
-                <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10;">
-                    <Label text="Αναλγητικά και Αντιφλεγμονώδη" textAlignment="CENTER" wrapText="true" />
-                    <ImageView fx:id="category1Image" fitHeight="48.0" fitWidth="48.0" onMouseClicked="#goToCategoryA1">
-                        <image><Image url="@../images/category1.png" /></image>
-                    </ImageView>
-                    <ImageView fx:id="addCategory1" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB1">
-                        <image><Image url="@../images/add-button.png" /></image>
-                    </ImageView>
-                </VBox>
-
-                <!-- Κατηγορία 2 -->
-                <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10;">
-                    <Label text="Βιταμίνες και Συμπληρώματα" textAlignment="CENTER" wrapText="true" />
-                    <ImageView fx:id="category2Image" fitHeight="48" fitWidth="48" onMouseClicked="#goToCategoryA2">
-                        <image><Image url="@../images/category2.png" /></image>
-                    </ImageView>
-                    <ImageView fx:id="addCategory2" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB2">
-                        <image><Image url="@../images/add-button.png" /></image>
-                    </ImageView>
-                </VBox>
-
-                <!-- Κατηγορία 3 -->
-                <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10;">
-                    <Label text="Κρυολογήματα και Γρίπη" textAlignment="CENTER" wrapText="true" />
-                    <ImageView fx:id="category3Image" fitHeight="48" fitWidth="48" onMouseClicked="#goToCategoryA3">
-                        <image><Image url="@../images/category3.png" /></image>
-                    </ImageView>
-                    <ImageView fx:id="addCategory3" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB3">
-                        <image><Image url="@../images/add-button.png" /></image>
-                    </ImageView>
-                </VBox>
-
-                <!-- Κατηγορία 4 -->
-                <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10;">
-                    <Label text="Βρεφικά Προϊόντα" textAlignment="CENTER" wrapText="true" />
-                    <ImageView fx:id="category4Image" fitHeight="48" fitWidth="48" onMouseClicked="#goToCategoryA4">
-                        <image><Image url="@../images/category4.png" /></image>
-                    </ImageView>
-                    <ImageView fx:id="addCategory4" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB4">
-                        <image><Image url="@../images/add-button.png" /></image>
-                    </ImageView>
-                </VBox>
-
-                <!-- Κατηγορία 5 -->
-                <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10;">
-                    <Label text="Δερματολογικά" textAlignment="CENTER" wrapText="true" />
-                    <ImageView fx:id="category5Image" fitHeight="48" fitWidth="48" onMouseClicked="#goToCategoryA5">
-                        <image><Image url="@../images/category5.png" /></image>
-                    </ImageView>
-                    <ImageView fx:id="addCategory5" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB5">
-                        <image><Image url="@../images/add-button.png" /></image>
-                    </ImageView>
-                </VBox>
-
-                <!-- Κατηγορία 6 -->
-                <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #f9f9f9; -fx-padding: 10; -fx-background-radius: 10;">
-                    <Label text="Ερωτική Υγεία και Προφυλάξεις" textAlignment="CENTER" wrapText="true" />
-                    <ImageView fx:id="category6Image" fitHeight="48" fitWidth="48" onMouseClicked="#goToCategoryA6">
-                        <image><Image url="@../images/category6.png" /></image>
-                    </ImageView>
-                    <ImageView fx:id="addCategory6" fitHeight="20" fitWidth="20" onMouseClicked="#goToCategoryB6">
-                        <image><Image url="@../images/add-button.png" /></image>
-                    </ImageView>
-                </VBox>
-            </TilePane>
+            
 
             <TilePane fx:id="categoriesTilePane" hgap="10" vgap="10" prefColumns="2" style="-fx-padding: 10;" />
-
+                        <!--οι κατηγορίες προσθετονται δυναμικά εδω-->
             <Hyperlink fx:id="addCategoryLink" onAction="#goToCategoryC" text="➕ Προσθήκη κατηγορίας" />
         </VBox>
 
