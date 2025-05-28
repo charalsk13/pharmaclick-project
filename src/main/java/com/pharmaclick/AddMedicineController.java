@@ -88,15 +88,22 @@ public void setPharmacy(int id) {
 
 
 
-
-  @FXML
+@FXML
 private void initialize() {
     quantitySpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 1));
     availabilityCombo.getItems().addAll("Διαθέσιμο", "Μη διαθέσιμο");
     availabilityCombo.getSelectionModel().selectFirst();
 
-    
+    // 👇 listener στην αναζήτηση, ΟΧΙ αρχική φόρτωση
+    if (searchField != null) {
+        searchField.textProperty().addListener((obs, oldVal, newVal) -> {
+            if (selectedCategoryId > 0 && pharmacyId > 0) {
+                loadMedicines(); // φορτώνει με βάση το search
+            }
+        });
+    }
 }
+
 
 
 
@@ -105,6 +112,7 @@ private VBox medicineListVBox;
 
 public void loadMedicines() {
     medicineListVBox.getChildren().clear(); // καθάρισε τα προηγούμενα
+    loadMedicinesWithFilter(searchField != null ? searchField.getText().trim() : "");
 
     try (Connection conn = DatabaseConnection.getConnection()) {
         String sql = "SELECT name, description, price FROM medicines WHERE pharmacy_id = ? AND category_id = ?";
@@ -207,6 +215,65 @@ private void handleAddMedicine() {
         }
     }
 
- 
+@FXML private TextField searchField;
+ private void loadMedicinesWithFilter(String filter) {
+    medicineListVBox.getChildren().clear();
+
+    try (Connection conn = DatabaseConnection.getConnection()) {
+        String sql = "SELECT name, description, price FROM medicines WHERE pharmacy_id = ? AND category_id = ?";
+        if (!filter.isEmpty()) {
+            sql += " AND name LIKE ?";
+        }
+
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1, pharmacyId);
+        stmt.setInt(2, selectedCategoryId);
+        if (!filter.isEmpty()) {
+            stmt.setString(3, "%" + filter + "%");
+        }
+
+        ResultSet rs = stmt.executeQuery();
+
+        while (rs.next()) {
+            String name = rs.getString("name");
+            String desc = rs.getString("description");
+            double price = rs.getDouble("price");
+
+            HBox medicineBox = createMedicineBox(name, desc, price);
+            medicineListVBox.getChildren().add(medicineBox);
+        }
+
+    } catch (SQLException e) {
+        System.out.println("❌ Σφάλμα κατά τη φόρτωση φαρμάκων: " + e.getMessage());
+    }
+}
+private HBox createMedicineBox(String name, String desc, double price) {
+    HBox medicineBox = new HBox(10);
+    ImageView icon = new ImageView(new Image(getClass().getResourceAsStream("/images/category1.png")));
+    icon.setFitWidth(20);
+    icon.setFitHeight(20);
+
+    VBox infoBox = new VBox(2);
+    Label nameLabel = new Label(name);
+    nameLabel.setStyle("-fx-font-weight: bold;");
+    Label descLabel = new Label(desc);
+    descLabel.setStyle("-fx-font-size: 11px;");
+    descLabel.setPrefWidth(198);
+    infoBox.getChildren().addAll(nameLabel, descLabel);
+
+    Region spacer = new Region();
+    HBox.setHgrow(spacer, Priority.ALWAYS);
+
+    VBox priceBox = new VBox(2);
+    Label priceLabel = new Label(String.format("%.2f €", price));
+    Spinner<Integer> spinner = new Spinner<>(0, 99, 1);
+    spinner.setPrefWidth(60);
+    priceBox.setAlignment(Pos.CENTER_RIGHT);
+    priceBox.getChildren().addAll(priceLabel, spinner);
+
+    medicineBox.getChildren().addAll(icon, infoBox, spacer, priceBox);
+    return medicineBox;
+}
+
 
 }
