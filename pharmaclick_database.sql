@@ -248,6 +248,9 @@ UPDATE `bookings`SET `status` = 'pending' WHERE `status` NOT IN ('pending','appr
 ALTER TABLE `bookings`
 	CHANGE COLUMN `status` `status` ENUM('pending','approve','denied') NOT NULL DEFAULT 'pending' COLLATE 'utf8mb4_general_ci' AFTER `total_price`;
 
+ALTER TABLE `bookings`
+	CHANGE COLUMN `status` `status` ENUM('pending','approve','denied','done') NOT NULL DEFAULT 'pending' COLLATE 'utf8mb4_general_ci' AFTER `total_price`;
+
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

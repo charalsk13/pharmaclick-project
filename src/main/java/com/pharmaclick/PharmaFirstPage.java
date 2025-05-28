@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.TilePane;
@@ -365,18 +366,19 @@ private void displayBookings(List<Booking> bookings) {
     DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     for (Booking b : bookings) {
-        if ("approve".equalsIgnoreCase(b.getStatus())) continue;
+        if ("approve".equalsIgnoreCase(b.getStatus()) || "done".equalsIgnoreCase(b.getStatus()))
+            continue;
 
         List<BookingItem> items = loadItemsForBooking(b.getId());
 
         VBox box = new VBox(8);
         box.setStyle("-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;");
 
-        // 1η γραμμή: Πελάτης + AMKA
+
         Label lblClient = new Label(b.getCustomerName() + " (AMKA: " + b.getCustomerAmka() + ")");
         lblClient.setStyle("-fx-font-weight: bold;");
 
-        // 2η γραμμή: Ημ/νία, Σύνολο, Κατάσταση
+    
         HBox row2 = new HBox(15);
         row2.setAlignment(Pos.CENTER_LEFT);
         row2.getChildren().addAll(
@@ -385,7 +387,7 @@ private void displayBookings(List<Booking> bookings) {
             new Label("Κατάσταση: " + b.getStatus())
         );
 
-        // 3η γραμμή: Λίστα ειδών
+
         VBox itemsBox = new VBox(4);
         for (BookingItem it : items) {
             Label li = new Label("• " + it.getMedicineName() + " ×" + it.getQuantity()
@@ -393,18 +395,16 @@ private void displayBookings(List<Booking> bookings) {
             itemsBox.getChildren().add(li);
         }
 
-        // 4η γραμμή: Κουμπιά αποδοχής/απόρριψης
+       
         Button acceptBtn = new Button("Αποδοχή");
         Button denyBtn = new Button("Απόρριψη");
 
         acceptBtn.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white;");
         denyBtn.setStyle("-fx-background-color: #f44336; -fx-text-fill: white;");
 
-        HBox actionRow = new HBox(10, acceptBtn, denyBtn);
-        actionRow.setAlignment(Pos.CENTER_RIGHT);
-
-        // Προσθήκη listener
-        acceptBtn.setOnAction(e -> {
+       
+       
+     acceptBtn.setOnAction(e -> {
             updateBookingStatus(b.getId(), "approve");
             refreshBookings();
         });
@@ -412,13 +412,18 @@ private void displayBookings(List<Booking> bookings) {
         denyBtn.setOnAction(e -> {
             updateBookingStatus(b.getId(), "denied");
             refreshBookings();
-        });
+        });        
 
-        // Προσθήκη όλων στο κουτί
+        HBox actionRow = new HBox(10, acceptBtn, denyBtn);
+
+        actionRow.setAlignment(Pos.CENTER_RIGHT);
+
         box.getChildren().addAll(lblClient, row2, new Separator(), itemsBox, actionRow);
         bookingsVBox.getChildren().add(box);
     }
 }
+
+
 
 private void refreshBookings() {
     List<Booking> updatedBookings = loadBookingsForPharmacy(this.pharmacyId);
@@ -503,12 +508,24 @@ private void displayApprovedBookings(List<Booking> bookings) {
         Label pickup = new Label("Παραλαβή: " + df.format(b.getPickupDate().toLocalDate()));
         Label total = new Label("Σύνολο: " + b.getTotalPrice() + " €");
 
-        box.getChildren().addAll(client, pickup, total);
+        CheckBox doneCheckBox = new CheckBox("Ολοκληρώθηκε");
+        doneCheckBox.setOnAction(e -> {
+            if (doneCheckBox.isSelected()) {
+                updateBookingStatus(b.getId(), "done");
+                refreshBookings();
+            }
+        });
+
+        HBox finalRow = new HBox(10, total, doneCheckBox);
+        finalRow.setAlignment(Pos.CENTER_LEFT);
+
+        box.getChildren().addAll(client, pickup, finalRow);
         approvedBookingsVBox.getChildren().add(box);
     }
 
     System.out.println("Total bookings loaded: " + bookings.size());
 }
+
 
 
 }
