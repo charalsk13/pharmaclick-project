@@ -57,22 +57,7 @@
             <!-- Medicine list -->
             <VBox fx:id="medicineListVBox" spacing="10" style="-fx-background-color: white; -fx-padding: 10; -fx-background-radius: 10;">
                 <!-- Example item -->
-                <HBox spacing="10">
-                    <ImageView fitHeight="20.0" fitWidth="20.0">
-                        <image>
-                            <Image url="@../images/category1.png" />
-                        </image>
-                    </ImageView>
-                    <VBox spacing="2">
-                        <Label style="-fx-font-weight: bold;" text="ALGON" />
-                        <Label prefHeight="16.0" prefWidth="198.0" style="-fx-font-size: 11px;" text="Ακετυλοσαλικυλικό οξύ - Παρακεταμόλη - Καφεΐνη" />
-                    </VBox>
-                    <Region HBox.hgrow="ALWAYS" />
-                    <VBox alignment="CENTER_RIGHT" spacing="2">
-                        <Label text="0,95 €" />
-                        <Spinner fx:id="algonQuantitySpinner" prefWidth="60" />
-                    </VBox>
-                </HBox>
+                
             </VBox>
 
             <!-- Add medicine form -->

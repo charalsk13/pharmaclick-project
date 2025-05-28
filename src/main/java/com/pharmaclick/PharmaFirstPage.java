@@ -109,7 +109,8 @@ public class PharmaFirstPage {
             Parent root = loader.load();
 
             AddMedicineController controller = loader.getController();
-            controller.setPharmacyName(pharmacyEmail);
+            controller.setPharmacy(pharmacyId);
+
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 350, 600);
@@ -157,7 +158,7 @@ public class PharmaFirstPage {
 
             AddMedicineController controller = loader.getController();
             controller.setCategory(categoryName, iconPath);
-            controller.setPharmacyName(pharmacyEmail);  // περνάει το email
+            controller.setPharmacy(pharmacyId); // περνάει το ιδ
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             Scene scene = new Scene(root, 350, 600);
