@@ -10,19 +10,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="352.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.CustomerOrdersController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="352.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.CustomerOrdersController" >
    <children>
       <Label layoutX="84.0" layoutY="10.0" text="ΟΙ ΚΡΑΤΗΣΕΙΣ ΜΟΥ">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="44.0" text="⬅" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="44.0" text="⬅" onAction="#goBack" />
       
       <!-- πρωτη παραγγελια -->
       <Pane layoutX="3.0" layoutY="66.0" prefHeight="250.0" prefWidth="329.0" style="-fx-border-color: #000000;">
          <children>
-            <Button fx:id="detailsButton1" layoutX="277.0" layoutY="14.0" mnemonicParsing="false" onAction="#launchOrderDetailsApp" prefHeight="27.0" prefWidth="37.0" text="&gt;" />
+            <Button fx:id="detailsButton1" layoutX="277.0" layoutY="14.0" mnemonicParsing="false" onAction="#launchOrderDetailsApp" prefHeight="27.0" prefWidth="37.0" text=">" />
 
             <Label fx:id="statusLabel1" layoutX="14.0" layoutY="18.0" text="">
                <font>
@@ -69,7 +69,7 @@
                   <Font size="10.0" />
                </font>
             </Hyperlink>
-            <Button fx:id="detailsButton2" layoutX="275.0" layoutY="15.0" mnemonicParsing="false" onAction="#launchOrderDetailsApp" prefHeight="27.0" prefWidth="37.0" text="&gt;" />
+            <Button fx:id="detailsButton2" layoutX="275.0" layoutY="15.0" mnemonicParsing="false" onAction="#launchOrderDetailsApp" prefHeight="27.0" prefWidth="37.0" text=">" />
          </children>
       </Pane>
 
