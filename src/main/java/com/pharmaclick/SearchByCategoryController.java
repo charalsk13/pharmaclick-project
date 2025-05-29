@@ -22,7 +22,7 @@ public class SearchByCategoryController {
     private Connection connect() throws SQLException {
         String url = "jdbc:mariadb://localhost:3306/pharmaclick";
         String user = "root";
-        String password = "123";
+        String password = "1111";
         return DriverManager.getConnection(url, user, password);
     }
 
