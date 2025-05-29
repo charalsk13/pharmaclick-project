@@ -69,22 +69,42 @@ public class CustomerOrdersController {
         idLabel2.setText("Κωδικός: " + rs.getInt("id"));
         progressBar2.setProgress(rs.getDouble("progress"));
         imageView2.setImage(new Image(getClass().getResourceAsStream("/images/category3.png")));
-
-        
     }
+
     @FXML
 private void launchOrderDetailsApp() {
     try {
         int orderId = Integer.parseInt(idLabel1.getText().replace("Κωδικός: ", ""));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Order_details.fxml"));
+        Parent root = loader.load();
 
-        OrderDetailsApp.setOrderId(orderId);
+        OrderDetailsController controller = loader.getController();
+        controller.loadOrderDetails(orderId);
 
-        new OrderDetailsApp().start(new Stage());
-
-    } catch (Exception e) {
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Λεπτομέρειες Παραγγελίας");
+        stage.setResizable(false);
+        stage.show();
+    } catch (IOException e) {
         e.printStackTrace();
     }
 }
+@FXML
+private void goBack() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/User_profile.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("User Profile");
+        stage.setScene(new Scene(root));
+        stage.show();
 
+        Stage currentStage = (Stage) statusLabel1.getScene().getWindow();
+        currentStage.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 
 }

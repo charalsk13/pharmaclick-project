@@ -7,7 +7,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class OrderDetailsController {
@@ -21,10 +25,7 @@ public class OrderDetailsController {
     @FXML private ImageView productImage;
 
     private Connection connect() throws SQLException {
-        String url = "jdbc:mariadb://localhost:3306/pharmaclick";
-        String user = "root";
-        String password = "123";
-        return DriverManager.getConnection(url, user, password);
+        return DatabaseConnection.getConnection();
     }
 
     public void loadOrderDetails(int orderId) {
@@ -63,23 +64,32 @@ public class OrderDetailsController {
                 // Κατάσταση και πρόοδος
                 statusLabel.setText(rs.getString("status"));
                 deliveryDateLabel.setText("Ημ/νία Παράδοσης: " + rs.getDate("delivery_date"));
-    
-                double progress = rs.getDouble("progress");
-                progressBar.setProgress(progress);
+                progressBar.setProgress(rs.getDouble("progress"));
             } else {
                 customerNameLabel.setText("Δεν βρέθηκε παραγγελία.");
             }
-    
         } catch (SQLException e) {
             e.printStackTrace();
             customerNameLabel.setText("Σφάλμα βάσης.");
         }
     }
-    
 
     @FXML
-    private void goBack() {
-        Stage stage = (Stage) backButton.getScene().getWindow();
-        stage.close();
+private void goBack() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/Customer_orders.fxml"));
+        Parent root = loader.load();
+        Stage stage = new Stage();
+        stage.setTitle("Οι Κρατήσεις μου");
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        Stage currentStage = (Stage) backButton.getScene().getWindow();
+        currentStage.close();
+
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+}
+
 }
