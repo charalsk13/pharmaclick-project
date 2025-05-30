@@ -10,19 +10,19 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="352.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.CustomerOrdersController" >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="352.0" style="-fx-background-color: #A7CCD7;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.pharmaclick.CustomerOrdersController">
    <children>
-      <Label layoutX="84.0" layoutY="10.0" text="ΟΙ ΚΡΑΤΗΣΕΙΣ ΜΟΥ">
+      <Label layoutX="93.0" layoutY="10.0" text="ΟΙ ΚΡΑΤΗΣΕΙΣ ΜΟΥ">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="44.0" text="⬅" onAction="#goBack" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#goBack" prefHeight="27.0" prefWidth="44.0" text="⬅" />
       
       <!-- πρωτη παραγγελια -->
-      <Pane layoutX="3.0" layoutY="66.0" prefHeight="250.0" prefWidth="329.0" style="-fx-border-color: #000000;">
+      <Pane layoutX="3.0" layoutY="66.0" prefHeight="250.0" prefWidth="344.0" style="-fx-border-color: #000000;">
          <children>
-            <Button fx:id="detailsButton1" layoutX="277.0" layoutY="14.0" mnemonicParsing="false" onAction="#launchOrderDetailsApp" prefHeight="27.0" prefWidth="37.0" text=">" />
+            <Button fx:id="detailsButton1" layoutX="277.0" layoutY="14.0" mnemonicParsing="false" onAction="#launchOrderDetailsApp" prefHeight="27.0" prefWidth="37.0" text="&gt;" />
 
             <Label fx:id="statusLabel1" layoutX="14.0" layoutY="18.0" text="">
                <font>
@@ -45,7 +45,7 @@
       </Pane>
 
       <!-- δευτερη παραγγελια -->
-      <Pane layoutX="3.0" layoutY="345.0" prefHeight="250.0" prefWidth="329.0" style="-fx-border-color: #000000;">
+      <Pane layoutX="3.0" layoutY="345.0" prefHeight="250.0" prefWidth="344.0" style="-fx-border-color: #000000;">
          <children>
             <Label fx:id="statusLabel2" layoutX="14.0" layoutY="18.0" text="">
                <font>
@@ -69,11 +69,11 @@
                   <Font size="10.0" />
                </font>
             </Hyperlink>
-            <Button fx:id="detailsButton2" layoutX="275.0" layoutY="15.0" mnemonicParsing="false" onAction="#launchOrderDetailsApp" prefHeight="27.0" prefWidth="37.0" text=">" />
+            <Button fx:id="detailsButton2" layoutX="275.0" layoutY="15.0" mnemonicParsing="false" onAction="#launchOrderDetailsApp" prefHeight="27.0" prefWidth="37.0" text="&gt;" />
          </children>
       </Pane>
 
       <!-- συνολο παραγγελιων -->
-      <Label fx:id="totalOrdersLabel" layoutX="143.0" layoutY="37.0" prefHeight="27.0" prefWidth="100.0" text="0 παραγγελίες" />
+      <Label fx:id="totalOrdersLabel" layoutX="126.0" layoutY="37.0" prefHeight="27.0" prefWidth="100.0" text="2 παραγγελίες" />
    </children>
 </AnchorPane>

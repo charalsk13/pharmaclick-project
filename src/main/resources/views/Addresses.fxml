@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="609.0" prefWidth="346.0" style="-fx-background-color: #A7CCD7;"
             xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            >
+            fx:controller="com.pharmaclick.AddressesController">
 
    <children>
       <Label layoutX="116.0" layoutY="14.0" text="ΔΙΕΥΘΥΝΣΕΙΣ">
