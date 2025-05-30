@@ -19,6 +19,51 @@
 CREATE DATABASE IF NOT EXISTS `pharmaclick` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_uca1400_ai_ci */;
 USE `pharmaclick`;
 
+CREATE TABLE IF NOT EXISTS `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_date` date NOT NULL,
+  `delivery_date` date DEFAULT NULL,
+  `status` varchar(50) DEFAULT NULL,
+  `progress` double DEFAULT NULL,
+  `customer_id` int(11) NOT NULL,
+  `customer_name` varchar(100) DEFAULT NULL,
+  `customer_address` varchar(255) DEFAULT NULL,
+  `customer_city` varchar(100) DEFAULT NULL,
+  `customer_country` varchar(100) DEFAULT NULL,
+  `customer_postal` varchar(10) DEFAULT NULL,
+  `customer_phone` varchar(20) DEFAULT NULL,
+  `pharmacy_id` int(11) DEFAULT NULL,
+  `pharmacy_name` varchar(100) DEFAULT NULL,
+  `pharmacy_address` varchar(255) DEFAULT NULL,
+  `pharmacy_city` varchar(100) DEFAULT NULL,
+  `pharmacy_country` varchar(100) DEFAULT NULL,
+  `pharmacy_postal` varchar(10) DEFAULT NULL,
+  `pharmacy_phone` varchar(20) DEFAULT NULL,
+  `product_id` int(11) DEFAULT NULL,
+  `product_name` varchar(100) DEFAULT NULL,
+  `product_description` text DEFAULT NULL,
+  `product_price` decimal(10,2) DEFAULT NULL,
+  `product_image_path` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `orders` (`id`, `order_date`, `delivery_date`, `status`, `progress`, `customer_id`, `customer_name`, `customer_address`, `customer_city`, `customer_country`, `customer_postal`, `customer_phone`, `pharmacy_id`, `pharmacy_name`, `pharmacy_address`, `pharmacy_city`, `pharmacy_country`, `pharmacy_postal`, `pharmacy_phone`, `product_id`, `product_name`, `product_description`, `product_price`, `product_image_path`) VALUES
+	(3, '2025-04-17', '2025-04-20', 'Ολοκληρώθηκε', 1, 1, 'Γιώργος Παπαδόπουλος', 'Οδός Ειρήνης 10', 'Πάτρα', 'Ελλάδα', '26222', '6901234567', 1, 'Φαρμακείο Παπαδημητρίου', 'Κεντρική Πλατεία 5', 'Πάτρα', 'Ελλάδα', '26222', '2610123456', 1, 'Depon 500mg', 'Αναλγητικό για πονοκεφάλους και πυρετό', 3.50, '/images/category3.png');
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `amka` varchar(255) DEFAULT NULL,
+  `user_type` enum('customer','pharmacist') NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci ROW_FORMAT=DYNAMIC;
+
+INSERT INTO `users` (`id`, `email`, `password`, `address`, `amka`, `user_type`) VALUES
+	(1, 'test@example.com', '123456', 'Athens, Greece', '12345678901', 'customer');
+
+
 -- Dumping structure for πίνακας pharmaclick.bookings
 CREATE TABLE IF NOT EXISTS `bookings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
