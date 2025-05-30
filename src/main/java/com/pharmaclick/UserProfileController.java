@@ -42,13 +42,27 @@ public class UserProfileController {
     }
 
     @FXML
-    private void openHelpPage(ActionEvent event) {
-        System.out.println("Help page not implemented yet.");
+    private void openFavorites(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/favorites.fxml"));
+            Parent root = loader.load();
+            
+            FavoritesController controller = loader.getController();
+            controller.setUserId(1);
+            
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Τα Αγαπημένα μου");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+    
 
     @FXML
-    private void openFavorites(ActionEvent event) {
-        System.out.println("Favorites page not implemented yet.");
+    private void openHelpPage(ActionEvent event) {
+        System.out.println("Help page not implemented yet.");
     }
 
     @FXML
@@ -105,4 +119,5 @@ private void openLogout() {
             e.printStackTrace();
         }
     }
+    
 }
